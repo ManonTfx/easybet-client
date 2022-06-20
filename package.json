@@ -1,0 +1,82 @@
+{
+  "name": "pro",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@apollo/client": "^3.4.16",
+    "@reduxjs/toolkit": "^1.6.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.2.1",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^16.7.13",
+    "@types/react": "^17.0.20",
+    "@types/react-dom": "^17.0.9",
+    "eslint-plugin-jest": "^25.3.4",
+    "graphql": "^15.7.2",
+    "postcss": "^8.3.0",
+    "prettier": "^2.5.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.32.2",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "5.0.0",
+    "redux": "^4.1.0",
+    "tailwindcss": "^3.0.9",
+    "typescript": "^4.4.2",
+    "web-vitals": "^2.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint . --ext .js,.ts,.jsx,.tsx",
+    "generate:types": "rm -rf ./src/api/types && cd src/API && apollo codegen:generate --endpoint=http://localhost:4000/graphql  --target=typescript --outputFlat=types --includes=./*/**.ts"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.16.7",
+    "@babel/preset-react": "^7.16.7",
+    "@types/react-redux": "^7.1.16",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/redux": "^3.6.0",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
+    "babel-jest": "^27.4.5",
+    "eslint": "7.2.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "4",
+    "jest": "^27.4.5",
+    "lint-staged": "^11.0.0"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "./node_modules/.bin/eslint --max-warnings=5",
+      "pretty-quick --staged"
+    ]
+  }
+}
