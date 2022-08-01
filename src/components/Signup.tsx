@@ -1,10 +1,10 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useContext } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
-import { useUserFromStore } from '../store/user.slice';
 import { SIGNUP_MUTATION } from '../API/mutation/signup';
 import LoginInput from './formInputs/LoginInput';
 import { Signup, SignupVariables } from '../API/types/Signup';
+import { AuthContext } from '../context/authContext';
 
 interface IProps {
   setIsLoginModal: Dispatch<SetStateAction<boolean>>;
@@ -12,14 +12,15 @@ interface IProps {
 }
 
 function SignUp({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
+  const { updateToken } = useContext(AuthContext);
+
   const { register, handleSubmit } = useForm();
-  const { dispatchLogin } = useUserFromStore();
   const [signupMutation, { loading, error }] = useMutation<
     Signup,
     SignupVariables
   >(SIGNUP_MUTATION, {
-    onCompleted: (data) => {
-      dispatchLogin(data.signup);
+    onCompleted: () => {
+      updateToken('');
       setIsLoginModal(true);
       setIsSignUpModal(false);
     },

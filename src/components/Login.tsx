@@ -1,12 +1,13 @@
 import { useMutation } from '@apollo/client';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useContext } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-
 import { LOGIN_MUTATION } from '../API/mutation/login';
 import { Login, LoginVariables } from '../API/types/Login';
-import { useUserFromStore } from '../store/user.slice';
+import { AuthContext } from '../context/authContext';
 import LoginInput from './formInputs/LoginInput';
+import logoEasybet from '../assets/logos/logoEasybet.svg';
+import close from '../assets/close.svg';
 
 interface IProps {
   setIsLoginModal: Dispatch<SetStateAction<boolean>>;
@@ -15,15 +16,17 @@ interface IProps {
 
 function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
   const { register, handleSubmit } = useForm();
+
+  const { updateToken } = useContext(AuthContext);
+
   const router = useNavigate();
 
-  const { dispatchLogin } = useUserFromStore();
   const [loginMutation, { loading, error }] = useMutation<
     Login,
     LoginVariables
   >(LOGIN_MUTATION, {
     onCompleted: (data: Login) => {
-      dispatchLogin(data.login);
+      updateToken(data.login.token);
       router('/feed', { replace: true });
       setIsLoginModal(false);
     },
@@ -47,7 +50,19 @@ function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
   return (
     <div className="w-screen fixed inset-0 z-50 h-full bg-opacity-50 flex items-center justify-center ">
       <div className="justify-center mx-8">
-        <div className="m-auto lg:m-0 block p-8 rounded-lg bg-darkGray shadow-purple border border-gray-600">
+        <div className="m-auto lg:m-0 block p-8 rounded-lg bg-darkGray shadow-purple ">
+          <button
+            type="button"
+            onClick={() => setIsLoginModal(false)}
+            className="w-full flex justify-end	cursor-pointer opacity-80 hover:opacity-50"
+          >
+            <img src={close} alt="fermer" className="h-3" />
+          </button>
+          <img
+            src={logoEasybet}
+            alt="easybet logo"
+            className="h-10 m-auto mb-6 mt-2 w-full"
+          />
           <form onSubmit={handleSubmit(onSubmit)}>
             <LoginInput
               label=""
@@ -71,7 +86,7 @@ function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
             />
             <button
               type="submit"
-              className="rounded-lg w-full mt-5 text-slate-800 px-5 py-3"
+              className="rounded-lg w-full mt-5 text-white px-5 py-3"
               style={{
                 background:
                   'linear-gradient(181.76deg, rgba(255, 255, 255, 0.4) -72.83%, #8560EE 98.51%)',
@@ -85,7 +100,7 @@ function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
                 setIsLoginModal(false);
                 setIsSignUpModal(true);
               }}
-              className="mt-4 ml-16  text-justify font-extralight drop-shadow-md"
+              className="mt-4 w-full font-extralight drop-shadow-md"
               style={{ color: ' #8560EE' }}
             >
               Pas encore inscrit? Inscrit toi!

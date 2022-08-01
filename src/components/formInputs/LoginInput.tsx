@@ -30,7 +30,7 @@ function LoginInput({
         placeholder={placeholder}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...register(name, { required })}
-        className="p-4 bg-white text-lightPurple  rounded-md focus:outline-none peer h-10"
+        className="p-4 bg-lightGray text-lightPurple rounded-md focus:outline-none peer h-10"
       />
       <p className="text-red text-xs">{error}</p>
       {required && (
