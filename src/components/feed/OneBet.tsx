@@ -31,7 +31,7 @@ function OneBet({
   };
 
   return (
-    <div className="bg-lightGray py-4 px-4 mb-4 rounded-xl">
+    <div className="bg-darkMode py-4 px-4 mb-4 rounded-xl">
       <div className="flex items-center justify-between ">
         <img src={srcImg()} alt={catSport} />
         <div>{nameBet}</div>

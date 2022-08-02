@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { DarkModeContext } from '../../context/darkModeContext';
 import { DashboardContext } from '../../context/dashboardContext';
 
 interface IProps {
@@ -12,6 +13,9 @@ interface IProps {
 
 function LinkButton({ item }: IProps): JSX.Element {
   const { isSidebar } = useContext(DashboardContext);
+  const { colorText } = useContext(DarkModeContext);
+
+  const displayIsSidebar = isSidebar ? 'visible' : 'hidden';
 
   return (
     <div>
@@ -21,7 +25,12 @@ function LinkButton({ item }: IProps): JSX.Element {
           className="lg:shadow-none lg:py-4 lg:px-0 w-full rounded-lg flex items-center"
         >
           <img className="h-5 w-5" src={item.icon} alt="icon" />
-          {isSidebar && <p className="ml-4 text-sm">{item.name}</p>}
+
+          <p
+            className={`${colorText} ${displayIsSidebar} ml-4 text-sm w-[170px] text-left`}
+          >
+            {item.name}
+          </p>
         </button>
       </Link>
     </div>

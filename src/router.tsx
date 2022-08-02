@@ -18,7 +18,7 @@ function Router(): JSX.Element {
         element={user !== null ? <Feed /> : <Navigate to="/" />}
       />
       <Route
-        path="/tutos"
+        path="/articles"
         element={user !== null ? <Tutos /> : <Navigate to="/" />}
       />
       <Route
