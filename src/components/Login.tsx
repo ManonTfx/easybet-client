@@ -49,19 +49,21 @@ function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
   }
   return (
     <div className="w-screen fixed inset-0 z-50 h-full bg-opacity-50 flex items-center justify-center ">
-      <div className="justify-center mx-8">
-        <div className="m-auto lg:m-0 block p-8 rounded-lg bg-darkGray shadow-purple ">
-          <button
-            type="button"
-            onClick={() => setIsLoginModal(false)}
-            className="w-full flex justify-end	cursor-pointer opacity-80 hover:opacity-50"
-          >
-            <img src={close} alt="fermer" className="h-3" />
-          </button>
+      <div className="justify-center ">
+        <div className="m-auto lg:m-0 block py-8 px-16 rounded-lg bg-[#221C2D] shadow-purple ">
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => setIsLoginModal(false)}
+              className="w-full flex justify-end absolute left-12 bottom-1	cursor-pointer opacity-80 hover:opacity-50"
+            >
+              <img src={close} alt="fermer" className="h-3" />
+            </button>
+          </div>
           <img
             src={logoEasybet}
             alt="easybet logo"
-            className="h-10 m-auto mb-6 mt-2 w-full"
+            className="h-10 m-auto mb-11 pr-4 mt-2 w-full"
           />
           <form onSubmit={handleSubmit(onSubmit)}>
             <LoginInput
@@ -86,11 +88,7 @@ function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
             />
             <button
               type="submit"
-              className="rounded-lg w-full mt-5 text-white px-5 py-3"
-              style={{
-                background:
-                  'linear-gradient(181.76deg, rgba(255, 255, 255, 0.4) -72.83%, #8560EE 98.51%)',
-              }}
+              className="rounded-lg w-full duration-1000 mt-5 text-white px-5 py-3 bg-[#5762C0] hover:bg-[#2C38A6]"
             >
               Connexion
             </button>
@@ -100,10 +98,11 @@ function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
                 setIsLoginModal(false);
                 setIsSignUpModal(true);
               }}
-              className="mt-4 w-full font-extralight drop-shadow-md"
-              style={{ color: ' #8560EE' }}
+              className="mt-4 w-full font-extralight drop-shadow-md text-sm"
+              style={{ color: ' #5762C0' }}
             >
-              Pas encore inscrit? Inscrit toi!
+              Pas encore inscrit?{' '}
+              <span className="font-medium underline">Inscrit toi!</span>
             </button>
           </form>
         </div>

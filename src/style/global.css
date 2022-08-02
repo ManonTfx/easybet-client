@@ -4,3 +4,15 @@
   background-image: url('../assets/heroSectionImg.png');
   background-size: cover;
 }
+
+/* Corrige le background blanc lors de l\'auto-complétion par google chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 40px #332e3d inset !important;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: white !important;
+}

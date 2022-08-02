@@ -27,7 +27,7 @@ function HomePage(): JSX.Element {
         setIsSignUpModal={setIsSignUpModal}
       />
       <div
-        className={isLoginModal || isSignUpModal ? 'opacity-50' : 'opacity-100'}
+        className={isLoginModal || isSignUpModal ? 'opacity-30' : 'opacity-100'}
       >
         <HeroSection />
       </div>
