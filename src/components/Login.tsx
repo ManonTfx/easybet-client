@@ -3,11 +3,11 @@ import { Dispatch, SetStateAction, useContext } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { LOGIN_MUTATION } from '../API/mutation/login';
-import { Login, LoginVariables } from '../API/types/Login';
 import { AuthContext } from '../context/authContext';
 import LoginInput from './formInputs/LoginInput';
 import logoEasybet from '../assets/logos/logoEasybet.svg';
 import close from '../assets/close.svg';
+import { Login, LoginVariables } from '../API/types/Login';
 
 interface IProps {
   setIsLoginModal: Dispatch<SetStateAction<boolean>>;
@@ -17,7 +17,7 @@ interface IProps {
 function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
   const { register, handleSubmit } = useForm();
 
-  const { updateToken } = useContext(AuthContext);
+  const { updateUser } = useContext(AuthContext);
 
   const router = useNavigate();
 
@@ -26,7 +26,7 @@ function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
     LoginVariables
   >(LOGIN_MUTATION, {
     onCompleted: (data: Login) => {
-      updateToken(data.login.token);
+      updateUser(data);
       router('/feed', { replace: true });
       setIsLoginModal(false);
     },

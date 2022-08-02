@@ -8,11 +8,11 @@ import { DashboardContext } from '../../context/dashboardContext';
 
 function Header(): JSX.Element {
   const { isSidebar, updateIsSidebar } = useContext(DashboardContext);
-  const { updateToken } = useContext(AuthContext);
+  const { updateUser } = useContext(AuthContext);
 
   const [logoutMutation] = useMutation<Logout>(LOGOUT_MUTATION, {
     onCompleted: () => {
-      updateToken('');
+      updateUser(null);
     },
   });
   return (

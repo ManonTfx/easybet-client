@@ -1,26 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Router from './router';
 import { AuthContext } from './context/authContext';
+import { Login } from './API/types/Login';
 
 function App(): JSX.Element {
-  const [token, setToken] = useState<string>(
-    sessionStorage.getItem('token') || ''
-  );
+  const [user, setUser] = useState<Login | null>(null);
 
   const authContextValue = {
-    token,
-    updateToken: setToken,
+    user,
+    updateUser: setUser,
   };
-
-  useEffect(() => {
-    if (token) {
-      if (token !== sessionStorage.getItem('token')) {
-        sessionStorage.setItem('token', token);
-      }
-    } else {
-      sessionStorage.removeItem('token');
-    }
-  }, [token]);
 
   return (
     <AuthContext.Provider value={authContextValue}>

@@ -12,7 +12,7 @@ interface IProps {
 }
 
 function SignUp({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
-  const { updateToken } = useContext(AuthContext);
+  const { updateUser } = useContext(AuthContext);
 
   const { register, handleSubmit } = useForm();
   const [signupMutation, { loading, error }] = useMutation<
@@ -20,7 +20,7 @@ function SignUp({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
     SignupVariables
   >(SIGNUP_MUTATION, {
     onCompleted: () => {
-      updateToken('');
+      updateUser(null);
       setIsLoginModal(true);
       setIsSignUpModal(false);
     },

@@ -1,13 +1,17 @@
 import React, { useContext } from 'react';
 import { DashboardContext } from '../../context/dashboardContext';
 import LinkButton from './LinkButton';
-import { nav } from './Navlinks';
+import { nav, navadmin } from './Navlinks';
 import logoEasybet from '../../assets/logos/logoEasybet.svg';
 import faviconEasbet from '../../assets/logos/faviconEasbet.svg';
+import { AuthContext } from '../../context/authContext';
 
 function Sidebar(): JSX.Element {
   const { isSidebar } = useContext(DashboardContext);
+  const { user } = useContext(AuthContext);
+
   const witdhSidebar = isSidebar ? 'w-3/12' : '';
+
   return (
     <div
       className={`${witdhSidebar} z-20 h-screen bg-darkGray px-5 py-8 inset-0 lg:block hidden`}
@@ -28,6 +32,9 @@ function Sidebar(): JSX.Element {
                 </div>
               );
             })}
+            {user?.login.role === 'SUPERADMIN' && (
+              <LinkButton item={navadmin} />
+            )}
           </div>
         </div>
       </div>
