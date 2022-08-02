@@ -22,7 +22,7 @@ function App(): JSX.Element {
   return (
     <AuthContext.Provider value={authContextValue}>
       <DarkModeContext.Provider value={darkModeContextValue}>
-        <div className="min-h-screen w-screen pb-5">
+        <div className="min-h-screen w-screen">
           <Router />
         </div>
       </DarkModeContext.Provider>

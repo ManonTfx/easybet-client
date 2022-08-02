@@ -23,8 +23,8 @@ function Layout({ children }: IProps): JSX.Element {
       <div
         className={
           isDarkMode
-            ? 'bg-[#121212] min-h-screen w-screen pb-5  flex font-lexend text-white'
-            : 'bg-white min-h-screen w-screen pb-5  flex font-lexend text-white'
+            ? 'bg-[#121212] min-h-screen w-screen flex font-lexend text-white'
+            : 'bg-white min-h-screen w-screen flex font-lexend text-white'
         }
       >
         <Sidebar />

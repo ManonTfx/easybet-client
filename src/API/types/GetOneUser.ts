@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetListUsers
+// GraphQL query operation: GetOneUser
 // ====================================================
 
-export interface GetListUsers_getAllUsers {
+export interface GetOneUser_getUserByID {
   __typename: "IUser";
   id: string;
   email: string;
@@ -19,6 +19,10 @@ export interface GetListUsers_getAllUsers {
   role: string;
 }
 
-export interface GetListUsers {
-  getAllUsers: GetListUsers_getAllUsers[];
+export interface GetOneUser {
+  getUserByID: GetOneUser_getUserByID;
+}
+
+export interface GetOneUserVariables {
+  getUserByIdId: string;
 }
