@@ -17,6 +17,7 @@ function App(): JSX.Element {
     isDarkMode,
     updateIsDarkMode: setIsDarkMode,
     colorText: isDarkMode ? 'text-white' : 'text-black',
+    colorCards: isDarkMode ? '#19191C' : '#DCDFF1',
   };
 
   return (

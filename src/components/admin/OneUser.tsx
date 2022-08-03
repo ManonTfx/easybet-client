@@ -2,6 +2,7 @@
 import { useContext } from 'react';
 import { GetOneUser_getUserByID } from '../../API/types/GetOneUser';
 import { AdminContext } from '../../context/adminContext';
+import { DarkModeContext } from '../../context/darkModeContext';
 
 interface IProps {
   datas: GetOneUser_getUserByID;
@@ -9,6 +10,8 @@ interface IProps {
 
 function OneUser({ datas }: IProps): JSX.Element {
   const { updateUserActiv, userActiv } = useContext(AdminContext);
+  const { colorCards } = useContext(DarkModeContext);
+
   const backroundColorRole = (role: string): string => {
     if (role === 'ADMIN') {
       return '#3EB5CA3';
@@ -21,11 +24,12 @@ function OneUser({ datas }: IProps): JSX.Element {
     }
     return '';
   };
+
   const backroundColorUserActivCard = (id: string): string => {
     if (id === userActiv?.id) {
       return '#5D6AD2';
     }
-    return '#19191C';
+    return colorCards;
   };
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions

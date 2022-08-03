@@ -1,44 +1,26 @@
+/* eslint-disable camelcase */
+import { useQuery } from '@apollo/client';
 import OneBet from './OneBet';
+import { GET_ALL_BETS } from '../../API/query/bets';
+import { GetOneBet_getBetByID } from '../../API/types/GetOneBet';
+import { GetAllbets } from '../../API/types/GetAllbets';
 
 function ListBets(): JSX.Element {
-  const itemProvisory = [
-    {
-      id: 1,
-      catSport: 'Football',
-      nameBet: 'Match de football',
-      dateBet: 'Le 22/02/2020',
-      bookmaker: 'Betfair',
-      oddBet: '1.5',
-    },
-    {
-      id: 2,
-      catSport: 'Tennis',
-      nameBet: 'Match de football',
-      dateBet: 'Le 22/02/2020',
-      bookmaker: 'Betfair',
-      oddBet: '1.5',
-    },
-    {
-      id: 3,
-      catSport: 'Basket',
-      nameBet: 'Match de football',
-      dateBet: 'Le 22/02/2020',
-      bookmaker: 'Betfair',
-      oddBet: '1.5',
-    },
-  ];
+  // FETCH THE TASK LIST
+  const { loading, error, data } = useQuery<GetAllbets>(GET_ALL_BETS);
+
+  if (loading) {
+    return <p>...loading</p>;
+  }
+  if (error || !data) {
+    return <p>error</p>;
+  }
   return (
     <div className="py-4 px-4">
-      {itemProvisory.map((item) => {
+      {data.getAllBets.map((el: GetOneBet_getBetByID) => {
         return (
-          <div key={item.id}>
-            <OneBet
-              catSport={item.catSport}
-              nameBet={item.nameBet}
-              oddBet={item.oddBet}
-              bookmaker={item.bookmaker}
-              dateBet={item.dateBet}
-            />
+          <div key={el.id}>
+            <OneBet datas={el} />
           </div>
         );
       })}

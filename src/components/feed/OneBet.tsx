@@ -1,47 +1,60 @@
+/* eslint-disable camelcase */
+import { useContext } from 'react';
 import football from '../../assets/cat/football.svg';
 import tennis from '../../assets/cat/tennis.svg';
 import basket from '../../assets/cat/basket.svg';
+import { DarkModeContext } from '../../context/darkModeContext';
+import { GetOneBet_getBetByID } from '../../API/types/GetOneBet';
 
 interface IProps {
-  catSport: string;
-  nameBet: string;
-  dateBet: string;
-  bookmaker: string;
-  oddBet: string;
+  datas: GetOneBet_getBetByID;
 }
-function OneBet({
-  catSport,
-  nameBet,
-  dateBet,
-  bookmaker,
-  oddBet,
-}: IProps): JSX.Element {
+function OneBet({ datas }: IProps): JSX.Element {
+  const { colorCards } = useContext(DarkModeContext);
   const srcImg = () => {
     let src = '';
-    if (catSport === 'Football') {
-      src = football;
-    }
-    if (catSport === 'Tennis') {
-      src = tennis;
-    }
-    if (catSport === 'Basket') {
-      src = basket;
+    switch (datas.category.toLowerCase()) {
+      case 'football':
+        src = football;
+        break;
+      case 'tennis':
+        src = tennis;
+        break;
+      case 'basketball':
+        src = basket;
+        break;
+      default:
     }
     return src;
   };
 
   return (
-    <div className="bg-darkMode py-4 px-4 mb-4 rounded-xl">
-      <div className="flex items-center justify-between ">
-        <img src={srcImg()} alt={catSport} />
-        <div>{nameBet}</div>
+    <div className={`bg-[${colorCards}] py-4 px-4 mb-4 rounded-xl `}>
+      <div className="flex items-center ">
+        <img src={srcImg()} alt={datas.category} />
+        <div className="text-xl ml-2">{datas.name}</div>
       </div>
-      <div>
-        {catSport}/ {dateBet}
+      <div className="text-lg">
+        {datas.category} -{' '}
+        <span className="text-xs opacity-80">
+          le {new Date(datas.date).toLocaleDateString('fr')}
+        </span>
       </div>
-      <div className="flex items-center">
-        <div>{oddBet}</div>
-        <div>{bookmaker}</div>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center mt-2">
+          <div className="px-2 bg-[#D9D9D9] text-black rounded-full mr-2">
+            {datas.stake}/10
+          </div>
+          <div className="px-5  bg-[#E4AC65] rounded-full">
+            {datas.bookmaker}
+          </div>
+        </div>
+        <button
+          className="bg-[#3EB5CA] rounded-sm px-8 py-2 hover:opacity-90"
+          type="button"
+        >
+          TRACK
+        </button>
       </div>
     </div>
   );
