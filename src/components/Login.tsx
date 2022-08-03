@@ -48,9 +48,9 @@ function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
     return <p>error</p>;
   }
   return (
-    <div className="w-screen fixed inset-0 z-50 h-full bg-opacity-50 flex items-center justify-center ">
+    <div className="w-screen fixed inset-0 z-50 h-full bg-black bg-opacity-70 flex items-center justify-center ">
       <div className="justify-center ">
-        <div className="m-auto lg:m-0 block py-8 px-16 rounded-lg bg-[#221C2D] shadow-purple ">
+        <div className="m-auto lg:m-0 block py-8 px-16 rounded-lg bg-[#19191C] shadow-purple ">
           <div className="relative">
             <button
               type="button"

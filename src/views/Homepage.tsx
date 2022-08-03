@@ -9,7 +9,7 @@ function HomePage(): JSX.Element {
   const [isSignUpModal, setIsSignUpModal] = useState(false);
 
   return (
-    <div>
+    <div className="!text-white">
       {isSignUpModal && (
         <SignUp
           setIsLoginModal={setIsLoginModal}
@@ -26,9 +26,7 @@ function HomePage(): JSX.Element {
         setIsLoginModal={setIsLoginModal}
         setIsSignUpModal={setIsSignUpModal}
       />
-      <div
-        className={isLoginModal || isSignUpModal ? 'opacity-30' : 'opacity-100'}
-      >
+      <div>
         <HeroSection />
       </div>
     </div>

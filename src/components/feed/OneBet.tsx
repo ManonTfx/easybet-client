@@ -30,7 +30,6 @@ function OneBet({ datas }: IProps): JSX.Element {
     }
     return src;
   };
-
   return (
     <div className={`bg-[${colorCards}] py-4 px-4 mb-4 rounded-xl `}>
       <div className="flex items-center ">

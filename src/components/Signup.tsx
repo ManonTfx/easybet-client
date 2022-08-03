@@ -50,8 +50,8 @@ function SignUp({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
   }
 
   return (
-    <div className="w-screen fixed inset-0 z-50 h-full bg-opacity-50 flex items-center justify-center ">
-      <div className="m-auto lg:m-0 block py-8 rounded-lg bg-darkMode px-14 shadow-purple">
+    <div className="w-screen bg-black bg-opacity-70 fixed inset-0 z-50 h-full flex items-center justify-center ">
+      <div className="m-auto lg:m-0 block py-8 rounded-lg bg-[#19191C] px-14 shadow-purple">
         <div className="relative">
           <button
             type="button"

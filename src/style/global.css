@@ -10,7 +10,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 40px #332e3d inset !important;
+  -webkit-box-shadow: 0 0 0 40px #19191c inset !important;
 }
 
 input:-webkit-autofill {
@@ -19,4 +19,23 @@ input:-webkit-autofill {
 
 .anim-sidebar-width {
   transition: width 1s;
+}
+
+/* ++++++++++++++++++++ SCROLL PERSONNALISATION ++++++++++++++++++++++ */
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: rgb(49, 48, 48);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: rgb(49, 48, 48);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgb(100, 100, 100);
 }

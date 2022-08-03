@@ -117,12 +117,15 @@ function ModalTrack({ datas }: IProps): JSX.Element {
           <div className="flex w-full justify-end items-center py-4 px-3">
             <button
               onClick={() => updateIsModal(false)}
-              className="bg-[#FF4E4E] bg-opacity-60 py-2 px-4 mr-3 rounded-sm"
+              className=" !text-white bg-[#FF4E4E] bg-opacity-60 py-2 px-4 mr-3 rounded-sm"
               type="button"
             >
               Annuler
             </button>
-            <button className="bg-[#3DA184] py-2 px-4 rounded-sm" type="submit">
+            <button
+              className="!text-white bg-[#3DA184] py-2 px-4 rounded-sm"
+              type="submit"
+            >
               Valider
             </button>
           </div>
