@@ -10,22 +10,28 @@ interface IProps {
 
 function Layout({ children }: IProps): JSX.Element {
   const [isSidebar, setIsSidebar] = useState(true);
+  const [isModal, setIsModal] = useState(false);
 
   const dashboardContextValue = {
     isSidebar,
     updateIsSidebar: setIsSidebar,
+    isModal,
+    updateIsModal: setIsModal,
   };
 
   const { isDarkMode } = useContext(DarkModeContext);
 
+  const opacityModalDarkmode = isModal ? 'opacity-80' : 'opacity-100';
+  const opacityModalLightmode = isModal ? 'opacity-50' : 'opacity-100';
+  const darkModeOpacityIsModal = isDarkMode
+    ? opacityModalDarkmode
+    : opacityModalLightmode;
+  const backgroundColorDarkMode = isDarkMode ? 'bg-[#121212]' : 'bg-white';
+
   return (
     <DashboardContext.Provider value={dashboardContextValue}>
       <div
-        className={
-          isDarkMode
-            ? 'bg-[#121212] min-h-screen w-screen flex font-lexend text-white'
-            : 'bg-white min-h-screen w-screen flex font-lexend text-white'
-        }
+        className={`${backgroundColorDarkMode} ${darkModeOpacityIsModal} min-h-screen w-screen flex`}
       >
         <Sidebar />
         <div className="w-full">
