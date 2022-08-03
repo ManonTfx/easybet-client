@@ -43,15 +43,18 @@ module.exports = {
     },
   ],
   rules: {
+    camelcase: 'off',
     'no-use-before-define': 'off',
-    'no-console': 1,
+    'no-console': 0,
     'no-unused-vars': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     '@typescript-eslint/no-unused-vars': [
       'error',
       { argsIgnorePattern: '^_', ignoreRestSiblings: true },
     ],
-
+    'prefer-destructuring': ['error', { object: false, array: false }],
+    '@typescript-eslint/no-explicit-any': 'off',
     'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Use our .prettierrc file as source
 
     'import/extensions': [
@@ -63,7 +66,6 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
-
     'react/jsx-filename-extension': [2, { extensions: ['.tsx', '.jsx'] }],
     'react/react-in-jsx-scope': 'off',
     'react/function-component-definition': [
