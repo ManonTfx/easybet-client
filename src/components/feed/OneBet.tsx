@@ -5,12 +5,15 @@ import tennis from '../../assets/cat/tennis.svg';
 import basket from '../../assets/cat/basket.svg';
 import { DarkModeContext } from '../../context/darkModeContext';
 import { GetOneBet_getBetByID } from '../../API/types/GetOneBet';
+import { DashboardContext } from '../../context/dashboardContext';
+import Modal from '../modal/Modal';
 
 interface IProps {
   datas: GetOneBet_getBetByID;
 }
 function OneBet({ datas }: IProps): JSX.Element {
   const { colorCards } = useContext(DarkModeContext);
+  const { updateIsModal } = useContext(DashboardContext);
   const srcImg = () => {
     let src = '';
     switch (datas.category.toLowerCase()) {
@@ -50,12 +53,18 @@ function OneBet({ datas }: IProps): JSX.Element {
           </div>
         </div>
         <button
+          onClick={() => updateIsModal(true)}
           className="bg-[#3EB5CA] rounded-sm px-8 py-2 hover:opacity-90"
           type="button"
         >
           TRACK
         </button>
       </div>
+      <Modal>
+        <div className="w-full bg-red-200 text-xl text-center py-2">
+          Track Pari
+        </div>
+      </Modal>
     </div>
   );
 }

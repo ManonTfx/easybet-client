@@ -21,18 +21,11 @@ function Layout({ children }: IProps): JSX.Element {
 
   const { isDarkMode } = useContext(DarkModeContext);
 
-  const opacityModalDarkmode = isModal ? 'opacity-80' : 'opacity-100';
-  const opacityModalLightmode = isModal ? 'opacity-50' : 'opacity-100';
-  const darkModeOpacityIsModal = isDarkMode
-    ? opacityModalDarkmode
-    : opacityModalLightmode;
   const backgroundColorDarkMode = isDarkMode ? 'bg-[#121212]' : 'bg-white';
 
   return (
     <DashboardContext.Provider value={dashboardContextValue}>
-      <div
-        className={`${backgroundColorDarkMode} ${darkModeOpacityIsModal} min-h-screen w-screen flex`}
-      >
+      <div className={`${backgroundColorDarkMode}  min-h-screen w-screen flex`}>
         <Sidebar />
         <div className="w-full">
           <Header />
