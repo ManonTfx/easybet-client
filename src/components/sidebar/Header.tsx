@@ -27,8 +27,8 @@ function Header(): JSX.Element {
     <div
       className={
         isDarkMode
-          ? 'bg-darkMode bg-darkMode flex items-center w-[99%] justify-between bg-darkMode py-3 px-2'
-          : 'bg-[#DDDFF2] bg-darkMode flex items-center w-[99%] justify-between bg-darkMode py-3 px-2'
+          ? 'bg-darkMode bg-darkMode flex items-center w-full justify-between bg-darkMode py-3 px-2'
+          : 'bg-[#DDDFF2] bg-darkMode flex items-center w-full justify-between bg-darkMode py-3 px-2'
       }
     >
       <button type="button" onClick={() => updateIsSidebar(!isSidebar)}>
