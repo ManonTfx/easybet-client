@@ -15,9 +15,10 @@ function ListBets(): JSX.Element {
   if (error || !data) {
     return <p>error</p>;
   }
+  const dataSort = [...data.getAllBets];
   return (
     <div className="py-4 px-4">
-      {data.getAllBets.map((el: GetOneBet_getBetByID) => {
+      {dataSort.reverse().map((el: GetOneBet_getBetByID) => {
         return (
           <div key={el.id}>
             <OneBet datas={el} />

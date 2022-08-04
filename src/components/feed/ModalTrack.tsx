@@ -96,24 +96,29 @@ function ModalTrack({ datas }: IProps): JSX.Element {
           </p>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} action="create/update/track">
-          <TextInput
-            placeholder="Odd"
-            label="Odd"
-            register={register}
-            name="odd"
-            id="odd"
-            required
-            error=""
-          />
-          <NumberInput
-            placeholder="Amount"
-            label="Amount"
-            register={register}
-            name="amount"
-            id="amount"
-            required
-            error=""
-          />
+          <div className="w-2/12">
+            <TextInput
+              placeholder="Cote"
+              label="Cote"
+              register={register}
+              name="odd"
+              id="odd"
+              required
+              error=""
+            />
+          </div>
+          <div className="w-2/12 flex items-center">
+            <NumberInput
+              placeholder="Montant"
+              label="Montant"
+              register={register}
+              name="amount"
+              id="amount"
+              required
+              error=""
+            />
+            <div className="mt-11 ml-2 ">EUR</div>
+          </div>
           <div className="flex w-full justify-end items-center py-4 px-3">
             <button
               onClick={() => updateIsModal(false)}

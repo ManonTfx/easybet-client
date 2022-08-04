@@ -5,7 +5,7 @@ import { GetListUsers } from '../../API/types/GetListUsers';
 import OneUser from './OneUser';
 
 function ListUsers(): JSX.Element {
-  // FETCH THE TASK LIST
+  // FETCH THE USER LIST
   const { loading, error, data } = useQuery<GetListUsers>(GET_ALL_USERS);
 
   if (loading) {

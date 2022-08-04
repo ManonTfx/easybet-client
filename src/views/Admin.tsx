@@ -6,6 +6,7 @@ import Layout from './LayoutDashboard';
 import ListUsers from '../components/admin/ListUsers';
 import { AdminContext } from '../context/adminContext';
 import { GetOneUser_getUserByID } from '../API/types/GetOneUser';
+import ListUserBets from '../components/admin/ListUsersBets';
 
 function Admin(): JSX.Element {
   const [userActiv, setUserActiv] = useState<GetOneUser_getUserByID | null>(
@@ -31,6 +32,7 @@ function Admin(): JSX.Element {
               Liste des tracks de{' '}
               <span className="text-[#5D6AD2]">{userActiv?.firstName}</span> :
             </p>
+            <ListUserBets />
           </div>
         </div>
       </Layout>

@@ -41,7 +41,7 @@ function Header(): JSX.Element {
       <div className="flex pr-1">
         <button
           type="button"
-          className="bg-primary p-2 rounded-lg mr-4"
+          className="bg-primary p-2 rounded-lg mr-4 !text-white"
           onClick={() => {
             logoutMutation();
           }}

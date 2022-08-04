@@ -33,11 +33,6 @@ function LoginInput({
         className="p-4 bg-transparent text-lightPurple rounded-[5px] border border-[#5762C0] focus:outline-none peer h-10"
       />
       <p className="text-red text-xs">{error}</p>
-      {required && (
-        <p className="invisible peer-invalid:visible text-xs text-purple mt-1">
-          Fieds required
-        </p>
-      )}
     </label>
   );
 }

@@ -25,17 +25,17 @@ input:-webkit-autofill {
 
 ::-webkit-scrollbar-track {
   border-radius: 10px;
-  background-color: rgb(49, 48, 48);
+  background-color: #abb1df;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
-  background-color: rgb(49, 48, 48);
+  background-color: #abb1df;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: rgb(100, 100, 100);
+  background-color: #abb1df;
 }

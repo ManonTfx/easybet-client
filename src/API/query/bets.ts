@@ -25,7 +25,7 @@ export const GET_ALL_BETS = gql`
 `;
 
 // **  GET ONE BET
-export const GET_ONE_USER = gql`
+export const GET_ONE_BET = gql`
   query GetOneBet($getBetByIdId: String!) {
     getBetByID(id: $getBetByIdId) {
       id

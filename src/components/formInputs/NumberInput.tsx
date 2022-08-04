@@ -32,7 +32,6 @@ function NumberInput({
         className="bg-transparent mt-1 border border-[#5D6AD2] rounded-md focus:outline-none p-2 border-purple"
       />
       <p className="text-red text-xs">{error}</p>
-      {required && <p className="text-xs text-purple mt-1">Fieds required</p>}
     </label>
   );
 }
