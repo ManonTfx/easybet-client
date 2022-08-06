@@ -1,22 +1,18 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { FieldValues, UseFormRegister } from 'react-hook-form';
-
 interface IProps {
   label: string;
   placeholder: string;
-  register: UseFormRegister<FieldValues>;
-  name: string;
   required: boolean;
   error: string;
   id: string;
+  value: string | undefined;
+  setValue: (value: string) => void;
 }
 
 function NumberInput({
   label,
   placeholder,
-  register,
-  name,
+  value,
+  setValue,
   required,
   id,
   error,
@@ -26,9 +22,11 @@ function NumberInput({
       {label}
       <input
         id={id}
+        required={required}
         type="number"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         placeholder={placeholder}
-        {...register(name, { required })}
         className="bg-transparent mt-1 border border-[#5D6AD2] rounded-md focus:outline-none p-2 border-purple"
       />
       <p className="text-red text-xs">{error}</p>

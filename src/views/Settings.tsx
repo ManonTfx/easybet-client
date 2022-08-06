@@ -1,11 +1,30 @@
+import { useMutation } from '@apollo/client';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { DELETE_USER } from '../API/mutation/settings';
 import UpdatePassword from '../components/settings/UpdatePassword';
 import UpdateProfil from '../components/settings/updateProfil';
+import { AuthContext } from '../context/authContext';
 import { DarkModeContext } from '../context/darkModeContext';
 import Layout from './LayoutDashboard';
 
 function Settings(): JSX.Element {
+  const { user } = useContext(AuthContext);
   const { colorCards, colorText } = useContext(DarkModeContext);
+  const router = useNavigate();
+  const [deleteUser, { loading, error }] = useMutation(DELETE_USER, {
+    onCompleted: () => {
+      router('/', { replace: true });
+    },
+  });
+
+  if (loading) {
+    return <p>...loading</p>;
+  }
+  if (error) {
+    toast('Une erreur est survenue.');
+  }
   return (
     <Layout>
       <div className={`${colorText}  py-4 px-5 text-2xl`}>
@@ -17,6 +36,11 @@ function Settings(): JSX.Element {
               <div className="flex w-full justify-between items-center">
                 <h1> Supprimer mon compte</h1>
                 <button
+                  onClick={() =>
+                    deleteUser({
+                      variables: { deleteUserByIdId: user?.login.id },
+                    })
+                  }
                   className="w-auto px-3 py-2 bg-[#5D6AD2] rounded-lg text-lg"
                   type="button"
                 >

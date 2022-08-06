@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import 'react-toastify/dist/ReactToastify.min.css';
 import { ToastContainer } from 'react-toastify';
 import Router from './router';
 import { AuthContext } from './context/authContext';
@@ -25,8 +26,8 @@ function App(): JSX.Element {
     <AuthContext.Provider value={authContextValue}>
       <DarkModeContext.Provider value={darkModeContextValue}>
         <ToastContainer
-          position="bottom-right"
-          autoClose={9000}
+          position="top-right"
+          autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
@@ -34,8 +35,9 @@ function App(): JSX.Element {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme="dark"
         />
+        {/* Same as */}
+        <ToastContainer />
         <div className="min-h-screen w-screen">
           <Router />
         </div>

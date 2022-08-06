@@ -1,24 +1,62 @@
+import { useMutation } from '@apollo/client';
 import { useContext } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { UPDATE_USER_PASSWORD } from '../../API/mutation/settings';
+import { AuthContext } from '../../context/authContext';
 import { DarkModeContext } from '../../context/darkModeContext';
 import LoginInput from '../formInputs/LoginInput';
 
 function UpdatePassword(): JSX.Element {
-  const { register } = useForm();
+  const { register, handleSubmit } = useForm();
 
+  const { user } = useContext(AuthContext);
   const { colorCards } = useContext(DarkModeContext);
+
+  // UPDATE USER PASSWORD
+  const [update, { loading, error }] = useMutation(UPDATE_USER_PASSWORD, {
+    onCompleted: () => {
+      toast('Votre mot de passe à été mis à jour.');
+    },
+  });
+
+  const onSubmit = (d: FieldValues) => {
+    console.log(d);
+    if (d.password === d.passwordConfirm) {
+      update({
+        variables: {
+          updateUserPasswordId: user?.login.id,
+          lastPassword: d.lastPassword,
+          password: d.password,
+        },
+      });
+    } else {
+      toast('Les mots de passe ne correspondent pas.');
+    }
+  };
+
+  if (loading) {
+    return <p>...loading</p>;
+  }
+  if (error) {
+    toast('Une erreur est survenue.');
+  }
   return (
     <div className={`bg-[${colorCards}] py-4 w-1/2 px-6 my-6`}>
       <h1> Modifier mon mot de passe</h1>
-      <form action="update-user" className="mt-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        action="update-user"
+        className="mt-4"
+      >
         <div className="w-full">
           <LoginInput
             type="password"
             placeholder="Mot de passe actuel"
             label="Mot de passe actuel"
             register={register}
-            name="firstname"
-            id="firstname"
+            name="lastPassword"
+            id="lastPassword"
             error=""
             required={false}
           />
@@ -29,8 +67,8 @@ function UpdatePassword(): JSX.Element {
             placeholder="Nouveau mot de passe"
             label="Nouveau mot de passe"
             register={register}
-            name="firstname"
-            id="firstname"
+            name="password"
+            id="password"
             error=""
             required={false}
           />
@@ -41,8 +79,8 @@ function UpdatePassword(): JSX.Element {
             placeholder="Confirmation mot de passe"
             label="Confirmation mot de passe"
             register={register}
-            name="firstname"
-            id="firstname"
+            name="passwordConfirm"
+            id="passwordConfirm"
             error=""
             required={false}
           />

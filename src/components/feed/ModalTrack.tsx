@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
@@ -7,7 +7,6 @@ import football from '../../assets/cat/football.svg';
 import tennis from '../../assets/cat/tennis.svg';
 import basket from '../../assets/cat/basket.svg';
 import { GetOneBet_getBetByID } from '../../API/types/GetOneBet';
-
 import Modal from '../modal/Modal';
 import { DashboardContext } from '../../context/dashboardContext';
 import NumberInput from '../formInputs/NumberInput';
@@ -21,7 +20,10 @@ interface IProps {
   datas: GetOneBet_getBetByID;
 }
 function ModalTrack({ datas }: IProps): JSX.Element {
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit } = useForm();
+
+  const [odd, setOdd] = useState('');
+  const [amount, setAmount] = useState('');
 
   const { updateIsModal } = useContext(DashboardContext);
   const { user } = useContext(AuthContext);
@@ -31,7 +33,7 @@ function ModalTrack({ datas }: IProps): JSX.Element {
     useMutation<CreateUserBet_createUserBet>(CREATE_USERBET_MUTATION, {
       onCompleted: () => {
         updateIsModal(false);
-        toast.success('Suivi enregistré!');
+        toast('Votre pari a bien été enregistré!');
       },
       refetchQueries: [GET_ALL_BETS],
     });
@@ -53,11 +55,10 @@ function ModalTrack({ datas }: IProps): JSX.Element {
     return src;
   };
 
-  // TODO CHANGE TYPE
-  const onSubmit = (data: any) => {
+  const onSubmit = () => {
     const trackData = {
-      amount: Number(data.amount),
-      odd: parseFloat(data.odd),
+      amount: Number(amount),
+      odd: parseFloat(odd),
       betId: datas.id,
       userId: user?.login.id,
     };
@@ -100,19 +101,19 @@ function ModalTrack({ datas }: IProps): JSX.Element {
             <TextInput
               placeholder="Cote"
               label="Cote"
-              register={register}
-              name="odd"
               id="odd"
               required
               error=""
+              value={odd}
+              setValue={setOdd}
             />
           </div>
           <div className="w-2/12 flex items-center">
             <NumberInput
               placeholder="Montant"
               label="Montant"
-              register={register}
-              name="amount"
+              value={amount}
+              setValue={setAmount}
               id="amount"
               required
               error=""

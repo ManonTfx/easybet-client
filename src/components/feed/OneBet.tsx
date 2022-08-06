@@ -12,7 +12,7 @@ interface IProps {
   datas: GetOneBet_getBetByID;
 }
 function OneBet({ datas }: IProps): JSX.Element {
-  const { colorCards } = useContext(DarkModeContext);
+  const { isDarkMode } = useContext(DarkModeContext);
   const { updateIsModal, isModal } = useContext(DashboardContext);
   const srcImg = () => {
     let src = '';
@@ -31,7 +31,11 @@ function OneBet({ datas }: IProps): JSX.Element {
     return src;
   };
   return (
-    <div className={`bg-[${colorCards}] py-4 px-4 mb-4 rounded-xl `}>
+    <div
+      className={`${
+        isDarkMode ? 'bg-[#221C2D]' : 'bg-[#dcdff1]'
+      } py-4 px-4 mb-4 rounded-xl `}
+    >
       <div className="flex items-center ">
         <img src={srcImg()} alt={datas.category} />
         <div className="text-xl ml-2">{datas.name}</div>
