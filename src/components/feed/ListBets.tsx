@@ -1,28 +1,36 @@
 /* eslint-disable camelcase */
-import { useQuery } from '@apollo/client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import OneBet from './OneBet';
-import { GET_ALL_BETS } from '../../API/query/bets';
 import { GetOneBet_getBetByID } from '../../API/types/GetOneBet';
-import { GetAllbets } from '../../API/types/GetAllbets';
+import { GetAllbets_getAllBets } from '../../API/types/GetAllbets';
 import InputSearch from '../formInputs/InputSearch';
 
-function ListBets(): JSX.Element {
-  const [search, setSearch] = useState('');
-  // FETCH THE TASK LIST
-  const { loading, error, data } = useQuery<GetAllbets>(GET_ALL_BETS);
+interface IProps {
+  datas: GetAllbets_getAllBets[];
+}
 
-  if (loading) {
-    return <p>...loading</p>;
-  }
-  if (error || !data) {
-    return <p>error</p>;
-  }
-  const dataSort = [...data.getAllBets];
+function ListBets({ datas }: IProps): JSX.Element {
+  const [search, setSearch] = useState('');
+  const [dataFiltered, setDataFiltered] = useState([...datas]);
 
   const submitSearch = (searchValue: string) => {
-    console.log(searchValue);
+    if (searchValue !== '') {
+      const newData = datas.filter(
+        (item) =>
+          item.bookmaker.toUpperCase().includes(searchValue.toUpperCase()) ||
+          item.category.toUpperCase().includes(searchValue.toUpperCase()) ||
+          item.name.toUpperCase().includes(searchValue.toUpperCase())
+      );
+      setDataFiltered([...newData]);
+    } else {
+      setDataFiltered([...datas]);
+    }
   };
+
+  useEffect(() => {
+    submitSearch(search);
+  }, [search]);
+
   return (
     <div className="py-4 px-4">
       <InputSearch
@@ -31,7 +39,7 @@ function ListBets(): JSX.Element {
         value={search}
         setValue={setSearch}
       />
-      {dataSort.reverse().map((el: GetOneBet_getBetByID) => {
+      {dataFiltered.reverse().map((el: GetOneBet_getBetByID) => {
         return (
           <div key={el.id}>
             <OneBet datas={el} />
