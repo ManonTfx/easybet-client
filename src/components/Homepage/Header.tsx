@@ -25,7 +25,10 @@ function Header({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
   });
 
   return (
-    <div className="bg-black flex px-4 justify-between fixed bg-opacity-50 w-full p-4">
+    <div
+      style={{ zIndex: 20 }}
+      className="bg-black flex px-4 justify-between fixed bg-opacity-50 w-full p-4"
+    >
       <img className="h-8" src={logoEasybet} alt="easybet" />
       {!user ? (
         <div>

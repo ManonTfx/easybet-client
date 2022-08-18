@@ -2,7 +2,7 @@ function HeroSection(): JSX.Element {
   return (
     <div className="hero-section h-screen">
       <div className="pt-[30vh] pl-[15vw]">
-        <p className="text-[50px] font-bold">Pari Comme un pro</p>
+        <h1 className="text-[50px] font-bold">Pari Comme un pro</h1>
         <p className="mb-3 text-[20px]">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum soluta
           quos exercitationem inventore.

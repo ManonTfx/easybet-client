@@ -4,6 +4,10 @@
   background-image: url('../assets/heroSectionImg.png');
   background-size: cover;
 }
+.last-section {
+  background-image: url('../assets/lastSection.jpg');
+  background-size: cover;
+}
 
 /* Corrige le background blanc lors de l\'auto-complétion par google chrome */
 input:-webkit-autofill,

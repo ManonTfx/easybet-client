@@ -39,7 +39,7 @@ function InputSearch({
             onClick={() => setValue('')}
             className={` p-3 `}
           >
-            <img className="h-5 mr-2" src={closePurple} alt="rechercher" />
+            <img className="h-4 mr-2" src={closePurple} alt="rechercher" />
           </button>
         )}
         <button
