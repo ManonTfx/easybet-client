@@ -40,10 +40,6 @@ function Header({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
             Connexion
           </button>
           <button
-            style={{
-              background:
-                'linear-gradient(181.76deg, rgba(255, 255, 255, 0.4) -72.83%, #8560EE 98.51%)',
-            }}
             type="button"
             className="bg-primary p-2 rounded-lg"
             onClick={() => {

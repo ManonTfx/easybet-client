@@ -7,6 +7,7 @@ import Settings from './views/Settings';
 import Stats from './views/Stats';
 import Tutos from './views/Tutos';
 import Admin from './views/Admin';
+import TutoDetail from './views/TutoDetail';
 
 function Router(): JSX.Element {
   const { user } = useContext(AuthContext);
@@ -21,6 +22,11 @@ function Router(): JSX.Element {
         path="/articles"
         element={user !== null ? <Tutos /> : <Navigate to="/" />}
       />
+      <Route
+        path="/article/:id"
+        element={user !== null ? <TutoDetail /> : <Navigate to="/" />}
+      />
+
       <Route
         path="/stats"
         element={user !== null ? <Stats /> : <Navigate to="/" />}

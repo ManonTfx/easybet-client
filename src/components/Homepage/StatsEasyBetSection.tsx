@@ -13,7 +13,7 @@ function StatsEasyBetSection(): JSX.Element {
         <h2 className="text-[50px] font-bold mb-5">
           Les stats ne mentent pas{' '}
         </h2>
-        <p>
+        <p className="text-lg py-8">
           Nous avons plus de 7000 paris à notre actif mais nous avons décidé de
           relancer les stats à louverture de la plateforme.
         </p>

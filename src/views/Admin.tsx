@@ -6,7 +6,6 @@ import Layout from './LayoutDashboard';
 import ListUsers from '../components/admin/ListUsers';
 import { AdminContext } from '../context/adminContext';
 import { GetOneUser_getUserByID } from '../API/types/GetOneUser';
-import ListUserBets from '../components/admin/ListUsersBets';
 import { GetListUsers } from '../API/types/GetListUsers';
 import { GET_ALL_USERS } from '../API/query/admin';
 
@@ -31,19 +30,13 @@ function Admin(): JSX.Element {
     userActiv,
     updateUserActiv: setUserActiv,
   };
+
   return (
     <AdminContext.Provider value={adminContextValue}>
       <Layout>
         <div className={`${colorText} px-5 py-5 w-full flex`}>
-          <div className="w-8/12">
+          <div className="w-full">
             <ListUsers datas={data.getAllUsers} />
-          </div>
-          <div className="w-4/12 px-5">
-            <p>
-              Liste des tracks de{' '}
-              <span className="text-[#5D6AD2]">{userActiv?.firstName}</span> :
-            </p>
-            <ListUserBets />
           </div>
         </div>
       </Layout>

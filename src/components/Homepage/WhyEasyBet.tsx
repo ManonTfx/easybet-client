@@ -2,7 +2,7 @@ import OneCardWhyEasyBet from './OneCardWhyEasyBet';
 
 function WhyEasyBet(): JSX.Element {
   return (
-    <div className="h-screen bg-[#221C2D] pt-[20vh] text-center">
+    <div className="h-screen bg-[#221C2D] pt-[20vh] text-center last-section">
       <h2 className="text-[50px] font-bold mb-8">Pourquoi EasyBet ?</h2>
       <div className="w-7/12 m-auto">
         <div className="flex space-x-6">

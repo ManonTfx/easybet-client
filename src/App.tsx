@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import 'react-toastify/dist/ReactToastify.min.css';
+import '@progress/kendo-theme-default/dist/all.css';
 import { ToastContainer } from 'react-toastify';
 import Router from './router';
 import { AuthContext } from './context/authContext';

@@ -1,20 +1,14 @@
 function HeroSection(): JSX.Element {
   return (
-    <div className="hero-section h-screen">
+    <div className="hero-section h-screen relative">
       <div className="pt-[30vh] pl-[15vw]">
-        <h1 className="text-[50px] font-bold">Pari Comme un pro</h1>
-        <p className="mb-3 text-[20px]">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum soluta
-          quos exercitationem inventore.
+        <h1 className="text-[70px] font-bold">Pari Comme un pro</h1>
+        <p className="mb-3 text-[30px]">
+          Respecte nos 2 piliers fondateurs: Contrôle tes émotions et Track tous
+          tes résultats
         </p>
-        <button
-          type="button"
-          className="bg-primary px-4 py-3 rounded-lg mt-4"
-          style={{
-            background:
-              'linear-gradient(181.76deg, rgba(255, 255, 255, 0.4) -72.83%, #8560EE 98.51%)',
-          }}
-        >
+
+        <button type="button" className="bg-primary px-4 py-3 rounded-lg mt-4">
           Rejoins nous
         </button>
       </div>

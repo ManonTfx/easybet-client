@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
+import { useMutation } from '@apollo/client';
 import { DashboardContext } from '../../context/dashboardContext';
 import LinkButton from './LinkButton';
 import logoEasybet from '../../assets/logos/logoEasybet.svg';
@@ -15,9 +16,13 @@ import feedDark from '../../assets/icons/feedDark.svg';
 import statsDark from '../../assets/icons/statsDark.svg';
 import articlesDark from '../../assets/icons/articlesDark.svg';
 import settingsDark from '../../assets/icons/settingsDark.svg';
+import logout from '../../assets/logout.svg';
+import logoutBlack from '../../assets/logoutBlack.svg';
 
 import { AuthContext } from '../../context/authContext';
 import { DarkModeContext } from '../../context/darkModeContext';
+import { Logout } from '../../API/types/Logout';
+import { LOGOUT_MUTATION } from '../../API/mutation/logout';
 
 function Sidebar(): JSX.Element {
   const { isSidebar } = useContext(DashboardContext);
@@ -25,7 +30,7 @@ function Sidebar(): JSX.Element {
 
   const { user } = useContext(AuthContext);
 
-  const witdhSidebar = isSidebar ? 'w-[300px]' : 'w-[80px]';
+  const witdhSidebar = isSidebar ? 'w-[300px]' : 'w-[70px]';
   const darkModeBackgroundColor = isDarkMode ? 'bg-[#19191C]' : 'bg-[#DDDFF2]';
   const darkModeBorderColor = isDarkMode
     ? 'border-r-darkMode'
@@ -49,10 +54,18 @@ function Sidebar(): JSX.Element {
     name: 'Gestion des utilisateurs',
     link: '/admin',
   };
+  const { updateUser } = useContext(AuthContext);
 
+  const [logoutMutation] = useMutation<Logout>(LOGOUT_MUTATION, {
+    onCompleted: () => {
+      updateUser(null);
+    },
+  });
+
+  const logoutImg = isDarkMode ? logout : logoutBlack;
   return (
     <div
-      className={`${witdhSidebar} ] anim-sidebar-width z-20 overflow-hidden h-screen ${darkModeBackgroundColor} px-5 pt-5 inset-0 lg:block hidden border-r-4 ${darkModeBorderColor}`}
+      className={`${witdhSidebar} h-screen anim-sidebar-width relative z-20 overflow-hidden ${darkModeBackgroundColor} px-5 pt-5 inset-0 lg:block hidden border-r-4 ${darkModeBorderColor}`}
     >
       {isSidebar ? (
         <div className="w-[200px]">
@@ -62,7 +75,7 @@ function Sidebar(): JSX.Element {
         <img src={darkModeFavicon} alt="easybet" className="h-7" />
       )}
 
-      <div className="h-full mt-8 flex lg:justify-between">
+      <div className="h-full mt-8 flex lg:justify-between h-auto">
         <div>
           <div className="w-full">
             {nav.map((item) => {
@@ -78,6 +91,35 @@ function Sidebar(): JSX.Element {
           </div>
         </div>
       </div>
+      {isSidebar ? (
+        <div
+          onKeyDown={undefined}
+          role="button"
+          tabIndex={0}
+          onClick={() => {
+            logoutMutation();
+          }}
+          className="bg-primary px-5 py-3 rounded-[5px] mr-4 !text-white absolute bottom-6 w-10/12 flex items-center justify-between"
+        >
+          <button type="button" className="">
+            Deconnexion
+          </button>
+          <img src={logoutImg} alt="easybet" className="h-5" />
+        </div>
+      ) : (
+        <button
+          onClick={() => {
+            logoutMutation();
+          }}
+          type="button"
+        >
+          <img
+            src={logoutImg}
+            alt="easybet"
+            className="h-6 absolute bottom-6 "
+          />
+        </button>
+      )}
     </div>
   );
 }

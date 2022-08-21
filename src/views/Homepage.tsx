@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Header from '../components/Homepage/Header';
 import HeroSection from '../components/Homepage/HeroSection';
-import LastSection from '../components/Homepage/LastSection';
 import StatsEasyBetSection from '../components/Homepage/StatsEasyBetSection';
 import WhyEasyBet from '../components/Homepage/WhyEasyBet';
 import LogIn from '../components/Login';
@@ -33,7 +32,6 @@ function HomePage(): JSX.Element {
         <HeroSection />
         <StatsEasyBetSection />
         <WhyEasyBet />
-        <LastSection />
       </div>
     </div>
   );

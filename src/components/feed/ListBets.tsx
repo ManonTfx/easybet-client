@@ -32,7 +32,7 @@ function ListBets({ datas }: IProps): JSX.Element {
   }, [search]);
 
   return (
-    <div className="py-4 px-4">
+    <div className="px-4">
       <InputSearch
         submitValue={() => submitSearch(search)}
         placeholder="Rechercher"
