@@ -17,6 +17,7 @@ export interface UpdateArticle_updateArticle {
   date: any;
   contents: string;
   img: string;
+  userId: string;
 }
 
 export interface UpdateArticle {

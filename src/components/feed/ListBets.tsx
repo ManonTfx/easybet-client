@@ -1,17 +1,17 @@
 /* eslint-disable camelcase */
 import { useEffect, useState } from 'react';
 import OneBet from './OneBet';
-import { GetOneBet_getBetByID } from '../../API/types/GetOneBet';
-import { GetAllbets_getAllBets } from '../../API/types/GetAllbets';
 import InputSearch from '../formInputs/InputSearch';
+import { GetAllBets_getAllBets } from '../../API/types/GetAllBets';
+import { GetBetByID_getBetByID } from '../../API/types/GetBetByID';
 
 interface IProps {
-  datas: GetAllbets_getAllBets[];
+  datas: GetAllBets_getAllBets[];
 }
 
 function ListBets({ datas }: IProps): JSX.Element {
-  const [search, setSearch] = useState('');
   const [dataFiltered, setDataFiltered] = useState([...datas]);
+  const [search, setSearch] = useState('');
 
   const submitSearch = (searchValue: string) => {
     if (searchValue !== '') {
@@ -39,7 +39,7 @@ function ListBets({ datas }: IProps): JSX.Element {
         value={search}
         setValue={setSearch}
       />
-      {dataFiltered.reverse().map((el: GetOneBet_getBetByID) => {
+      {dataFiltered.reverse().map((el: GetBetByID_getBetByID) => {
         return (
           <div key={el.id}>
             <OneBet datas={el} />

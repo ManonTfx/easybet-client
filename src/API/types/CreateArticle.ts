@@ -15,6 +15,7 @@ export interface CreateArticle_createArticle {
   date: any;
   contents: string;
   img: string;
+  userId: string;
 }
 
 export interface CreateArticle {
@@ -26,4 +27,5 @@ export interface CreateArticleVariables {
   title: string;
   contents: string;
   img: string;
+  userId: string;
 }

@@ -4,10 +4,10 @@ import { AuthContext } from './context/authContext';
 import Feed from './views/Feed';
 import HomePage from './views/Homepage';
 import Settings from './views/Settings';
-import Stats from './views/Stats';
 import Tutos from './views/Tutos';
 import Admin from './views/Admin';
 import TutoDetail from './views/TutoDetail';
+import Stats from './views/Stats';
 
 function Router(): JSX.Element {
   const { user } = useContext(AuthContext);

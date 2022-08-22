@@ -4,19 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetOneBet
+// GraphQL query operation: GetBetByID
 // ====================================================
 
-export interface GetOneBet_getBetByID_UserBet {
-  __typename: "IUserBet";
-  id: string;
-  betId: string;
-  userId: string;
-  amount: number;
-  odd: number;
-}
-
-export interface GetOneBet_getBetByID {
+export interface GetBetByID_getBetByID {
   __typename: "IBet";
   id: string;
   name: string;
@@ -24,16 +15,15 @@ export interface GetOneBet_getBetByID {
   bookmaker: string;
   odd: number;
   category: string;
-  result: boolean | null;
+  result: number | null;
   date: string;
   createdAt: any;
-  UserBet: GetOneBet_getBetByID_UserBet[];
 }
 
-export interface GetOneBet {
-  getBetByID: GetOneBet_getBetByID;
+export interface GetBetByID {
+  getBetByID: GetBetByID_getBetByID;
 }
 
-export interface GetOneBetVariables {
+export interface GetBetByIDVariables {
   getBetByIdId: string;
 }

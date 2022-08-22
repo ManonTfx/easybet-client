@@ -4,12 +4,12 @@ import football from '../../assets/cat/football.svg';
 import tennis from '../../assets/cat/tennis.svg';
 import basket from '../../assets/cat/basket.svg';
 import { DarkModeContext } from '../../context/darkModeContext';
-import { GetOneBet_getBetByID } from '../../API/types/GetOneBet';
 import { DashboardContext } from '../../context/dashboardContext';
 import ModalTrack from './ModalTrack';
+import { GetBetByID_getBetByID } from '../../API/types/GetBetByID';
 
 interface IProps {
-  datas: GetOneBet_getBetByID;
+  datas: GetBetByID_getBetByID;
 }
 function OneBet({ datas }: IProps): JSX.Element {
   const { isDarkMode } = useContext(DarkModeContext);

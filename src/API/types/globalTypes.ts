@@ -13,6 +13,7 @@ export interface IUpdateArticlePayload {
   title?: string | null;
   contents?: string | null;
   img?: string | null;
+  userId?: string | null;
 }
 
 //==============================================================

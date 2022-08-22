@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 // **  GET LIST BETS
 export const GET_ALL_BETS = gql`
-  query GetAllbets {
+  query GetAllBets {
     getAllBets {
       id
       name
@@ -13,20 +13,13 @@ export const GET_ALL_BETS = gql`
       result
       date
       createdAt
-      UserBet {
-        id
-        userId
-        betId
-        amount
-        odd
-      }
     }
   }
 `;
 
 // **  GET ONE BET
 export const GET_ONE_BET = gql`
-  query GetOneBet($getBetByIdId: String!) {
+  query GetBetByID($getBetByIdId: String!) {
     getBetByID(id: $getBetByIdId) {
       id
       name
@@ -37,13 +30,6 @@ export const GET_ONE_BET = gql`
       result
       date
       createdAt
-      UserBet {
-        id
-        betId
-        userId
-        amount
-        odd
-      }
     }
   }
 `;

@@ -15,6 +15,7 @@ export interface GetOneArticle_getArticleByID {
   date: any;
   contents: string;
   img: string;
+  userId: string;
 }
 
 export interface GetOneArticle {

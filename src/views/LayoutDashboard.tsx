@@ -11,12 +11,15 @@ interface IProps {
 function Layout({ children }: IProps): JSX.Element {
   const [isSidebar, setIsSidebar] = useState(true);
   const [isModal, setIsModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const dashboardContextValue = {
     isSidebar,
     updateIsSidebar: setIsSidebar,
     isModal,
     updateIsModal: setIsModal,
+    isLoading,
+    updateIsLoading: setIsLoading,
   };
 
   const { isDarkMode } = useContext(DarkModeContext);

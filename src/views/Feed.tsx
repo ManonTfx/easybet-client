@@ -1,22 +1,30 @@
 import { useQuery } from '@apollo/client';
 import { useContext } from 'react';
+import { GET_ALL_ARTICLES } from '../API/query/articles';
 import { GET_ALL_BETS } from '../API/query/bets';
-import { GetAllbets } from '../API/types/GetAllbets';
 import ListBets from '../components/feed/ListBets';
 import ListTutos from '../components/tuto/ListTutos';
 import { DarkModeContext } from '../context/darkModeContext';
 import Layout from './LayoutDashboard';
+import { GetAllBets } from '../API/types/GetAllBets';
 
 function Feed(): JSX.Element {
   const { colorText, isDarkMode } = useContext(DarkModeContext);
 
-  // FETCH THE BETS LIST
-  const { loading, error, data } = useQuery<GetAllbets>(GET_ALL_BETS);
+  // FETCH THE ARTICLES LIST
+  const {
+    loading: loadingArticle,
+    error: errorArticle,
+    data: dataArticles,
+  } = useQuery(GET_ALL_ARTICLES);
 
-  if (loading) {
+  // FETCH THE BETS LIST
+  const { loading, error, data } = useQuery<GetAllBets>(GET_ALL_BETS);
+
+  if (loading || loadingArticle) {
     return <p>...loading</p>;
   }
-  if (error || !data) {
+  if (error || !data || errorArticle || !dataArticles) {
     return <p>error</p>;
   }
   const scrollbarColor = isDarkMode
@@ -32,7 +40,7 @@ function Feed(): JSX.Element {
         </div>
         <div className="w-4/12 pl-5">
           <p>Derniers articles</p>
-          <ListTutos />
+          <ListTutos data={dataArticles.getAllArticles} />
         </div>
       </div>
     </Layout>

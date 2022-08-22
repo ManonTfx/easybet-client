@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 import football from '../../assets/cat/football.svg';
 import tennis from '../../assets/cat/tennis.svg';
 import basket from '../../assets/cat/basket.svg';
-import { GetOneBet_getBetByID } from '../../API/types/GetOneBet';
 import Modal from '../modal/Modal';
 import { DashboardContext } from '../../context/dashboardContext';
 import NumberInput from '../formInputs/NumberInput';
@@ -15,9 +14,10 @@ import { CreateUserBet_createUserBet } from '../../API/types/CreateUserBet';
 import { CREATE_USERBET_MUTATION } from '../../API/mutation/userBets';
 import { GET_ALL_BETS } from '../../API/query/bets';
 import TextInput from '../formInputs/TextInput';
+import { GetBetByID_getBetByID } from '../../API/types/GetBetByID';
 
 interface IProps {
-  datas: GetOneBet_getBetByID;
+  datas: GetBetByID_getBetByID;
 }
 function ModalTrack({ datas }: IProps): JSX.Element {
   const { handleSubmit } = useForm();

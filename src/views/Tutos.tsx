@@ -1,15 +1,26 @@
 import { useContext, useState } from 'react';
+import { useQuery } from '@apollo/client';
 import { DarkModeContext } from '../context/darkModeContext';
 import Layout from './LayoutDashboard';
 import { AuthContext } from '../context/authContext';
 import CreateUpdateTuto from '../components/tuto/CreateOrUpdateTuto';
 import ListTutos from '../components/tuto/ListTutos';
+import { GET_ALL_ARTICLES } from '../API/query/articles';
 
 function Tutos(): JSX.Element {
   const [isForm, setIsForm] = useState(false);
   const { colorText } = useContext(DarkModeContext);
   const { user } = useContext(AuthContext);
 
+  // FETCH THE ARTICLES LIST
+  const { loading, error, data } = useQuery(GET_ALL_ARTICLES);
+
+  if (loading) {
+    return <p>...loading</p>;
+  }
+  if (error || !data) {
+    return <p>error</p>;
+  }
   return (
     <Layout>
       <div className={`${colorText} px-5 py-5 w-full flex`}>
@@ -23,7 +34,7 @@ function Tutos(): JSX.Element {
               >
                 Creer un nouveau tuto/article
               </button>
-              <ListTutos />
+              <ListTutos data={data.getAllArticles} />
             </div>
           )
         ) : (

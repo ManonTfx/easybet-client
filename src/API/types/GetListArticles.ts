@@ -15,6 +15,7 @@ export interface GetListArticles_getAllArticles {
   date: any;
   contents: string;
   img: string;
+  userId: string;
 }
 
 export interface GetListArticles {

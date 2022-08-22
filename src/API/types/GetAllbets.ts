@@ -4,19 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetAllbets
+// GraphQL query operation: GetAllBets
 // ====================================================
 
-export interface GetAllbets_getAllBets_UserBet {
-  __typename: "IUserBet";
-  id: string;
-  userId: string;
-  betId: string;
-  amount: number;
-  odd: number;
-}
-
-export interface GetAllbets_getAllBets {
+export interface GetAllBets_getAllBets {
   __typename: "IBet";
   id: string;
   name: string;
@@ -24,12 +15,11 @@ export interface GetAllbets_getAllBets {
   bookmaker: string;
   odd: number;
   category: string;
-  result: boolean | null;
+  result: number | null;
   date: string;
   createdAt: any;
-  UserBet: GetAllbets_getAllBets_UserBet[];
 }
 
-export interface GetAllbets {
-  getAllBets: GetAllbets_getAllBets[];
+export interface GetAllBets {
+  getAllBets: GetAllBets_getAllBets[];
 }

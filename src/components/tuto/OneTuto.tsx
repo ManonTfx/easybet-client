@@ -10,6 +10,7 @@ interface IProps {
 
 function OneTuto({ data }: IProps): JSX.Element {
   const { isDarkMode } = useContext(DarkModeContext);
+
   return (
     <Link to={`/article/${data.id}`}>
       <div
@@ -19,8 +20,8 @@ function OneTuto({ data }: IProps): JSX.Element {
         <p className="text-lg font-bold mb-2 pt-6">{data.title}</p>
         <img className="w-full" src={data.img} alt="toto" />
         <div
-          className="pb-4 mt-4"
-          dangerouslySetInnerHTML={{ __html: data.contents.substr(0, 50) }}
+          className="pb-4 mt-4 "
+          dangerouslySetInnerHTML={{ __html: data.contents }}
         />
       </div>
     </Link>

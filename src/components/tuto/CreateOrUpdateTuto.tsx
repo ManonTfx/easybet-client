@@ -170,11 +170,11 @@ function CreateUpdateTuto({ setIsForm }: IProps): JSX.Element {
           />
         </div>
         <button
-          className="!text-white mt-5 float-right flex bg-[#3DA184] py-2 px-8 rounded-sm"
+          className="!text-white text-lg  items-center mt-5 float-right flex bg-primary py-2 px-8 rounded-[5px]"
           type="submit"
         >
           Valider
-          <img className="ml-2" src={arrow_right} alt="back" />
+          <img className="ml-6" src={arrow_right} alt="back" />
         </button>
       </form>
     </div>
