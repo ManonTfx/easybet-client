@@ -5,7 +5,7 @@ import { GET_ALL_USERBETS } from '../../API/query/userBets';
 import { GetAllUserBets } from '../../API/types/GetAllUserBets';
 import { AuthContext } from '../../context/authContext';
 import MoreImportantFigures from './MoreImportantFigures';
-import { GetAllBets } from '../../API/types/GetAllBets.ts';
+import { GetAllBets } from '../../API/types/GetAllBets';
 
 interface IProps {
   isMyStats: boolean;
