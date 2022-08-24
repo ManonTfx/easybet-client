@@ -37,7 +37,6 @@ function ModalTrack({ datas }: IProps): JSX.Element {
       },
       refetchQueries: [GET_ALL_BETS],
     });
-
   const srcImg = () => {
     let src = '';
     switch (datas.category.toLowerCase()) {
