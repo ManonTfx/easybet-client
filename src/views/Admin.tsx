@@ -6,7 +6,7 @@ import Layout from './LayoutDashboard';
 import ListUsers from '../components/admin/ListUsers';
 import { AdminContext } from '../context/adminContext';
 import { GetOneUser_getUserByID } from '../API/types/GetOneUser';
-import { GetListUsers } from '../API/types/GetListUsers';
+import { GetListUsers } from '../API/types/GetListUsers.ts';
 import { GET_ALL_USERS } from '../API/query/admin';
 
 function Admin(): JSX.Element {

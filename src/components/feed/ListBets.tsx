@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import OneBet from './OneBet';
 import InputSearch from '../formInputs/InputSearch';
-import { GetAllBets_getAllBets } from '../../API/types/GetAllBets';
+import { GetAllBets_getAllBets } from '../../API/types/GetAllBets.ts';
 import { GetBetByID_getBetByID } from '../../API/types/GetBetByID';
 
 interface IProps {

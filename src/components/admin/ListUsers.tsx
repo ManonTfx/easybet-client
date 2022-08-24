@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { v4 } from 'uuid';
-import { GetListUsers_getAllUsers } from '../../API/types/GetListUsers';
+import { GetListUsers_getAllUsers } from '../../API/types/GetListUsers.ts';
 import { DarkModeContext } from '../../context/darkModeContext';
 import InputSearch from '../formInputs/InputSearch';
 import OneUser from './OneUser';

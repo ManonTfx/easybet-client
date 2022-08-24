@@ -6,7 +6,7 @@ import ListBets from '../components/feed/ListBets';
 import ListTutos from '../components/tuto/ListTutos';
 import { DarkModeContext } from '../context/darkModeContext';
 import Layout from './LayoutDashboard';
-import { GetAllBets } from '../API/types/GetAllBets';
+import { GetAllBets } from '../API/types/GetAllBets.ts';
 
 function Feed(): JSX.Element {
   const { colorText, isDarkMode } = useContext(DarkModeContext);
