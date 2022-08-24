@@ -1,12 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { v4 } from 'uuid';
-import { GetListUsers_getAllUsers } from '../../API/types/GetListUsers';
 import { DarkModeContext } from '../../context/darkModeContext';
 import InputSearch from '../formInputs/InputSearch';
 import OneUser from './OneUser';
 
 interface IProps {
-  datas: GetListUsers_getAllUsers[];
+  datas: any;
 }
 
 function ListUsers({ datas }: IProps): JSX.Element {
@@ -17,7 +16,7 @@ function ListUsers({ datas }: IProps): JSX.Element {
   const submitSearch = (searchValue: string) => {
     if (searchValue !== '') {
       const newData = datas.filter(
-        (item) =>
+        (item: any) =>
           item.email.toUpperCase().includes(searchValue.toUpperCase()) ||
           item.firstName.toUpperCase().includes(searchValue.toUpperCase()) ||
           item.lastName.toUpperCase().includes(searchValue.toUpperCase()) ||

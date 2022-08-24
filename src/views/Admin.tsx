@@ -6,7 +6,6 @@ import Layout from './LayoutDashboard';
 import ListUsers from '../components/admin/ListUsers';
 import { AdminContext } from '../context/adminContext';
 import { GetOneUser_getUserByID } from '../API/types/GetOneUser';
-import { GetListUsers } from '../API/types/GetListUsers';
 import { GET_ALL_USERS } from '../API/query/admin';
 
 function Admin(): JSX.Element {
@@ -16,7 +15,7 @@ function Admin(): JSX.Element {
   const { colorText } = useContext(DarkModeContext);
 
   // FETCH THE USER LIST
-  const { loading, error, data } = useQuery<GetListUsers>(GET_ALL_USERS);
+  const { loading, error, data } = useQuery(GET_ALL_USERS);
 
   if (loading) {
     return <p>...loading</p>;

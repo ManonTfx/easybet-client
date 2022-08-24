@@ -6,7 +6,6 @@ import ListBets from '../components/feed/ListBets';
 import ListTutos from '../components/tuto/ListTutos';
 import { DarkModeContext } from '../context/darkModeContext';
 import Layout from './LayoutDashboard';
-import { GetAllBets } from '../API/types/GetAllBets';
 
 function Feed(): JSX.Element {
   const { colorText, isDarkMode } = useContext(DarkModeContext);
@@ -19,7 +18,7 @@ function Feed(): JSX.Element {
   } = useQuery(GET_ALL_ARTICLES);
 
   // FETCH THE BETS LIST
-  const { loading, error, data } = useQuery<GetAllBets>(GET_ALL_BETS);
+  const { loading, error, data } = useQuery(GET_ALL_BETS);
 
   if (loading || loadingArticle) {
     return <p>...loading</p>;

@@ -5,7 +5,6 @@ import { GET_ALL_USERBETS } from '../../API/query/userBets';
 import { GetAllUserBets } from '../../API/types/GetAllUserBets';
 import { AuthContext } from '../../context/authContext';
 import MoreImportantFigures from './MoreImportantFigures';
-import { GetAllBets } from '../../API/types/GetAllBets';
 
 interface IProps {
   isMyStats: boolean;
@@ -17,7 +16,7 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
     loading: loadingBets,
     error: errorBets,
     data: dataBets,
-  } = useQuery<GetAllBets>(GET_ALL_BETS);
+  } = useQuery(GET_ALL_BETS);
 
   // FETCH THE USERBETS LIST
   const {
@@ -38,14 +37,14 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
   );
   // ** STATS GLOBALES
   // WINNINGS
-  const totalStakeSum = dataBets.getAllBets.reduce((acc, obj) => {
+  const totalStakeSum = dataBets.getAllBets.reduce((acc: any, obj: any) => {
     return acc + obj.stake;
   }, 0);
 
   const totalWinArray = dataBets.getAllBets.map((bet: any) => {
     return bet.result * bet.stake * bet.odd;
   });
-  const totalWinSum = totalWinArray.reduce((acc, obj) => {
+  const totalWinSum = totalWinArray.reduce((acc: any, obj: any) => {
     return acc + obj;
   }, 0);
 

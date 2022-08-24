@@ -2,11 +2,10 @@
 import { useEffect, useState } from 'react';
 import OneBet from './OneBet';
 import InputSearch from '../formInputs/InputSearch';
-import { GetAllBets_getAllBets } from '../../API/types/GetAllBets';
 import { GetBetByID_getBetByID } from '../../API/types/GetBetByID';
 
 interface IProps {
-  datas: GetAllBets_getAllBets[];
+  datas: any;
 }
 
 function ListBets({ datas }: IProps): JSX.Element {
@@ -16,7 +15,7 @@ function ListBets({ datas }: IProps): JSX.Element {
   const submitSearch = (searchValue: string) => {
     if (searchValue !== '') {
       const newData = datas.filter(
-        (item) =>
+        (item: any) =>
           item.bookmaker.toUpperCase().includes(searchValue.toUpperCase()) ||
           item.category.toUpperCase().includes(searchValue.toUpperCase()) ||
           item.name.toUpperCase().includes(searchValue.toUpperCase())
