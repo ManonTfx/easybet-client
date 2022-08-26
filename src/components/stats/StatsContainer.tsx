@@ -35,6 +35,7 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
   const userBetsUserId = dataUserBets.getAllUserBets.filter(
     (userBet) => userBet.userId === user?.login.id
   );
+
   // ** STATS GLOBALES
   // WINNINGS
   const totalStakeSum = dataBets.getAllBets.reduce((acc: any, obj: any) => {
@@ -55,13 +56,21 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
 
   return (
     <div className="w-9/12">
-      <MoreImportantFigures
-        totalBets={
-          isMyStats ? userBetsUserId.length : dataBets.getAllBets.length
-        }
-        winnings={winnings}
-        roi={roi}
-      />
+      {isMyStats ? (
+        <MoreImportantFigures
+          totalBets={userBetsUserId.length}
+          winnings={0}
+          roi={0}
+        />
+      ) : (
+        <MoreImportantFigures
+          totalBets={
+            isMyStats ? userBetsUserId.length : dataBets.getAllBets.length
+          }
+          winnings={winnings}
+          roi={roi}
+        />
+      )}
     </div>
   );
 }

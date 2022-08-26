@@ -15,10 +15,10 @@ function OneTuto({ data }: IProps): JSX.Element {
     <Link to={`/article/${data.id}`}>
       <div
         style={{ backgroundColor: isDarkMode ? '#221D2C' : '#DDDFF2' }}
-        className="bg-[#221D2C] w-full px-11 my-6 rounded-[5px]"
+        className="bg-[#221D2C] px-11 my-6 rounded-[5px] w-full "
       >
         <p className="text-lg font-bold mb-2 pt-6">{data.title}</p>
-        <img className="w-full" src={data.img} alt="toto" />
+        <img className="object-cover w-full " src={data.img} alt="toto" />
         <div
           className="pb-4 mt-4 "
           dangerouslySetInnerHTML={{ __html: data.contents }}
