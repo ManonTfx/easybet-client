@@ -11,16 +11,17 @@ import { DashboardContext } from '../../context/dashboardContext';
 import NumberInput from '../formInputs/NumberInput';
 import { AuthContext } from '../../context/authContext';
 import { CreateUserBet_createUserBet } from '../../API/types/CreateUserBet';
-import { CREATE_USERBET_MUTATION } from '../../API/mutation/userBets';
+import {
+  CREATE_USERBET_MUTATION,
+  UPDATE_USERBET,
+} from '../../API/mutation/userBets';
 import { GET_ALL_BETS, GET_ONE_BET } from '../../API/query/bets';
 import TextInput from '../formInputs/TextInput';
 import { DarkModeContext } from '../../context/darkModeContext';
+import { GET_ALL_USERBETS } from '../../API/query/userBets';
 
 function ModalTrack(): JSX.Element {
   const { handleSubmit } = useForm();
-
-  const [odd, setOdd] = useState('');
-  const [amount, setAmount] = useState('');
 
   const { updateIsModal, idBetActif } = useContext(DashboardContext);
   const { user } = useContext(AuthContext);
@@ -35,6 +36,22 @@ function ModalTrack(): JSX.Element {
     variables: { getBetByIdId: idBetActif },
   });
 
+  /// ** GET ALL USERBETS
+  const {
+    loading: loadingUserBets,
+    error: errorUserBets,
+    data: dataUserBets,
+  } = useQuery(GET_ALL_USERBETS);
+
+  const userBetId = dataUserBets.getAllUserBets.filter(
+    (userBet: any) =>
+      userBet.userId === user?.login.id && userBet.betId === idBetActif
+  );
+
+  const [odd, setOdd] = useState(userBetId.length > 0 ? userBetId[0].odd : '');
+  const [amount, setAmount] = useState(
+    userBetId.length > 0 ? userBetId[0].amount : ''
+  );
   // **  CREATE A USERBET
   const [create, { loading: createLoading, error: createError }] =
     useMutation<CreateUserBet_createUserBet>(CREATE_USERBET_MUTATION, {
@@ -45,6 +62,17 @@ function ModalTrack(): JSX.Element {
       refetchQueries: [GET_ALL_BETS],
     });
 
+  // ** UPDATE A USERBET
+  const [update, { loading: updateLoading, error: updateError }] = useMutation(
+    UPDATE_USERBET,
+    {
+      onCompleted: () => {
+        updateIsModal(false);
+        toast('Votre pari a bien été modifié!');
+      },
+      refetchQueries: [GET_ALL_BETS],
+    }
+  );
   const srcImg = () => {
     let src = '';
     switch (dataBet.getBetByID.category.toLowerCase()) {
@@ -66,21 +94,33 @@ function ModalTrack(): JSX.Element {
     const trackData = {
       amount: Number(amount),
       odd: parseFloat(odd),
-      betId: dataBet.id,
+      betId: idBetActif,
       userId: user?.login.id,
     };
-    create({ variables: { ...trackData } });
+
+    const trackDataUpdate = {
+      amount: Number(amount),
+      odd: parseFloat(odd),
+      betId: idBetActif,
+      updateUserBetId: userBetId[0].id,
+    };
+
+    if (userBetId.length > 0) {
+      update({ variables: { ...trackDataUpdate } });
+    } else {
+      create({ variables: { ...trackData } });
+    }
   };
 
-  if (createLoading || loadingBet) {
+  if (createLoading || loadingBet || loadingUserBets || updateLoading) {
     return <p>...loading</p>;
   }
-  if (createError || errorBet) {
+  if (createError || errorBet || errorUserBets || updateError) {
     toast('Une erreur est survenue');
   }
   return (
     <Modal>
-      <div className="w-full bg-[#5D6AD2] text-2xl text-center py-2">
+      <div className="w-full bg-[#5D6AD2] !text-white text-2xl text-center py-2">
         Suivre Pari
       </div>
       <div
@@ -146,7 +186,7 @@ function ModalTrack(): JSX.Element {
               className="!text-white bg-[#3DA184] py-2 px-4 rounded-sm"
               type="submit"
             >
-              Valider
+              {userBetId.length > 0 ? 'Modifier' : 'Valider'}
             </button>
           </div>
         </form>
