@@ -25,18 +25,20 @@ function Tutos(): JSX.Element {
     <Layout>
       <div className={`${colorText} px-5 py-5 w-full flex`}>
         {!isForm ? (
-          user?.login.role !== 'USER' && (
-            <div>
-              <button
-                onClick={() => setIsForm(true)}
-                className="bg-primary p-2 rounded-[5px] !text-white"
-                type="button"
-              >
-                Creer un nouveau tuto/article
-              </button>
-              <ListTutos data={data.getAllArticles} />
-            </div>
-          )
+          <div>
+            {user?.login.role !== 'USER' && (
+              <div>
+                <button
+                  onClick={() => setIsForm(true)}
+                  className="bg-primary p-2 rounded-[5px] !text-white"
+                  type="button"
+                >
+                  Creer un nouveau tuto/article
+                </button>
+              </div>
+            )}
+            <ListTutos data={data.getAllArticles} />
+          </div>
         ) : (
           <CreateUpdateTuto setIsForm={setIsForm} />
         )}

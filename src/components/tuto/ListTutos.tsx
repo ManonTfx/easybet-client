@@ -10,7 +10,7 @@ interface IProps {
 }
 function ListTutos({ data }: IProps): JSX.Element {
   const { isDarkMode } = useContext(DarkModeContext);
-
+  console.log(data);
   const scrollbarColor = isDarkMode
     ? 'scrollbar-darkMode'
     : 'scrollbar-lightMode';
