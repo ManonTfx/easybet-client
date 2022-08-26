@@ -34,28 +34,32 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
   if (errorBets || !dataBets || errorUserBets || !dataUserBets) {
     return <p>error</p>;
   }
+
   // ** STATS USER
   const userBetsUserId = dataUserBets.getAllUserBets.filter(
     (userBet) => userBet.userId === user?.login.id
   );
 
   // ** STATS GLOBALES
+
+  const pastBets = dataBets.getAllBets.filter((bet: any) => bet.result !== 0);
+
   // WINNINGS
-  const totalStakeSum = dataBets.getAllBets.reduce((acc: any, obj: any) => {
+  const totalStakeSum = pastBets.reduce((acc: any, obj: any) => {
     return acc + obj.stake;
   }, 0);
 
-  const totalWinArray = dataBets.getAllBets.map((bet: any) => {
-    return bet.result * bet.stake * bet.odd;
+  const totalWinArray = pastBets.map((bet: any) => {
+    return (bet.stake * bet.odd - bet.stake) * bet.result;
   });
-  const totalWinSum = totalWinArray.reduce((acc: any, obj: any) => {
-    return acc + obj;
-  }, 0);
-
-  const winnings = totalWinSum - totalStakeSum;
+  const winnings = Math.round(
+    totalWinArray.reduce((acc: any, obj: any) => {
+      return acc + obj;
+    }, 0)
+  );
 
   // ROI
-  const roi = (winnings / dataBets.getAllBets.length) * 100;
+  const roi = Math.round((winnings / totalStakeSum) * 100);
 
   return (
     <div className="lg:w-9/12 w-full">
