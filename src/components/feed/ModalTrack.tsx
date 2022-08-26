@@ -18,9 +18,12 @@ import {
 import { GET_ALL_BETS, GET_ONE_BET } from '../../API/query/bets';
 import TextInput from '../formInputs/TextInput';
 import { DarkModeContext } from '../../context/darkModeContext';
-import { GET_ALL_USERBETS } from '../../API/query/userBets';
 
-function ModalTrack(): JSX.Element {
+interface IProps {
+  dataUserBets: any;
+}
+
+function ModalTrack({ dataUserBets }: IProps): JSX.Element {
   const { handleSubmit } = useForm();
 
   const { updateIsModal, idBetActif } = useContext(DashboardContext);
@@ -36,13 +39,6 @@ function ModalTrack(): JSX.Element {
     variables: { getBetByIdId: idBetActif },
   });
 
-  /// ** GET ALL USERBETS
-  const {
-    loading: loadingUserBets,
-    error: errorUserBets,
-    data: dataUserBets,
-  } = useQuery(GET_ALL_USERBETS);
-
   const userBetId = dataUserBets.getAllUserBets.filter(
     (userBet: any) =>
       userBet.userId === user?.login.id && userBet.betId === idBetActif
@@ -52,6 +48,7 @@ function ModalTrack(): JSX.Element {
   const [amount, setAmount] = useState(
     userBetId.length > 0 ? userBetId[0].amount : ''
   );
+
   // **  CREATE A USERBET
   const [create, { loading: createLoading, error: createError }] =
     useMutation<CreateUserBet_createUserBet>(CREATE_USERBET_MUTATION, {
@@ -112,10 +109,10 @@ function ModalTrack(): JSX.Element {
     }
   };
 
-  if (createLoading || loadingBet || loadingUserBets || updateLoading) {
+  if (createLoading || loadingBet || updateLoading) {
     return <p>...loading</p>;
   }
-  if (createError || errorBet || errorUserBets || updateError) {
+  if (createError || errorBet || updateError) {
     toast('Une erreur est survenue');
   }
   return (

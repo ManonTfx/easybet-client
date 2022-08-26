@@ -47,7 +47,8 @@ function SportChart() {
     ],
   };
   return (
-    <div className="w-3/12 m-auto mt-5">
+    <div className="w-3/12 m-auto mt-4">
+      <p className="mb-3">Nombre de paris par sport</p>
       <Doughnut data={data} options={options} />
     </div>
   );
