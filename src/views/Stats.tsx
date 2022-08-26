@@ -13,7 +13,7 @@ function Stats(): JSX.Element {
     <Layout>
       <div className={` ${colorText}`}>
         <HeaderStats setIsMyStats={setIsMyStats} isMyStats={isMyStats} />
-        <div className="flex">
+        <div className="lg:flex">
           <StatsContainer isMyStats={isMyStats} />
           <Toolbox />
         </div>

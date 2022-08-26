@@ -7,7 +7,7 @@ function Toolbox(): JSX.Element {
   return (
     <div
       style={{ backgroundColor: isDarkMode ? '#19191C' : '#DCDFF1' }}
-      className="w-3/12 mx-5 rounded-[5px] px-3 mt-5 "
+      className="w-3/12 mx-5 rounded-[5px] px-3 mt-5  lg:block hidden"
     >
       <p className="p-3 text-lg">Aide</p>
       <div className="border border-primary" />

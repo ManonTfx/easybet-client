@@ -5,6 +5,9 @@ import { GET_ALL_USERBETS } from '../../API/query/userBets';
 import { GetAllUserBets } from '../../API/types/GetAllUserBets';
 import { AuthContext } from '../../context/authContext';
 import MoreImportantFigures from './MoreImportantFigures';
+import ProfitChart from './ProfitChart';
+import SecondaryStatisticalsFigures from './SegondaryStatisticalsFigures';
+import SportChart from './SportChart';
 
 interface IProps {
   isMyStats: boolean;
@@ -55,7 +58,7 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
   const roi = (winnings / dataBets.getAllBets.length) * 100;
 
   return (
-    <div className="w-9/12">
+    <div className="lg:w-9/12 w-full">
       {isMyStats ? (
         <MoreImportantFigures
           totalBets={userBetsUserId.length}
@@ -71,6 +74,18 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
           roi={roi}
         />
       )}
+      <ProfitChart />
+      <div className="flex justify-between w-full px-11">
+        <SecondaryStatisticalsFigures
+          totalStaked={0}
+          avarageOdd={0}
+          avarageBet={0}
+          totalWin={0}
+          percentageWin={0}
+          esperance={0}
+        />
+        <SportChart />
+      </div>
     </div>
   );
 }
