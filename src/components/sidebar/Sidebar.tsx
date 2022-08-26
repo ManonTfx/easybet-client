@@ -104,7 +104,7 @@ function Sidebar(): JSX.Element {
           <button type="button" className="">
             Deconnexion
           </button>
-          <img src={logoutImg} alt="easybet" className="h-5" />
+          <img src={logout} alt="easybet" className="h-5" />
         </div>
       ) : (
         <button

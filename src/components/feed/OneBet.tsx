@@ -5,7 +5,6 @@ import tennis from '../../assets/cat/tennis.svg';
 import basket from '../../assets/cat/basket.svg';
 import { DarkModeContext } from '../../context/darkModeContext';
 import { DashboardContext } from '../../context/dashboardContext';
-import ModalTrack from './ModalTrack';
 import { GetBetByID_getBetByID } from '../../API/types/GetBetByID';
 
 interface IProps {
@@ -13,7 +12,7 @@ interface IProps {
 }
 function OneBet({ datas }: IProps): JSX.Element {
   const { isDarkMode } = useContext(DarkModeContext);
-  const { updateIsModal, isModal } = useContext(DashboardContext);
+  const { updateIsModal, updateIdBetActif } = useContext(DashboardContext);
   const srcImg = () => {
     let src = '';
     switch (datas.category.toLowerCase()) {
@@ -56,14 +55,16 @@ function OneBet({ datas }: IProps): JSX.Element {
           </div>
         </div>
         <button
-          onClick={() => updateIsModal(true)}
+          onClick={() => {
+            updateIsModal(true);
+            updateIdBetActif(datas.id);
+          }}
           className="bg-[#3EB5CA] rounded-sm px-8 py-2 hover:opacity-90"
           type="button"
         >
           TRACK
         </button>
       </div>
-      {isModal && <ModalTrack datas={datas} />}
     </div>
   );
 }

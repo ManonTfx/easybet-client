@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import menu from '../../assets/icons/menu.svg';
 import menuDark from '../../assets/icons/menuDark.svg';
 import lightDark from '../../assets/lightDark.svg';
@@ -17,36 +17,39 @@ function Header(): JSX.Element {
     <div
       className={
         isDarkMode
-          ? 'flex items-center w-full justify-between bg-darkMode py-3 px-2'
-          : 'bg-[#ABB1DF]  flex items-center w-full justify-between py-3 px-2'
+          ? ' w-full bg-darkMode py-3 px-2'
+          : 'bg-[#ABB1DF] w-full  py-3 px-2'
       }
     >
-      <button type="button" onClick={() => updateIsSidebar(!isSidebar)}>
-        {isDarkMode ? (
-          <img src={menu} alt="menu" className="h-7" />
-        ) : (
-          <img src={menuDark} alt="menu" className="h-7" />
-        )}
-      </button>
-      <div className="flex pr-1  mr-2">
-        <p style={{ color: isDarkMode ? 'white' : 'black' }} className="mr-2">
-          {user?.login.firstName} {user?.login.lastName}
-        </p>
-
-        <button
-          type="button"
-          onClick={
-            isDarkMode
-              ? () => updateIsDarkMode(false)
-              : () => updateIsDarkMode(true)
-          }
-        >
+      <div className="flex items-center w-full justify-between  ">
+        <button type="button" onClick={() => updateIsSidebar(!isSidebar)}>
           {isDarkMode ? (
-            <img src={darkLight} alt="darkMode" />
+            <img src={menu} alt="menu" className="h-7" />
           ) : (
-            <img src={lightDark} alt="lightMode" />
+            <img src={menuDark} alt="menu" className="h-7" />
           )}
         </button>
+
+        <div className="flex pr-1  mr-2">
+          <p style={{ color: isDarkMode ? 'white' : 'black' }} className="mr-2">
+            {user?.login.firstName} {user?.login.lastName}
+          </p>
+
+          <button
+            type="button"
+            onClick={
+              isDarkMode
+                ? () => updateIsDarkMode(false)
+                : () => updateIsDarkMode(true)
+            }
+          >
+            {isDarkMode ? (
+              <img src={darkLight} alt="darkMode" />
+            ) : (
+              <img src={lightDark} alt="lightMode" />
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );

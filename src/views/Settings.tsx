@@ -29,9 +29,9 @@ function Settings(): JSX.Element {
     <Layout>
       <div className={`${colorText}  py-4 px-5 text-2xl`}>
         <UpdateProfil />
-        <div className="w-full flex">
+        <div className="w-full lg:flex">
           <UpdatePassword />
-          <div className={` w-1/2 my-6 ml-4`}>
+          <div className={` lg:w-1/2 my-6 lg:ml-4 w-full`}>
             <div className={`bg-[${colorCards}] py-2 pb-5 px-6`}>
               <div className="flex w-full justify-between items-center">
                 <h1> Supprimer mon compte</h1>

@@ -11,6 +11,10 @@
   background-image: url('../assets/lastSection.jpg');
   background-size: cover;
 }
+
+.transition-menu-burger {
+  transition: max-height 1s ease-in-out;
+}
 /* Correction style édition d'articles */
 
 .k-button,

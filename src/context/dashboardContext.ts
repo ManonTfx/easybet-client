@@ -7,6 +7,10 @@ interface DashboardContextState {
   updateIsModal: Dispatch<SetStateAction<boolean>>;
   isLoading: boolean;
   updateIsLoading: Dispatch<SetStateAction<boolean>>;
+  isMenuBurger: boolean;
+  updateIsMenuBurger: Dispatch<SetStateAction<boolean>>;
+  idBetActif: string;
+  updateIdBetActif: Dispatch<SetStateAction<string>>;
 }
 
 export const DashboardContext = React.createContext(

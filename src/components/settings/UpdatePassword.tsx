@@ -42,7 +42,7 @@ function UpdatePassword(): JSX.Element {
     toast('Une erreur est survenue.');
   }
   return (
-    <div className={`bg-[${colorCards}] py-4 w-1/2 px-6 my-6`}>
+    <div className={`bg-[${colorCards}] py-4 lg:w-1/2 px-6 my-6`}>
       <h1> Modifier mon mot de passe</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}

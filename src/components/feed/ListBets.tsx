@@ -1,8 +1,10 @@
 /* eslint-disable camelcase */
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import OneBet from './OneBet';
 import InputSearch from '../formInputs/InputSearch';
 import { GetBetByID_getBetByID } from '../../API/types/GetBetByID';
+import { DashboardContext } from '../../context/dashboardContext';
+import ModalTrack from './ModalTrack';
 
 interface IProps {
   datas: any;
@@ -12,6 +14,7 @@ function ListBets({ datas }: IProps): JSX.Element {
   const [dataFiltered, setDataFiltered] = useState([...datas]);
   const [search, setSearch] = useState('');
 
+  const { isModal } = useContext(DashboardContext);
   const submitSearch = (searchValue: string) => {
     if (searchValue !== '') {
       const newData = datas.filter(
@@ -45,6 +48,7 @@ function ListBets({ datas }: IProps): JSX.Element {
           </div>
         );
       })}
+      {isModal && <ModalTrack />}
     </div>
   );
 }

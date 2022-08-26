@@ -31,13 +31,13 @@ function Feed(): JSX.Element {
     : 'scrollbar-lightMode';
   return (
     <Layout>
-      <div className={`${colorText} flex justify-between px-5 pt-5`}>
+      <div className={`${colorText} lg:flex justify-between px-5 pt-5`}>
         <div
-          className={`${scrollbarColor} w-8/12 overflow-y-scroll  max-h-[90vh]`}
+          className={`${scrollbarColor} lg:w-8/12 overflow-y-scroll  max-h-[90vh]`}
         >
           <ListBets datas={data.getAllBets} />
         </div>
-        <div className="w-4/12 pl-5">
+        <div className="w-4/12 pl-5 lg:block hidden">
           <p>Derniers articles</p>
           <ListTutos data={dataArticles.getAllArticles} />
         </div>

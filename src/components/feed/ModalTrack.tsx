@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import football from '../../assets/cat/football.svg';
 import tennis from '../../assets/cat/tennis.svg';
@@ -12,21 +12,28 @@ import NumberInput from '../formInputs/NumberInput';
 import { AuthContext } from '../../context/authContext';
 import { CreateUserBet_createUserBet } from '../../API/types/CreateUserBet';
 import { CREATE_USERBET_MUTATION } from '../../API/mutation/userBets';
-import { GET_ALL_BETS } from '../../API/query/bets';
+import { GET_ALL_BETS, GET_ONE_BET } from '../../API/query/bets';
 import TextInput from '../formInputs/TextInput';
-import { GetBetByID_getBetByID } from '../../API/types/GetBetByID';
+import { DarkModeContext } from '../../context/darkModeContext';
 
-interface IProps {
-  datas: GetBetByID_getBetByID;
-}
-function ModalTrack({ datas }: IProps): JSX.Element {
+function ModalTrack(): JSX.Element {
   const { handleSubmit } = useForm();
 
   const [odd, setOdd] = useState('');
   const [amount, setAmount] = useState('');
 
-  const { updateIsModal } = useContext(DashboardContext);
+  const { updateIsModal, idBetActif } = useContext(DashboardContext);
   const { user } = useContext(AuthContext);
+  const { isDarkMode } = useContext(DarkModeContext);
+
+  // ** READ ONE BET
+  const {
+    loading: loadingBet,
+    error: errorBet,
+    data: dataBet,
+  } = useQuery(GET_ONE_BET, {
+    variables: { getBetByIdId: idBetActif },
+  });
 
   // **  CREATE A USERBET
   const [create, { loading: createLoading, error: createError }] =
@@ -37,9 +44,10 @@ function ModalTrack({ datas }: IProps): JSX.Element {
       },
       refetchQueries: [GET_ALL_BETS],
     });
+
   const srcImg = () => {
     let src = '';
-    switch (datas.category.toLowerCase()) {
+    switch (dataBet.getBetByID.category.toLowerCase()) {
       case 'football':
         src = football;
         break;
@@ -58,16 +66,16 @@ function ModalTrack({ datas }: IProps): JSX.Element {
     const trackData = {
       amount: Number(amount),
       odd: parseFloat(odd),
-      betId: datas.id,
+      betId: dataBet.id,
       userId: user?.login.id,
     };
     create({ variables: { ...trackData } });
   };
 
-  if (createLoading) {
+  if (createLoading || loadingBet) {
     return <p>...loading</p>;
   }
-  if (createError) {
+  if (createError || errorBet) {
     toast('Une erreur est survenue');
   }
   return (
@@ -75,18 +83,25 @@ function ModalTrack({ datas }: IProps): JSX.Element {
       <div className="w-full bg-[#5D6AD2] text-2xl text-center py-2">
         Suivre Pari
       </div>
-      <div className="p-3 pl-5 pt-4">
-        <p className="text-xl">{datas.name}</p>
+      <div
+        style={{ backgroundColor: isDarkMode ? '#121212' : '#dcdff0' }}
+        className="p-3 pl-5 pt-4 "
+      >
+        <p className="text-xl">{dataBet.getBetByID.name}</p>
         <div className="flex items-center my-3">
-          <img className="mr-4" src={srcImg()} alt={datas.category} />
+          <img
+            className="mr-4"
+            src={srcImg()}
+            alt={dataBet.getBetByID.category}
+          />
           <p className="mr-4">
-            {datas.category} @{datas.odd}
+            {dataBet.category} @{dataBet.getBetByID.odd}
           </p>
           <div className="px-2 bg-[#D9D9D9] text-black rounded-full mr-2">
-            {datas.stake}/10
+            {dataBet.getBetByID.stake}/10
           </div>
           <div className="px-5  bg-[#E4AC65] rounded-full">
-            {datas.bookmaker}
+            {dataBet.getBetByID.bookmaker}
           </div>
         </div>
         <div className="border-t border-t-[#5D6AD2]">
