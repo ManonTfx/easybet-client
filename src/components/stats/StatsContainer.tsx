@@ -71,9 +71,7 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
         />
       ) : (
         <MoreImportantFigures
-          totalBets={
-            isMyStats ? userBetsUserId.length : dataBets.getAllBets.length
-          }
+          totalBets={isMyStats ? userBetsUserId.length : pastBets.length}
           winnings={winnings}
           roi={roi}
         />

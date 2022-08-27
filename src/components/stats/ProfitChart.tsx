@@ -52,7 +52,7 @@ function ProfitChart({ bets }: IProps) {
     (bet: any) => bet.result !== 0 && bet.result !== null
   );
 
-  let i = -1;
+  let i = 0;
   const labels = pastBets.map(() => {
     i += 1;
     return i;
