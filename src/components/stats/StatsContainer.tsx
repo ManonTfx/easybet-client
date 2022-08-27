@@ -79,6 +79,7 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
         />
       )}
       <ProfitChart bets={dataBets} />
+      <div className="border border-[#221C2D] w-11/12 m-auto mt-2" />
       <div className="flex justify-between w-full px-11">
         <SecondaryStatisticalsFigures
           totalStaked={0}

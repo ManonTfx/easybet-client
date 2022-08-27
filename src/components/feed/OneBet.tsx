@@ -13,6 +13,7 @@ interface IProps {
 function OneBet({ datas }: IProps): JSX.Element {
   const { isDarkMode } = useContext(DarkModeContext);
   const { updateIsModal, updateIdBetActif } = useContext(DashboardContext);
+
   const srcImg = () => {
     let src = '';
     switch (datas.category.toLowerCase()) {
@@ -56,8 +57,8 @@ function OneBet({ datas }: IProps): JSX.Element {
         </div>
         <button
           onClick={() => {
-            updateIsModal(true);
             updateIdBetActif(datas.id);
+            updateIsModal(true);
           }}
           className="bg-[#3EB5CA] rounded-sm px-8 py-2 hover:opacity-90"
           type="button"

@@ -25,10 +25,13 @@ function MoreImportantFigures({
     },
   ];
   return (
-    <div className="flex p-5 w-full justify-around">
+    <div className="flex p-5 w-full justify-between px-[100px]">
       {arrayData.map((data) => {
         return (
-          <div key={v4()} className="w-[150px] text-center">
+          <div
+            key={v4()}
+            className="w-[200px] border-[#3BA6B9] text-center border-2 mx-2 py-2 rounded-[5px]  "
+          >
             <p className="text-xl">{data.label}</p>
             <p className="text-lg">{data.value}</p>
           </div>
