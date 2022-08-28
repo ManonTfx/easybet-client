@@ -58,12 +58,6 @@ function ProfitChart({ bets }: IProps) {
     return i;
   });
 
-  console.log(
-    pastBets.reduce((acc: any, bet: any) => {
-      return acc + (bet.stake * bet.odd - bet.stake) * bet.result;
-    }, 0)
-  );
-
   let total = 0;
   const data = {
     labels,
@@ -76,10 +70,6 @@ function ProfitChart({ bets }: IProps) {
           }
           return 0;
         }),
-
-        //     totalWinArray.reduce((acc: any, obj: any) => {
-        //   return acc + obj;
-        // }, 0)
         borderColor: '#5C6AD2',
         backgroundColor: '#5C6AD2',
         label: '',

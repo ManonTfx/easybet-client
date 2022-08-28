@@ -14,13 +14,6 @@ function SportChart({ bets }: IProps) {
   );
 
   const uniqueSport = [...new Set(pastBets.map((bet) => bet.category))];
-  console.log(uniqueSport);
-
-  // const sport1 = pastBets.reduce(
-  //   (counter, { category }) =>
-  //     category === uniqueSport[0] ? (counter += 1) : counter,
-  //   0
-  // );
 
   const betsNbBySport = [];
   for (let i = 0; i < uniqueSport.length; i += 1) {
@@ -32,8 +25,6 @@ function SportChart({ bets }: IProps) {
       }, 0)
     );
   }
-
-  console.log(betsNbBySport);
 
   const options = {
     responsive: true,
