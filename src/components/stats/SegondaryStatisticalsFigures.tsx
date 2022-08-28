@@ -2,16 +2,16 @@ import { v4 } from 'uuid';
 
 interface IProps {
   totalStaked: number;
-  avarageOdd: number;
-  avarageBet: number;
+  averageOdd: number;
+  averageBet: number;
   totalWin: number;
   percentageWin: number;
   esperance: number;
 }
 function SecondaryStatisticalsFigures({
   totalStaked,
-  avarageOdd,
-  avarageBet,
+  averageOdd,
+  averageBet,
   totalWin,
   percentageWin,
   esperance,
@@ -23,11 +23,11 @@ function SecondaryStatisticalsFigures({
     },
     {
       label: 'Cote moyenne',
-      value: avarageOdd,
+      value: averageOdd.toPrecision(3),
     },
     {
       label: 'Mise moyenne',
-      value: ` ${avarageBet} €`,
+      value: ` ${averageBet.toPrecision(3)} €`,
     },
   ];
   const arrayDataRight = [

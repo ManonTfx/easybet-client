@@ -14,6 +14,7 @@ interface IProps {
 }
 function StatsContainer({ isMyStats }: IProps): JSX.Element {
   const { user } = useContext(AuthContext);
+  const BANKROLL = 1;
   // FETCH THE BETS LIST
   const {
     loading: loadingBets,
@@ -41,25 +42,39 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
   );
 
   // ** STATS GLOBALES
-
   const pastBets = dataBets.getAllBets.filter((bet: any) => bet.result !== 0);
 
   // WINNINGS
-  const totalStakeSum = pastBets.reduce((acc: any, obj: any) => {
-    return acc + obj.stake;
-  }, 0);
+  const totalStakeSum =
+    pastBets.reduce((acc: any, obj: any) => {
+      return acc + obj.stake;
+    }, 0) * BANKROLL;
 
   const totalWinArray = pastBets.map((bet: any) => {
-    return (bet.stake * bet.odd - bet.stake) * bet.result;
+    return (bet.stake * bet.odd - bet.stake) * bet.result * BANKROLL;
   });
   const winnings = Math.round(
     totalWinArray.reduce((acc: any, obj: any) => {
       return acc + obj;
-    }, 0)
+    }, 0 * BANKROLL)
+  );
+
+  const sumOdd = pastBets.reduce((acc: any, bet: any) => acc + bet.odd, 0);
+  const avgOdd = sumOdd / pastBets.length;
+
+  const sumStake = pastBets.reduce((acc: any, bet: any) => acc + bet.stake, 0);
+  const avgStake = (sumStake / pastBets.length) * BANKROLL;
+
+  const betsWonNb = pastBets.filter((bet: any) => bet.result > 0);
+  const winningPercentage = Math.round(
+    (betsWonNb.length / pastBets.length) * 100
   );
 
   // ROI
   const roi = Math.round((winnings / totalStakeSum) * 100);
+
+  const ESPERANCE_NB = 10000;
+  const esperance = Math.floor(ESPERANCE_NB * avgStake * (roi / 100));
 
   return (
     <div className="lg:w-9/12 w-full">
@@ -80,12 +95,12 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
       <div className="border border-[#221C2D] w-11/12 m-auto mt-2" />
       <div className="flex justify-between w-full px-11">
         <SecondaryStatisticalsFigures
-          totalStaked={0}
-          avarageOdd={0}
-          avarageBet={0}
-          totalWin={0}
-          percentageWin={0}
-          esperance={0}
+          totalStaked={totalStakeSum}
+          averageOdd={avgOdd}
+          averageBet={avgStake}
+          totalWin={winnings}
+          percentageWin={winningPercentage}
+          esperance={esperance}
         />
         <SportChart bets={dataBets} />
       </div>
