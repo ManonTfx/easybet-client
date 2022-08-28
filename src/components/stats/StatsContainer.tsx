@@ -87,7 +87,7 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
           percentageWin={0}
           esperance={0}
         />
-        <SportChart />
+        <SportChart bets={dataBets} />
       </div>
     </div>
   );

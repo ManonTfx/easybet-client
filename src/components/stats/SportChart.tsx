@@ -1,8 +1,39 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { GetAllBets } from '../../API/types/GetAllbets';
 
-function SportChart() {
+interface IProps {
+  bets: GetAllBets;
+}
+
+function SportChart({ bets }: IProps) {
   ChartJS.register(ArcElement, Tooltip, Legend);
+
+  const pastBets = bets.getAllBets.filter(
+    (bet: any) => bet.result !== 0 && bet.result !== null
+  );
+
+  const uniqueSport = [...new Set(pastBets.map((bet) => bet.category))];
+  console.log(uniqueSport);
+
+  // const sport1 = pastBets.reduce(
+  //   (counter, { category }) =>
+  //     category === uniqueSport[0] ? (counter += 1) : counter,
+  //   0
+  // );
+
+  const betsNbBySport = [];
+  for (let i = 0; i < uniqueSport.length; i += 1) {
+    let betNbBySport = 0;
+    betsNbBySport.push(
+      pastBets.reduce((counter: number, obj) => {
+        if (obj.category === uniqueSport[i]) betNbBySport += 1;
+        return betNbBySport;
+      }, 0)
+    );
+  }
+
+  console.log(betsNbBySport);
 
   const options = {
     responsive: true,
@@ -14,18 +45,11 @@ function SportChart() {
   };
 
   const data = {
-    labels: [
-      'Basket',
-      'Football',
-      'Tennis',
-      'Football Am.',
-      'Handball',
-      'Volleyball',
-    ],
+    labels: uniqueSport,
     datasets: [
       {
         label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        data: betsNbBySport,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -48,7 +72,9 @@ function SportChart() {
   };
   return (
     <div className="w-3/12 m-auto mt-4">
-      <p className="mb-3">Nombre de paris par sport</p>
+      <p className="mb-3">
+        Repartition selon les {uniqueSport.length} sports joués
+      </p>
       <Doughnut data={data} options={options} />
     </div>
   );
