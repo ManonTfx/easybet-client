@@ -29,6 +29,7 @@ function MenuBurgerDashboard(): JSX.Element {
     onCompleted: () => {
       localStorage.removeItem('user');
       router('/', { replace: true });
+      window.location.reload();
     },
   });
 

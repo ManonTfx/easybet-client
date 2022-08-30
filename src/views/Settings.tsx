@@ -20,7 +20,11 @@ function Settings(): JSX.Element {
   });
 
   if (loading) {
-    return <p>...loading</p>;
+    return (
+      <Layout>
+        <div>Loading</div>
+      </Layout>
+    );
   }
   if (error) {
     toast('Une erreur est survenue.');

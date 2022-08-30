@@ -60,8 +60,9 @@ function Sidebar(): JSX.Element {
 
   const [logoutMutation] = useMutation<Logout>(LOGOUT_MUTATION, {
     onCompleted: () => {
-      router('/', { replace: true });
       localStorage.removeItem('user');
+      router('/', { replace: true });
+      window.location.reload();
     },
   });
 
@@ -88,7 +89,7 @@ function Sidebar(): JSX.Element {
                 </div>
               );
             })}
-            {user?.login.role === 'SUPERADMIN' && (
+            {user !== null && user.login.role === 'SUPERADMIN' && (
               <LinkButton item={navadmin} />
             )}
           </div>

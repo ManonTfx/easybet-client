@@ -31,7 +31,7 @@ function Header({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
       className="bg-black flex px-4 justify-between fixed bg-opacity-50 w-full p-4"
     >
       <img className="h-8" src={logoEasybet} alt="easybet" />
-      {!user ? (
+      {user.login.id === '' ? (
         <div>
           <button
             type="button"

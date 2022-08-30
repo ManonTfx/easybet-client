@@ -9,8 +9,11 @@ import { Login } from './API/types/Login';
 import { DarkModeContext } from './context/darkModeContext';
 
 function App(): JSX.Element {
-  const [user, setUser] = useState<Login | null>(
-    JSON.parse(localStorage.getItem('user') || '{}') || null
+  const [user, setUser] = useState<Login>(
+    JSON.parse(
+      localStorage.getItem('user') ||
+        '{"login":{"id":"","email":"","firstName":"","lastName":"","token":"","role":"","__typename":""}}'
+    )
   );
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [expireDate, setExpireDate] = useState<string>('');
