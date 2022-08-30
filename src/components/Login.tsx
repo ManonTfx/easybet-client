@@ -27,7 +27,6 @@ function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
   >(LOGIN_MUTATION, {
     onCompleted: (data: Login) => {
       localStorage.setItem('token', data.login.token);
-      localStorage.setItem('role_user', data.login.role);
       updateUser(data);
       router('/feed', { replace: true });
       setIsLoginModal(false);

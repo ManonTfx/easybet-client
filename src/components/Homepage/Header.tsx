@@ -12,14 +12,12 @@ interface IProps {
 }
 
 function Header({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
-  const { token, updateUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const router = useNavigate();
 
   const [logoutMutation] = useMutation<Logout>(LOGOUT_MUTATION, {
     onCompleted: () => {
-      updateUser(null);
-      localStorage.removeItem('token');
-      localStorage.removeItem('role_user');
+      localStorage.removeItem('user');
       router('/', { replace: true });
       setIsSignUpModal(false);
       setIsLoginModal(false);
@@ -33,7 +31,7 @@ function Header({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
       className="bg-black flex px-4 justify-between fixed bg-opacity-50 w-full p-4"
     >
       <img className="h-8" src={logoEasybet} alt="easybet" />
-      {!token ? (
+      {!user ? (
         <div>
           <button
             type="button"

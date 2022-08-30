@@ -57,14 +57,11 @@ function Sidebar(): JSX.Element {
     name: 'Gestion des utilisateurs',
     link: '/admin',
   };
-  const { updateUser } = useContext(AuthContext);
 
   const [logoutMutation] = useMutation<Logout>(LOGOUT_MUTATION, {
     onCompleted: () => {
-      updateUser(null);
       router('/', { replace: true });
-      localStorage.removeItem('token');
-      localStorage.removeItem('user_role');
+      localStorage.removeItem('user');
     },
   });
 

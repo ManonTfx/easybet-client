@@ -10,35 +10,35 @@ import TutoDetail from './views/TutoDetail';
 import Stats from './views/Stats';
 
 function Router(): JSX.Element {
-  const { token, userRole } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <Routes>
       <Route
         path="/feed"
-        element={token !== null ? <Feed /> : <Navigate to="/" />}
+        element={user !== null ? <Feed /> : <Navigate to="/" />}
       />
       <Route
         path="/articles"
-        element={token !== null ? <Tutos /> : <Navigate to="/" />}
+        element={user !== null ? <Tutos /> : <Navigate to="/" />}
       />
       <Route
         path="/article/:id"
-        element={token !== null ? <TutoDetail /> : <Navigate to="/" />}
+        element={user !== null ? <TutoDetail /> : <Navigate to="/" />}
       />
 
       <Route
         path="/stats"
-        element={token !== null ? <Stats /> : <Navigate to="/" />}
+        element={user !== null ? <Stats /> : <Navigate to="/" />}
       />
       <Route
         path="/settings"
-        element={token !== null ? <Settings /> : <Navigate to="/" />}
+        element={user !== null ? <Settings /> : <Navigate to="/" />}
       />
       <Route
         path="/admin"
         element={
-          userRole === 'SUPERADMIN' && token !== null ? (
+          user?.login.role === 'SUPERADMIN' && user !== null ? (
             <Admin />
           ) : (
             <Navigate to="/" />

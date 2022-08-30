@@ -9,30 +9,20 @@ import { Login } from './API/types/Login';
 import { DarkModeContext } from './context/darkModeContext';
 
 function App(): JSX.Element {
-  const [user, setUser] = useState<Login | null>(null);
+  const [user, setUser] = useState<Login | null>(
+    JSON.parse(localStorage.getItem('user') || '{}') || null
+  );
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [expireDate, setExpireDate] = useState<string>('');
   const [tokenConnected, setTokenConnected] = useState<boolean>(true);
-  const [token, setToken] = useState<string>(
-    localStorage.getItem('token') || ''
-  );
-  const [userRole, setUserRole] = useState<string>(
-    localStorage.getItem('user_role') || ''
-  );
-
-  console.log(localStorage.getItem('token'));
 
   const hour: number = 60 * 60 * 1000;
 
   const authContextValue = {
     user,
     updateUser: setUser,
-    token,
-    updateToken: setToken,
     expireDate,
     updateExpireDate: setExpireDate,
-    userRole,
-    updateUserRole: setUserRole,
   };
 
   const darkModeContextValue = {
@@ -43,10 +33,9 @@ function App(): JSX.Element {
   };
 
   useEffect(() => {
-    if (token) {
-      if (token !== localStorage.getItem('token')) {
-        localStorage.setItem('token', token);
-        localStorage.setItem('user_role', userRole);
+    if (user) {
+      if (user !== JSON.parse(JSON.stringify(localStorage.getItem('user')))) {
+        localStorage.setItem('user', JSON.stringify(user));
       }
 
       setInterval(() => {
@@ -61,10 +50,8 @@ function App(): JSX.Element {
       }, hour);
     } else {
       localStorage.removeItem('token');
-      localStorage.removeItem('user_role');
     }
-  }, [token, expireDate]);
-
+  }, [user, expireDate]);
   return (
     <AuthContext.Provider value={authContextValue}>
       <DarkModeContext.Provider value={darkModeContextValue}>

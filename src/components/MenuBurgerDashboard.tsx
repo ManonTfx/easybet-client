@@ -25,13 +25,9 @@ function MenuBurgerDashboard(): JSX.Element {
     { name: 'Paramètres', link: '/settings' },
   ];
 
-  const { updateUser } = useContext(AuthContext);
-
   const [logoutMutation] = useMutation<Logout>(LOGOUT_MUTATION, {
     onCompleted: () => {
-      updateUser(null);
-      localStorage.removeItem('token');
-      localStorage.removeItem('role_user');
+      localStorage.removeItem('user');
       router('/', { replace: true });
     },
   });
