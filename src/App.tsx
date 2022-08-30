@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'react-toastify/dist/ReactToastify.min.css';
 import '@progress/kendo-theme-default/dist/all.css';
 import { ToastContainer } from 'react-toastify';
+import { Link } from 'react-router-dom';
 import Router from './router';
 import { AuthContext } from './context/authContext';
 import { Login } from './API/types/Login';
@@ -10,10 +11,28 @@ import { DarkModeContext } from './context/darkModeContext';
 function App(): JSX.Element {
   const [user, setUser] = useState<Login | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [expireDate, setExpireDate] = useState<string>('');
+  const [tokenConnected, setTokenConnected] = useState<boolean>(true);
+  const [token, setToken] = useState<string>(
+    localStorage.getItem('token') || ''
+  );
+  const [userRole, setUserRole] = useState<string>(
+    localStorage.getItem('user_role') || ''
+  );
+
+  console.log(localStorage.getItem('token'));
+
+  const hour: number = 60 * 60 * 1000;
 
   const authContextValue = {
     user,
     updateUser: setUser,
+    token,
+    updateToken: setToken,
+    expireDate,
+    updateExpireDate: setExpireDate,
+    userRole,
+    updateUserRole: setUserRole,
   };
 
   const darkModeContextValue = {
@@ -22,6 +41,29 @@ function App(): JSX.Element {
     colorText: isDarkMode ? 'text-white' : 'text-black',
     colorCards: isDarkMode ? '#19191C' : '#DCDFF1',
   };
+
+  useEffect(() => {
+    if (token) {
+      if (token !== localStorage.getItem('token')) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('user_role', userRole);
+      }
+
+      setInterval(() => {
+        if (
+          new Date().toLocaleDateString() <=
+          new Date(expireDate).toLocaleDateString()
+        ) {
+          setTokenConnected(true);
+        } else {
+          setTokenConnected(false);
+        }
+      }, hour);
+    } else {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user_role');
+    }
+  }, [token, expireDate]);
 
   return (
     <AuthContext.Provider value={authContextValue}>
@@ -39,6 +81,14 @@ function App(): JSX.Element {
         />
         {/* Same as */}
         <ToastContainer />
+        {!tokenConnected && (
+          <div className="banner-deco">
+            Votre session a expiré ! {}
+            <Link className="cursor-pointer" to="/homepage">
+              Veuillez vous reconnecter.
+            </Link>
+          </div>
+        )}
         <div className="min-h-screen w-screen">
           <Router />
         </div>

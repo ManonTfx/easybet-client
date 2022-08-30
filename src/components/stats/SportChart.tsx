@@ -1,6 +1,6 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import { GetAllBets } from '../../API/types/GetAllbets';
+import { GetAllBets } from '../../API/types/GetAllBets';
 
 interface IProps {
   bets: GetAllBets;
