@@ -88,25 +88,24 @@ function ModalTrack({ dataUserBets }: IProps): JSX.Element {
   };
 
   const onSubmit = () => {
-    const trackData = {
-      amount: Number(amount),
-      odd: parseFloat(odd),
-      betId: idBetActif,
-      userId: user?.login.id,
-    };
-
-    const trackDataUpdate = {
-      amount: Number(amount),
-      odd: parseFloat(odd),
-      betId: idBetActif,
-      updateUserBetId: userBetId[0].id,
-    };
-
     if (userBetId.length > 0) {
+      const trackDataUpdate = {
+        amount: Number(amount),
+        odd: parseFloat(odd),
+        betId: idBetActif,
+        updateUserBetId: userBetId[0].id,
+      };
       update({ variables: { ...trackDataUpdate } });
     } else {
+      const trackData = {
+        amount: Number(amount),
+        odd: parseFloat(odd),
+        betId: idBetActif,
+        userId: user?.login.id,
+      };
       create({ variables: { ...trackData } });
     }
+    updateIsModal(false);
   };
 
   if (createLoading || loadingBet || updateLoading) {

@@ -20,11 +20,8 @@ function ListBets({ datas }: IProps): JSX.Element {
   const { isModal } = useContext(DashboardContext);
 
   /// ** GET ALL USERBETS
-  const {
-    loading: loadingUserBets,
-    error: errorUserBets,
-    data: dataUserBets,
-  } = useQuery(GET_ALL_USERBETS);
+  const { error: errorUserBets, data: dataUserBets } =
+    useQuery(GET_ALL_USERBETS);
 
   const submitSearch = (searchValue: string) => {
     if (searchValue !== '') {
@@ -43,9 +40,7 @@ function ListBets({ datas }: IProps): JSX.Element {
   useEffect(() => {
     submitSearch(search);
   }, [search]);
-  if (loadingUserBets) {
-    return <p>...loading</p>;
-  }
+
   if (errorUserBets) {
     toast('Une erreur est survenue');
   }

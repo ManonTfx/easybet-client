@@ -11,6 +11,7 @@ import Stats from './views/Stats';
 
 function Router(): JSX.Element {
   const { user } = useContext(AuthContext);
+  console.log(user);
 
   return (
     <Routes>
@@ -35,10 +36,11 @@ function Router(): JSX.Element {
         path="/settings"
         element={user !== null ? <Settings /> : <Navigate to="/" />}
       />
+
       <Route
         path="/admin"
         element={
-          user?.login.role === 'SUPERADMIN' && user !== null ? (
+          user !== null && user.login.role === 'SUPERADMIN' ? (
             <Admin />
           ) : (
             <Navigate to="/" />

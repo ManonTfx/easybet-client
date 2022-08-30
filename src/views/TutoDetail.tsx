@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { useParams, Link } from 'react-router-dom';
 import { useContext } from 'react';
+import { toast } from 'react-toastify';
 import { GET_ONE_ARTICLE } from '../API/query/articles';
 import Layout from './LayoutDashboard';
 import { GetOneArticle } from '../API/types/GetOneArticle';
@@ -19,10 +20,14 @@ function TutoDetail(): JSX.Element {
     variables: { getArticleByIdId: id },
   });
   if (loadingArticle) {
-    return <p>...loading</p>;
+    return (
+      <Layout>
+        <div>Loading</div>
+      </Layout>
+    );
   }
   if (errorArticle) {
-    return <p>erreur</p>;
+    toast('Une erreur est survenue.');
   }
   const scrollbarColor = isDarkMode
     ? 'scrollbar-darkMode'

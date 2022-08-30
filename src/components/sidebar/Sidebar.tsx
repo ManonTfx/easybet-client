@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 import { DashboardContext } from '../../context/dashboardContext';
 import LinkButton from './LinkButton';
 import logoEasybet from '../../assets/logos/logoEasybet.svg';
@@ -25,6 +26,8 @@ import { Logout } from '../../API/types/Logout';
 import { LOGOUT_MUTATION } from '../../API/mutation/logout';
 
 function Sidebar(): JSX.Element {
+  const router = useNavigate();
+
   const { isSidebar } = useContext(DashboardContext);
   const { isDarkMode } = useContext(DarkModeContext);
 
@@ -54,11 +57,12 @@ function Sidebar(): JSX.Element {
     name: 'Gestion des utilisateurs',
     link: '/admin',
   };
-  const { updateUser } = useContext(AuthContext);
 
   const [logoutMutation] = useMutation<Logout>(LOGOUT_MUTATION, {
     onCompleted: () => {
-      updateUser(null);
+      localStorage.removeItem('user');
+      router('/', { replace: true });
+      window.location.reload();
     },
   });
 
@@ -85,7 +89,7 @@ function Sidebar(): JSX.Element {
                 </div>
               );
             })}
-            {user?.login.role === 'SUPERADMIN' && (
+            {user !== null && user.login.role === 'SUPERADMIN' && (
               <LinkButton item={navadmin} />
             )}
           </div>

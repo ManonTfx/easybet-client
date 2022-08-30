@@ -16,11 +16,7 @@ function Toolbox(): JSX.Element {
         deserunt consectetur expedita hic excepturi iusto totam illum assumenda
         fugiat maiores consequatur cupiditate voluptas voluptatibus magnam neque
         natus ad optio praesentium. Modi suscipit, error enim temporibus autem
-        veniam hic veritatis quas, provident unde odit, cupiditate illo. Nihil
-        tenetur cumque unde laboriosam voluptatem ex facere, explicabo itaque,
-        autem nam nulla eligendi sit? Vero aperiam illo cumque vel harum
-        recusandae ea quisquam quasi fugiat similique exercitationem, inventore
-        delectus excepturi ipsam.
+        veniam hic veritatis quas, provident unde odit.
       </p>
       <div className="border border-primary" />
       <p className="p-3 text-center">Besoin de plus d&quot;aides ?</p>

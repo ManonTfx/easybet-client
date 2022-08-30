@@ -26,9 +26,9 @@ function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
     LoginVariables
   >(LOGIN_MUTATION, {
     onCompleted: (data: Login) => {
+      localStorage.setItem('token', data.login.token);
       updateUser(data);
       router('/feed', { replace: true });
-      setIsLoginModal(false);
     },
   });
 
@@ -42,7 +42,7 @@ function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
   };
 
   if (loading) {
-    return <p>...loading</p>;
+    return <p>laoding</p>;
   }
   if (error) {
     return <p>error</p>;

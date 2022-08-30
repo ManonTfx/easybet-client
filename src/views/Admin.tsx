@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import { useContext, useState } from 'react';
 import { useQuery } from '@apollo/client';
+import { toast } from 'react-toastify';
 import { DarkModeContext } from '../context/darkModeContext';
 import Layout from './LayoutDashboard';
 import ListUsers from '../components/admin/ListUsers';
@@ -18,10 +19,14 @@ function Admin(): JSX.Element {
   const { loading, error, data } = useQuery(GET_ALL_USERS);
 
   if (loading) {
-    return <p>...loading</p>;
+    return (
+      <Layout>
+        <div>Loading</div>
+      </Layout>
+    );
   }
   if (error || !data) {
-    return <p>error</p>;
+    toast('Une erreur est survenue');
   }
 
   // ADMIN CONTEXT

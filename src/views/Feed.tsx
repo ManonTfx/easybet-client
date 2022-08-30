@@ -1,8 +1,10 @@
 import { useQuery } from '@apollo/client';
 import { useContext } from 'react';
+import { toast } from 'react-toastify';
 import { GET_ALL_ARTICLES } from '../API/query/articles';
 import { GET_ALL_BETS } from '../API/query/bets';
 import ListBets from '../components/feed/ListBets';
+
 import ListTutos from '../components/tuto/ListTutos';
 import { DarkModeContext } from '../context/darkModeContext';
 import Layout from './LayoutDashboard';
@@ -21,14 +23,19 @@ function Feed(): JSX.Element {
   const { loading, error, data } = useQuery(GET_ALL_BETS);
 
   if (loading || loadingArticle) {
-    return <p>...loading</p>;
+    return (
+      <Layout>
+        <div>Loading</div>
+      </Layout>
+    );
   }
   if (error || !data || errorArticle || !dataArticles) {
-    return <p>error</p>;
+    toast('Une erreur est survenue');
   }
   const scrollbarColor = isDarkMode
     ? 'scrollbar-darkMode'
     : 'scrollbar-lightMode';
+
   return (
     <Layout>
       <div className={`${colorText} lg:flex justify-between px-5 pt-5`}>

@@ -1,10 +1,9 @@
-import React, { Dispatch, SetStateAction, useContext } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
 import { SIGNUP_MUTATION } from '../API/mutation/signup';
 import LoginInput from './formInputs/LoginInput';
 import { Signup, SignupVariables } from '../API/types/Signup';
-import { AuthContext } from '../context/authContext';
 import logoEasybet from '../assets/logos/logoEasybet.svg';
 import close from '../assets/close.svg';
 
@@ -14,15 +13,12 @@ interface IProps {
 }
 
 function SignUp({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
-  const { updateUser } = useContext(AuthContext);
-
   const { register, handleSubmit } = useForm();
   const [signupMutation, { loading, error }] = useMutation<
     Signup,
     SignupVariables
   >(SIGNUP_MUTATION, {
     onCompleted: () => {
-      updateUser(null);
       setIsLoginModal(true);
       setIsSignUpModal(false);
     },

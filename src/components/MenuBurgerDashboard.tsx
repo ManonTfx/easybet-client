@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Divide as Hamburger } from 'hamburger-react';
 import { useMutation } from '@apollo/client';
 import { AuthContext } from '../context/authContext';
@@ -16,6 +16,8 @@ function MenuBurgerDashboard(): JSX.Element {
   const { user } = useContext(AuthContext);
   const { isDarkMode } = useContext(DarkModeContext);
 
+  const router = useNavigate();
+
   const nav = [
     { name: "Fil d'actualité", link: '/feed' },
     { name: 'Tutoriels', link: '/articles' },
@@ -23,11 +25,11 @@ function MenuBurgerDashboard(): JSX.Element {
     { name: 'Paramètres', link: '/settings' },
   ];
 
-  const { updateUser } = useContext(AuthContext);
-
   const [logoutMutation] = useMutation<Logout>(LOGOUT_MUTATION, {
     onCompleted: () => {
-      updateUser(null);
+      localStorage.removeItem('user');
+      router('/', { replace: true });
+      window.location.reload();
     },
   });
 
