@@ -40,7 +40,7 @@ function SecondaryStatisticalsFigures({
       value: ` ${percentageWin} %`,
     },
     {
-      label: 'Esperance > 1K paris',
+      label: 'Esperance > 10K paris',
       value: ` ${esperance} €`,
     },
   ];

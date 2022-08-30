@@ -64,7 +64,7 @@ function ProfitChart({ bets }: IProps) {
     datasets: [
       {
         data: pastBets.map((bet) => {
-          if (bet.result !== null) {
+          if (bet.result) {
             total += (bet.stake * bet.odd - bet.stake) * bet.result;
             return total;
           }
