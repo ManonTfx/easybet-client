@@ -2,7 +2,11 @@ import { useQuery } from '@apollo/client';
 import { useContext } from 'react';
 import { GET_ALL_BETS } from '../../API/query/bets';
 import { GET_ALL_USERBETS } from '../../API/query/userBets';
-import { GetAllUserBets } from '../../API/types/GetAllUserBets';
+import { GetAllBets_getAllBets } from '../../API/types/GetAllbets';
+import {
+  GetAllUserBets_getAllUserBets,
+  GetAllUserBets,
+} from '../../API/types/GetAllUserBets';
 import { AuthContext } from '../../context/authContext';
 import MoreImportantFigures from './MoreImportantFigures';
 import ProfitChart from './ProfitChart';
@@ -36,13 +40,10 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
     return <p>error</p>;
   }
 
-  // ** STATS USER
-  const userBetsUserId = dataUserBets.getAllUserBets.filter(
-    (userBet) => userBet.userId === user?.login.id
-  );
-
   // ** STATS GLOBALES
-  const pastBets = dataBets.getAllBets.filter((bet: any) => bet.result !== 0);
+  const pastBets = dataBets.getAllBets.filter(
+    (bet: any) => bet.result !== 0 && bet.result !== null
+  );
 
   // WINNINGS
   const totalStakeSum =
@@ -76,17 +77,42 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
   const ESPERANCE_NB = 10000;
   const esperance = Math.floor(ESPERANCE_NB * avgStake * (roi / 100));
 
+  // ** STATS USER
+  const userBetsUserId = dataUserBets.getAllUserBets.filter(
+    (userBet) => userBet.userId === user?.login.id
+  );
+
+  let userWinnings = 0;
+  let totalUserStakeSum = 0;
+  const pastUserBets = userBetsUserId.filter(
+    (userBet: GetAllUserBets_getAllUserBets) => {
+      // Find global bet with same id
+      const mainBet = pastBets.find(
+        (globalBet: GetAllBets_getAllBets) => globalBet.id === userBet.betId
+      );
+      if (mainBet?.result) {
+        totalUserStakeSum += userBet.amount;
+        userWinnings +=
+          (userBet.amount * userBet.odd - userBet.amount) * mainBet.result;
+        return userBet;
+      }
+      return null;
+    }
+  );
+
+  const userRoi = Math.round((userWinnings / totalUserStakeSum) * 100);
+
   return (
     <div className="lg:w-9/12 w-full">
       {isMyStats ? (
         <MoreImportantFigures
-          totalBets={userBetsUserId.length}
-          winnings={0}
-          roi={0}
+          totalBets={pastUserBets.length}
+          winnings={userWinnings}
+          roi={userRoi}
         />
       ) : (
         <MoreImportantFigures
-          totalBets={isMyStats ? userBetsUserId.length : pastBets.length}
+          totalBets={pastBets.length}
           winnings={winnings}
           roi={roi}
         />
