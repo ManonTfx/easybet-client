@@ -9,7 +9,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { GetAllBets } from '../../API/types/GetAllBets';
+import { GetAllBets } from '../../API/types/GetAllbets';
 
 // A CHANGER !
 interface IProps {
