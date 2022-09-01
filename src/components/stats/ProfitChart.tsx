@@ -9,14 +9,20 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { GetAllBets } from '../../API/types/GetAllbets';
 
 // A CHANGER !
+// interface IProps {
+//   betsProfit: {
+//     id: number;
+//     profit: number;
+//   }[];
+// }
+
 interface IProps {
-  bets: GetAllBets;
+  betsProfit: number[];
 }
 
-function ProfitChart({ bets }: IProps) {
+function ProfitChart({ betsProfit }: IProps) {
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -25,7 +31,6 @@ function ProfitChart({ bets }: IProps) {
     Tooltip,
     Legend
   );
-
   const options = {
     responsive: true,
     hoverRadius: 12,
@@ -48,12 +53,8 @@ function ProfitChart({ bets }: IProps) {
     },
   };
 
-  const pastBets = bets.getAllBets.filter(
-    (bet: any) => bet.result !== 0 && bet.result !== null
-  );
-
   let i = 0;
-  const labels = pastBets.map(() => {
+  const labels = betsProfit.map(() => {
     i += 1;
     return i;
   });
@@ -63,12 +64,9 @@ function ProfitChart({ bets }: IProps) {
     labels,
     datasets: [
       {
-        data: pastBets.map((bet) => {
-          if (bet.result) {
-            total += (bet.stake * bet.odd - bet.stake) * bet.result;
-            return total;
-          }
-          return 0;
+        data: betsProfit.map((betProfit) => {
+          total += betProfit;
+          return total;
         }),
         borderColor: '#5C6AD2',
         backgroundColor: '#5C6AD2',
