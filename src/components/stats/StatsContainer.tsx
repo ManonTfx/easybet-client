@@ -12,10 +12,33 @@ import MoreImportantFigures from './MoreImportantFigures';
 import ProfitChart from './ProfitChart';
 import SecondaryStatisticalsFigures from './SegondaryStatisticalsFigures';
 import SportChart from './SportChart';
+import { IBetsWithResult, IUserBetsWithResult } from '../../types/stats/stats';
 
 interface IProps {
   isMyStats: boolean;
 }
+
+// interface IBetsWithResult extends GetAllBets_getAllBets {
+//   profit: string;
+// }
+
+interface Stats {
+  total: {
+    stake: number;
+    profit: number;
+    odd: number;
+    betsWon: number;
+  };
+  average: {
+    odd: number;
+    stake: number;
+  };
+  percentage: {
+    win: number;
+    roi: number;
+  };
+}
+
 function StatsContainer({ isMyStats }: IProps): JSX.Element {
   const { user } = useContext(AuthContext);
   const BANKROLL = 1;
@@ -40,96 +63,163 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
     return <p>error</p>;
   }
 
-  // ** STATS GLOBALES
+  // =======================
+  // ** GLOBAL STATS
+  // =======================
   const pastBets = dataBets.getAllBets.filter(
-    (bet: any) => bet.result !== 0 && bet.result !== null
+    (bet: GetAllBets_getAllBets) => bet.result !== 0 && bet.result !== null
   );
 
-  // WINNINGS
-  const totalStakeSum =
-    pastBets.reduce((acc: any, obj: any) => {
-      return acc + obj.stake;
-    }, 0) * BANKROLL;
+  const betsStats: Stats = {
+    total: {
+      stake: 0,
+      profit: 0,
+      odd: 0,
+      betsWon: 0,
+    },
+    average: {
+      odd: 0,
+      stake: 0,
+    },
+    percentage: {
+      win: 0,
+      roi: 0,
+    },
+  };
+  const pastBetsWithProfit: IBetsWithResult[] = pastBets.map(
+    (bet: GetAllBets_getAllBets) => {
+      if (bet.result !== null) {
+        const profit = (bet.stake * bet.odd - bet.stake) * bet.result;
+        betsStats.total.stake += bet.stake * BANKROLL;
+        betsStats.total.odd += bet.odd;
+        betsStats.total.profit += profit * BANKROLL;
+        betsStats.total.betsWon += bet.result > 0 ? 1 : 0;
+        return { ...bet, profit };
+      }
+      return 0;
+    }
+  );
+  betsStats.average.odd = betsStats.total.odd / pastBets.length;
+  betsStats.average.stake =
+    (betsStats.total.stake / pastBets.length) * BANKROLL;
 
-  const totalWinArray = pastBets.map((bet: any) => {
-    return (bet.stake * bet.odd - bet.stake) * bet.result * BANKROLL;
-  });
-  const winnings = Math.round(
-    totalWinArray.reduce((acc: any, obj: any) => {
-      return acc + obj;
-    }, 0 * BANKROLL)
+  betsStats.percentage.win = Math.round(
+    (betsStats.total.betsWon / pastBets.length) * 100
   );
 
-  const sumOdd = pastBets.reduce((acc: any, bet: any) => acc + bet.odd, 0);
-  const avgOdd = sumOdd / pastBets.length;
-
-  const sumStake = pastBets.reduce((acc: any, bet: any) => acc + bet.stake, 0);
-  const avgStake = (sumStake / pastBets.length) * BANKROLL;
-
-  const betsWonNb = pastBets.filter((bet: any) => bet.result > 0);
-  const winningPercentage = Math.round(
-    (betsWonNb.length / pastBets.length) * 100
+  betsStats.percentage.roi = Math.round(
+    (betsStats.total.profit / betsStats.total.stake) * 100
   );
-
-  // ROI
-  const roi = Math.round((winnings / totalStakeSum) * 100);
 
   const ESPERANCE_NB = 10000;
-  const esperance = Math.floor(ESPERANCE_NB * avgStake * (roi / 100));
+  const esperance = Math.floor(
+    ESPERANCE_NB * betsStats.average.stake * (betsStats.percentage.roi / 100)
+  );
 
-  // ** STATS USER
+  // =======================
+  // ** USER STATS
+  // =======================
+  const userBetsStats: Stats = {
+    total: {
+      stake: 0,
+      profit: 0,
+      odd: 0,
+      betsWon: 0,
+    },
+    average: {
+      odd: 0,
+      stake: 0,
+    },
+    percentage: {
+      win: 0,
+      roi: 0,
+    },
+  };
   const userBetsUserId = dataUserBets.getAllUserBets.filter(
     (userBet) => userBet.userId === user?.login.id
   );
 
-  let userWinnings = 0;
-  let totalUserStakeSum = 0;
-  const pastUserBets = userBetsUserId.filter(
+  const pastUserBetsWithProfit: IUserBetsWithResult[] = userBetsUserId.map(
     (userBet: GetAllUserBets_getAllUserBets) => {
-      // Find global bet with same id
+      // Find global bet from user bet
       const mainBet = pastBets.find(
         (globalBet: GetAllBets_getAllBets) => globalBet.id === userBet.betId
       );
       if (mainBet?.result) {
-        totalUserStakeSum += userBet.amount;
-        userWinnings +=
+        const profit =
           (userBet.amount * userBet.odd - userBet.amount) * mainBet.result;
-        return userBet;
+        userBetsStats.total.stake += userBet.amount;
+        userBetsStats.total.odd += mainBet.odd;
+        userBetsStats.total.profit += profit;
+        return { ...userBet, profit };
       }
-      return null;
+      return { ...userBet, profit: 0 };
     }
   );
 
-  const userRoi = Math.round((userWinnings / totalUserStakeSum) * 100);
+  userBetsStats.average.odd =
+    userBetsStats.total.odd / pastUserBetsWithProfit.length;
+  userBetsStats.average.stake =
+    (userBetsStats.total.stake / pastUserBetsWithProfit.length) * BANKROLL;
 
+  userBetsStats.percentage.win = Math.round(
+    (userBetsStats.total.betsWon / pastUserBetsWithProfit.length) * 100
+  );
+  userBetsStats.percentage.roi = Math.round(
+    (userBetsStats.total.profit / userBetsStats.total.stake) * 100
+  );
+  const userEsperance = Math.floor(
+    // eslint-disable-next-line prettier/prettier
+    ESPERANCE_NB * userBetsStats.average.stake * (userBetsStats.percentage.roi / 100)
+  );
   return (
     <div className="lg:w-9/12 w-full">
       {isMyStats ? (
-        <MoreImportantFigures
-          totalBets={pastUserBets.length}
-          winnings={userWinnings}
-          roi={userRoi}
-        />
+        <>
+          <MoreImportantFigures
+            totalBets={pastUserBetsWithProfit.length}
+            winnings={userBetsStats.total.profit}
+            roi={userBetsStats.percentage.roi}
+          />
+          <ProfitChart
+            betsProfit={pastUserBetsWithProfit.map((bet: any) => bet.profit)}
+          />
+          <div className="flex justify-between w-full px-11">
+            <SecondaryStatisticalsFigures
+              totalStaked={userBetsStats.total.stake}
+              averageOdd={userBetsStats.average.odd}
+              averageBet={userBetsStats.average.stake}
+              totalWin={userBetsStats.total.profit}
+              percentageWin={userBetsStats.percentage.win}
+              esperance={userEsperance}
+            />
+            <SportChart bets={dataBets} />
+          </div>
+        </>
       ) : (
-        <MoreImportantFigures
-          totalBets={pastBets.length}
-          winnings={winnings}
-          roi={roi}
-        />
+        <>
+          <MoreImportantFigures
+            totalBets={pastBets.length}
+            winnings={betsStats.total.profit}
+            roi={betsStats.percentage.roi}
+          />
+          <ProfitChart
+            betsProfit={pastBetsWithProfit.map((bet) => bet.profit)}
+          />
+          <div className="flex justify-between w-full px-11">
+            <SecondaryStatisticalsFigures
+              totalStaked={betsStats.total.stake}
+              averageOdd={betsStats.average.odd}
+              averageBet={betsStats.average.stake}
+              totalWin={betsStats.total.profit}
+              percentageWin={betsStats.percentage.win}
+              esperance={esperance}
+            />
+            <SportChart bets={dataBets} />
+          </div>
+        </>
       )}
-      <ProfitChart bets={dataBets} />
       <div className="border border-[#221C2D] w-11/12 m-auto mt-2" />
-      <div className="flex justify-between w-full px-11">
-        <SecondaryStatisticalsFigures
-          totalStaked={totalStakeSum}
-          averageOdd={avgOdd}
-          averageBet={avgStake}
-          totalWin={winnings}
-          percentageWin={winningPercentage}
-          esperance={esperance}
-        />
-        <SportChart bets={dataBets} />
-      </div>
     </div>
   );
 }
