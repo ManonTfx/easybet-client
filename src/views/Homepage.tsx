@@ -1,38 +1,25 @@
-import { useState } from 'react';
+import React, { useContext } from 'react';
+import Footer from '../components/Homepage/Footer';
+
 import Header from '../components/Homepage/Header';
 import HeroSection from '../components/Homepage/HeroSection';
 import StatsEasyBetSection from '../components/Homepage/StatsEasyBetSection';
 import WhyEasyBet from '../components/Homepage/WhyEasyBet';
 import LogIn from '../components/Login';
 import SignUp from '../components/Signup';
+import { AuthContext } from '../context/authContext';
 
 function HomePage(): JSX.Element {
-  const [isLoginModal, setIsLoginModal] = useState(false);
-  const [isSignUpModal, setIsSignUpModal] = useState(false);
-
+  const { isSignUpModal, isLoginModal } = useContext(AuthContext);
   return (
     <div className="!text-white">
-      {isSignUpModal && (
-        <SignUp
-          setIsLoginModal={setIsLoginModal}
-          setIsSignUpModal={setIsSignUpModal}
-        />
-      )}
-      {isLoginModal && (
-        <LogIn
-          setIsSignUpModal={setIsSignUpModal}
-          setIsLoginModal={setIsLoginModal}
-        />
-      )}
-      <Header
-        setIsLoginModal={setIsLoginModal}
-        setIsSignUpModal={setIsSignUpModal}
-      />
-      <div>
-        <HeroSection />
-        <StatsEasyBetSection />
-        <WhyEasyBet />
-      </div>
+      {isSignUpModal && <SignUp />}
+      {isLoginModal && <LogIn />}
+      <Header />
+      <HeroSection />
+      <StatsEasyBetSection />
+      <WhyEasyBet />
+      <Footer />
     </div>
   );
 }

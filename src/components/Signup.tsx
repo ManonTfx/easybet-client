@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { useContext } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
 import { SIGNUP_MUTATION } from '../API/mutation/signup';
@@ -6,21 +6,18 @@ import LoginInput from './formInputs/LoginInput';
 import { Signup, SignupVariables } from '../API/types/Signup';
 import logoEasybet from '../assets/logos/logoEasybet.svg';
 import close from '../assets/close.svg';
+import { AuthContext } from '../context/authContext';
 
-interface IProps {
-  setIsLoginModal: Dispatch<SetStateAction<boolean>>;
-  setIsSignUpModal: Dispatch<SetStateAction<boolean>>;
-}
-
-function SignUp({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
+function SignUp(): JSX.Element {
   const { register, handleSubmit } = useForm();
+  const { updateIsLoginModal, updateIsSignUpModal } = useContext(AuthContext);
   const [signupMutation, { loading, error }] = useMutation<
     Signup,
     SignupVariables
   >(SIGNUP_MUTATION, {
     onCompleted: () => {
-      setIsLoginModal(true);
-      setIsSignUpModal(false);
+      updateIsLoginModal(true);
+      updateIsSignUpModal(false);
     },
   });
 
@@ -51,7 +48,7 @@ function SignUp({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
         <div className="relative">
           <button
             type="button"
-            onClick={() => setIsSignUpModal(false)}
+            onClick={() => updateIsSignUpModal(false)}
             className="w-full flex justify-end absolute left-10 bottom-1	cursor-pointer opacity-80 hover:opacity-50"
           >
             <img src={close} alt="fermer" className="h-3" />
@@ -122,8 +119,8 @@ function SignUp({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
           <button
             type="button"
             onClick={() => {
-              setIsLoginModal(true);
-              setIsSignUpModal(false);
+              updateIsLoginModal(true);
+              updateIsSignUpModal(false);
             }}
             className="mt-4 text-center w-full font-extralight drop-shadow-md font-extralight"
             style={{ color: '#5762C0' }}

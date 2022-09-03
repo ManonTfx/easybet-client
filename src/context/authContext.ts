@@ -6,6 +6,10 @@ interface AuthContextState {
   updateUser: Dispatch<SetStateAction<Login>>;
   expireDate: string;
   updateExpireDate: Dispatch<SetStateAction<string>>;
+  isLoginModal: boolean;
+  updateIsLoginModal: Dispatch<SetStateAction<boolean>>;
+  isSignUpModal: boolean;
+  updateIsSignUpModal: Dispatch<SetStateAction<boolean>>;
 }
 
 export const AuthContext = React.createContext({} as AuthContextState);

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import { DarkModeContext } from '../context/darkModeContext';

@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import { Dispatch, SetStateAction, useContext } from 'react';
+import { useContext } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { LOGIN_MUTATION } from '../API/mutation/login';
@@ -9,15 +9,11 @@ import logoEasybet from '../assets/logos/logoEasybet.svg';
 import close from '../assets/close.svg';
 import { Login, LoginVariables } from '../API/types/Login';
 
-interface IProps {
-  setIsLoginModal: Dispatch<SetStateAction<boolean>>;
-  setIsSignUpModal: Dispatch<SetStateAction<boolean>>;
-}
-
-function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
+function LogIn(): JSX.Element {
   const { register, handleSubmit } = useForm();
 
-  const { updateUser } = useContext(AuthContext);
+  const { updateUser, updateIsLoginModal, updateIsSignUpModal } =
+    useContext(AuthContext);
 
   const router = useNavigate();
 
@@ -54,7 +50,7 @@ function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
           <div className="relative">
             <button
               type="button"
-              onClick={() => setIsLoginModal(false)}
+              onClick={() => updateIsLoginModal(false)}
               className="w-full flex justify-end absolute left-12 bottom-1	cursor-pointer opacity-80 hover:opacity-50"
             >
               <img src={close} alt="fermer" className="h-3" />
@@ -95,8 +91,8 @@ function LogIn({ setIsLoginModal, setIsSignUpModal }: IProps): JSX.Element {
             <button
               type="submit"
               onClick={() => {
-                setIsLoginModal(false);
-                setIsSignUpModal(true);
+                updateIsLoginModal(false);
+                updateIsSignUpModal(true);
               }}
               className="mt-4 w-full font-extralight drop-shadow-md text-sm"
               style={{ color: ' #5762C0' }}

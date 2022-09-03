@@ -1,8 +1,7 @@
 import { useQuery } from '@apollo/client';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { GET_ALL_BETS } from '../../API/query/bets';
 import { GET_ALL_USERBETS } from '../../API/query/userBets';
-import { GetAllBets_getAllBets } from '../../API/types/GetAllbets';
 import {
   GetAllUserBets_getAllUserBets,
   GetAllUserBets,
@@ -13,6 +12,7 @@ import ProfitChart from './ProfitChart';
 import SecondaryStatisticalsFigures from './SegondaryStatisticalsFigures';
 import SportChart from './SportChart';
 import { IBetsWithResult, IUserBetsWithResult } from '../../types/stats/stats';
+import { GetAllBets_getAllBets } from '../../types/bets';
 
 interface IProps {
   isMyStats: boolean;

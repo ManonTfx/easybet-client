@@ -1,8 +1,6 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-//
-// import { GetAllBets } from '../../API/types/GetAllBets';
-import { GetAllBets } from '../../API/types/GetAllbets';
+import { GetAllBets } from '../../types/bets';
 
 interface IProps {
   bets: GetAllBets;
@@ -17,11 +15,11 @@ function SportChart({ bets }: IProps) {
 
   const uniqueSport = [...new Set(pastBets.map((bet) => bet.category))];
 
-  const betsNbBySport = [];
+  const betsNbBySport: number[] = [];
   for (let i = 0; i < uniqueSport.length; i += 1) {
     let betNbBySport = 0;
     betsNbBySport.push(
-      pastBets.reduce((counter: number, obj) => {
+      pastBets.reduce((_counter: number, obj) => {
         if (obj.category === uniqueSport[i]) betNbBySport += 1;
         return betNbBySport;
       }, 0)

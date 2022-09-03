@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
+
 import { toast } from 'react-toastify';
 import { GET_ALL_ARTICLES } from '../API/query/articles';
 import { GET_ALL_BETS } from '../API/query/bets';

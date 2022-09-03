@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { useParams, Link } from 'react-router-dom';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
 import { GET_ONE_ARTICLE } from '../API/query/articles';
 import Layout from './LayoutDashboard';

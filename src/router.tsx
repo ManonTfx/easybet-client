@@ -8,6 +8,7 @@ import Tutos from './views/Tutos';
 import Admin from './views/Admin';
 import TutoDetail from './views/TutoDetail';
 import Stats from './views/Stats';
+import LegalNotice from './views/LegalNotice';
 
 function Router(): JSX.Element {
   const { user } = useContext(AuthContext);
@@ -48,6 +49,7 @@ function Router(): JSX.Element {
         }
       />
 
+      <Route path="/mentions-legales" element={<LegalNotice />} />
       <Route path="/" element={<HomePage />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

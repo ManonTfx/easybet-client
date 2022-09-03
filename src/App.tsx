@@ -19,6 +19,9 @@ function App(): JSX.Element {
   const [expireDate, setExpireDate] = useState<string>('');
   const [tokenConnected, setTokenConnected] = useState<boolean>(true);
 
+  const [isLoginModal, setIsLoginModal] = useState(false);
+  const [isSignUpModal, setIsSignUpModal] = useState(false);
+
   const hour: number = 60 * 60 * 1000;
 
   const authContextValue = {
@@ -26,6 +29,10 @@ function App(): JSX.Element {
     updateUser: setUser,
     expireDate,
     updateExpireDate: setExpireDate,
+    isLoginModal,
+    updateIsLoginModal: setIsLoginModal,
+    isSignUpModal,
+    updateIsSignUpModal: setIsSignUpModal,
   };
 
   const darkModeContextValue = {
@@ -52,7 +59,7 @@ function App(): JSX.Element {
         }
       }, hour);
     } else {
-      localStorage.removeItem('token');
+      localStorage.removeItem('user');
     }
   }, [user, expireDate]);
   return (
@@ -69,8 +76,8 @@ function App(): JSX.Element {
           draggable
           pauseOnHover
         />
-        {/* Same as */}
-        <ToastContainer />
+        {/* Same as
+        <ToastContainer /> */}
         {!tokenConnected && (
           <div className="banner-deco">
             Votre session a expiré ! {}
@@ -79,7 +86,7 @@ function App(): JSX.Element {
             </Link>
           </div>
         )}
-        <div className="min-h-screen w-screen">
+        <div className="min-h-screen max-w-screen">
           <Router />
         </div>
       </DarkModeContext.Provider>
