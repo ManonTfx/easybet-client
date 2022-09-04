@@ -18,7 +18,15 @@ function OneTuto({ data }: IProps): JSX.Element {
         className="bg-[#221D2C] px-11 my-6 rounded-[5px] w-full "
       >
         <p className="text-lg font-bold mb-2 pt-6">{data.title}</p>
-        <img className="object-cover w-full " src={data.img} alt="toto" />
+        <div
+          className="h-[400px] w-full border-purple mr-3 mt-5 "
+          style={{
+            backgroundImage: `url(${data.img})`,
+            backgroundPosition: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+          }}
+        />
         <div
           className="pb-4 mt-4 "
           dangerouslySetInnerHTML={{ __html: data.contents }}

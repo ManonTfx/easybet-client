@@ -30,7 +30,7 @@ function Tutos(): JSX.Element {
     <Layout>
       <div className={`${colorText} px-5 py-5 w-full flex`}>
         {!isForm ? (
-          <div>
+          <div className="w-full">
             {user?.login.role !== 'USER' && (
               <div>
                 <button
