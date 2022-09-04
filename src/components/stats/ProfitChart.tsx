@@ -10,14 +10,6 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
-// A CHANGER !
-// interface IProps {
-//   betsProfit: {
-//     id: number;
-//     profit: number;
-//   }[];
-// }
-
 interface IProps {
   betsProfit: number[];
 }

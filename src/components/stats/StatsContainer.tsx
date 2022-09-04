@@ -9,7 +9,7 @@ import {
 import { AuthContext } from '../../context/authContext';
 import MoreImportantFigures from './MoreImportantFigures';
 import ProfitChart from './ProfitChart';
-import SecondaryStatisticalsFigures from './SegondaryStatisticalsFigures';
+import SecondaryStatisticalsFigures from './SecondaryStatisticalsFigures';
 import SportChart from './SportChart';
 import { IBetsWithResult, IUserBetsWithResult } from '../../types/stats/stats';
 import { GetAllBets_getAllBets } from '../../types/bets';
@@ -182,7 +182,7 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
             roi={userBetsStats.percentage.roi}
           />
           <ProfitChart
-            betsProfit={pastUserBetsWithProfit.map((bet: any) => bet.profit)}
+            betsProfit={pastUserBetsWithProfit.map((bet) => bet.profit)}
           />
           <div className="lg:flex justify-between w-full lg:px-11">
             <SecondaryStatisticalsFigures
