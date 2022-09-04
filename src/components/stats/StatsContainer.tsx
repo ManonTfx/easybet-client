@@ -89,7 +89,10 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
   const pastBetsWithProfit: IBetsWithResult[] = pastBets.map(
     (bet: GetAllBets_getAllBets) => {
       if (bet.result !== null) {
-        const profit = (bet.stake * bet.odd - bet.stake) * bet.result;
+        const profit =
+          bet.result < 0
+            ? bet.stake * bet.result
+            : (bet.stake * bet.odd - bet.stake) * bet.result;
         betsStats.total.stake += bet.stake * BANKROLL;
         betsStats.total.odd += bet.odd;
         betsStats.total.profit += profit * BANKROLL;
