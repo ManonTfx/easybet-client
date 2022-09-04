@@ -9,9 +9,10 @@ export const GET_ALL_USERS = gql`
       password
       firstName
       lastName
-      createdAt
       updatedAt
+      avatar
       role
+      createdAt
     }
   }
 `;
@@ -28,6 +29,7 @@ export const GET_ONE_USER = gql`
       createdAt
       updatedAt
       role
+      avatar
     }
   }
 `;

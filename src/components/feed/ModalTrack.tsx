@@ -114,9 +114,37 @@ function ModalTrack({ dataUserBets }: IProps): JSX.Element {
   if (createError || errorBet || updateError) {
     toast('Une erreur est survenue');
   }
+
+  const backgroundColorBookmakers = () => {
+    let background = '';
+    switch (dataBet.getBetByID.bookmaker.toLowerCase()) {
+      case 'pinnacle':
+        background = '#E4AC65';
+        break;
+      case 'bet365':
+        background = '#3BA6B9';
+        break;
+      case '1xbit':
+        background = '#3DA184';
+        break;
+      case 'mrxbet':
+        background = '#FF5829';
+        break;
+      case 'gg.bet':
+        background = '#C6FE01';
+        break;
+      case 'asianodds':
+        background = '#8790E0';
+        break;
+
+      default:
+        background = '#000000';
+    }
+    return background;
+  };
   return (
     <Modal>
-      <div className="w-full bg-[#5D6AD2] !text-white text-2xl text-center py-2">
+      <div className="w-full bg-[#6640D1] !text-white text-2xl text-center py-2">
         Suivre Pari
       </div>
       <div
@@ -136,7 +164,10 @@ function ModalTrack({ dataUserBets }: IProps): JSX.Element {
           <div className="px-2 bg-[#D9D9D9] text-black rounded-full mr-2">
             {dataBet.getBetByID.stake}/10
           </div>
-          <div className="px-5  bg-[#E4AC65] rounded-full">
+          <div
+            style={{ backgroundColor: backgroundColorBookmakers() }}
+            className="px-5  bg-[#E4AC65] rounded-full"
+          >
             {dataBet.getBetByID.bookmaker}
           </div>
         </div>
@@ -173,13 +204,13 @@ function ModalTrack({ dataUserBets }: IProps): JSX.Element {
           <div className="flex w-full justify-end items-center py-4 px-3">
             <button
               onClick={() => updateIsModal(false)}
-              className=" !text-white bg-[#FF4E4E] bg-opacity-60 py-2 px-4 mr-3 rounded-sm"
+              className=" !text-white bg-[#D25D5D] py-3 px-5 mr-3 rounded-sm"
               type="button"
             >
               Annuler
             </button>
             <button
-              className="!text-white bg-[#3DA184] py-2 px-4 rounded-sm"
+              className="!text-white bg-[#40D2B8] py-3 px-5 rounded-sm"
               type="submit"
             >
               {userBetId.length > 0 ? 'Modifier' : 'Valider'}

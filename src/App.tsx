@@ -5,8 +5,8 @@ import { ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import Router from './router';
 import { AuthContext } from './context/authContext';
-import { Login } from './API/types/Login';
 import { DarkModeContext } from './context/darkModeContext';
+import { Login } from './API/types/Login';
 
 function App(): JSX.Element {
   const [user, setUser] = useState<Login>(

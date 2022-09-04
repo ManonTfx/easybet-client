@@ -6,7 +6,6 @@ import LinkButton from './LinkButton';
 import logoEasybet from '../../assets/logos/logoEasybet.svg';
 import logoEasybetDark from '../../assets/logos/logoEasybetDark.svg';
 import faviconEasybet from '../../assets/logos/faviconEasybet.svg';
-import faviconEasybetDark from '../../assets/logos/faviconEasybetDark.svg';
 import settings from '../../assets/icons/settings.svg';
 import articles from '../../assets/icons/articles.svg';
 import stats from '../../assets/icons/stats.svg';
@@ -39,7 +38,6 @@ function Sidebar(): JSX.Element {
     ? 'border-r-darkMode'
     : 'border-r-[#ABB1DF]';
   const darkModeLogo = isDarkMode ? logoEasybet : logoEasybetDark;
-  const darkModeFavicon = isDarkMode ? faviconEasybet : faviconEasybetDark;
   const adminIcon = isDarkMode ? admin : adminDark;
   const feedIcon = isDarkMode ? feed : feedDark;
   const statsIcon = isDarkMode ? stats : statsDark;
@@ -76,7 +74,7 @@ function Sidebar(): JSX.Element {
           <img src={darkModeLogo} alt="easybet" className="h-7" />
         </div>
       ) : (
-        <img src={darkModeFavicon} alt="easybet" className="h-7" />
+        <img src={faviconEasybet} alt="easybet" className="h-7" />
       )}
 
       <div className="h-full mt-8 flex lg:justify-between h-auto">

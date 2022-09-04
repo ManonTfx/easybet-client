@@ -27,12 +27,22 @@ function UpdateProfil(): JSX.Element {
   });
 
   const onSubmit = () => {
+    console.log({
+      firstName: firstname,
+      lastName,
+      email,
+      updateUserId: user?.login.id,
+      avatar: '',
+      role: user?.login.role,
+    });
     update({
       variables: {
         firstName: firstname,
         lastName,
         email,
         updateUserId: user?.login.id,
+        avatar: '',
+        role: user?.login.role,
       },
     });
   };
@@ -86,7 +96,7 @@ function UpdateProfil(): JSX.Element {
           />
         </div>
         <button
-          className="w-auto px-3 py-2 bg-[#5D6AD2] rounded-lg mt-6 text-lg"
+          className="w-auto px-3 py-2 bg-[#6640d1] rounded-lg mt-6 text-lg"
           type="submit"
         >
           Enregistrer

@@ -11,8 +11,13 @@ export interface Mutation_updateUser {
   __typename: "IUser";
   id: string;
   email: string;
+  password: string;
   firstName: string;
   lastName: string;
+  createdAt: any;
+  updatedAt: any;
+  avatar: string;
+  role: string;
 }
 
 export interface Mutation {
@@ -24,4 +29,6 @@ export interface MutationVariables {
   email?: string | null;
   firstName?: string | null;
   lastName?: string | null;
+  avatar?: string | null;
+  role?: string | null;
 }

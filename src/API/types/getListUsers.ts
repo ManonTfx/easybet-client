@@ -14,9 +14,10 @@ export interface GetListUsers_getAllUsers {
   password: string;
   firstName: string;
   lastName: string;
-  createdAt: any;
   updatedAt: any;
+  avatar: string;
   role: string;
+  createdAt: any;
 }
 
 export interface GetListUsers {

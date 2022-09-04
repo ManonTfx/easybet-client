@@ -31,6 +31,7 @@ function Header(): JSX.Element {
         </button>
 
         <div className="flex pr-1  mr-2">
+          <p>totot</p>
           <p style={{ color: isDarkMode ? 'white' : 'black' }} className="mr-2">
             {user?.login.firstName} {user?.login.lastName}
           </p>

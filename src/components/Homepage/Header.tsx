@@ -1,7 +1,8 @@
 import { useMutation } from '@apollo/client';
 import { useContext, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 import { LOGOUT_MUTATION } from '../../API/mutation/logout';
 import { Logout } from '../../API/types/Logout';
 import logoEasybet from '../../assets/logos/logoEasybet.svg';
@@ -35,7 +36,9 @@ function Header(): JSX.Element {
           style={{ zIndex: 20 }}
           className="bg-black flex px-4 justify-between fixed bg-opacity-50 w-full p-4"
         >
-          <img className="h-8" src={logoEasybet} alt="easybet" />
+          <Link to="/">
+            <img className="h-8" src={logoEasybet} alt="easybet" />
+          </Link>
           {user.login.id === '' ? (
             <div>
               <button

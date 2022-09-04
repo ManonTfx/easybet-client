@@ -17,6 +17,7 @@ export interface GetOneUser_getUserByID {
   createdAt: any;
   updatedAt: any;
   role: string;
+  avatar: string;
 }
 
 export interface GetOneUser {

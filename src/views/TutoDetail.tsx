@@ -1,12 +1,13 @@
 import { useQuery } from '@apollo/client';
 import { useParams, Link } from 'react-router-dom';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { toast } from 'react-toastify';
 import { GET_ONE_ARTICLE } from '../API/query/articles';
 import Layout from './LayoutDashboard';
 import { GetOneArticle } from '../API/types/GetOneArticle';
 import { DarkModeContext } from '../context/darkModeContext';
 import arrow_right from '../assets/arrow_right.svg';
+import arrow_black from '../assets/arrow_black.svg';
 
 function TutoDetail(): JSX.Element {
   const { id } = useParams();
@@ -32,6 +33,8 @@ function TutoDetail(): JSX.Element {
   const scrollbarColor = isDarkMode
     ? 'scrollbar-darkMode'
     : 'scrollbar-lightMode';
+
+  const srcImg = isDarkMode ? arrow_right : arrow_black;
   return (
     <Layout>
       <div
@@ -39,7 +42,7 @@ function TutoDetail(): JSX.Element {
       >
         <Link to="/articles">
           <button type="button" className="flex items-center mb-4">
-            <img className="rotate-180" src={arrow_right} alt="back" />
+            <img className="rotate-180" src={srcImg} alt="back" />
             <p className="text-sm ml-4">Revenir aux articles</p>
           </button>
         </Link>

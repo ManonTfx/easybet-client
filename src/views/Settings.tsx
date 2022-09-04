@@ -46,7 +46,7 @@ function Settings(): JSX.Element {
                       variables: { deleteUserByIdId: user?.login.id },
                     })
                   }
-                  className="w-auto px-3 py-2 bg-[#5D6AD2] rounded-lg text-lg"
+                  className="w-auto px-3 py-2 bg-[#6640d1] rounded-lg text-lg"
                   type="button"
                 >
                   Supprimer

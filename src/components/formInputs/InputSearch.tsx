@@ -23,7 +23,7 @@ function InputSearch({
     }
   };
   return (
-    <div className="flex justify-between overflow-hidden rounded-md mb-6 w-full mt-5 text-sm items-center border border-[#5D6AD2]">
+    <div className="flex justify-between overflow-hidden rounded-md mb-6 w-full mt-5 text-sm items-center border border-[#6640D0]">
       <input
         value={value}
         onKeyUp={(e) => searchWithKey(e)}

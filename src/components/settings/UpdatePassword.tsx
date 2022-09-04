@@ -86,7 +86,7 @@ function UpdatePassword(): JSX.Element {
           />
         </div>
         <button
-          className="w-auto px-3 py-2 bg-[#5D6AD2] rounded-lg mt-6 text-lg"
+          className="w-auto px-3 py-2 bg-[#6640d1] rounded-lg mt-6 text-lg"
           type="submit"
         >
           Enregistrer

@@ -17,6 +17,8 @@ function Layout({ children }: IProps): JSX.Element {
   const [isMenuBurger, setIsMenuBurger] = useState(false);
   const [idBetActif, setIdBetActif] = useState('');
 
+  const { isDarkMode } = useContext(DarkModeContext);
+
   const dashboardContextValue = {
     isSidebar,
     updateIsSidebar: setIsSidebar,
@@ -29,8 +31,6 @@ function Layout({ children }: IProps): JSX.Element {
     idBetActif,
     updateIdBetActif: setIdBetActif,
   };
-
-  const { isDarkMode } = useContext(DarkModeContext);
 
   const backgroundColorDarkMode = isDarkMode ? 'bg-[#121212]' : 'bg-white';
   const isMobile = useMediaQuery({

@@ -3,6 +3,14 @@ import { useContext } from 'react';
 import football from '../../assets/cat/football.svg';
 import tennis from '../../assets/cat/tennis.svg';
 import basket from '../../assets/cat/basket.svg';
+import volleyball from '../../assets/cat/volleyball.svg';
+import tabletennis from '../../assets/cat/tabletennis.svg';
+import badminton from '../../assets/cat/badminton.svg';
+import icehokey from '../../assets/cat/icehokey.svg';
+import esports from '../../assets/cat/esports.svg';
+import handball from '../../assets/cat/handball.svg';
+import snooker from '../../assets/cat/snooker.svg';
+import cycling from '../../assets/cat/cycling.svg';
 import { DarkModeContext } from '../../context/darkModeContext';
 import { DashboardContext } from '../../context/dashboardContext';
 import { GetBetByID_getBetByID } from '../../API/types/GetBetByID';
@@ -23,12 +31,64 @@ function OneBet({ datas }: IProps): JSX.Element {
       case 'tennis':
         src = tennis;
         break;
+      case 'table tennis':
+        src = tabletennis;
+        break;
+      case 'snooker':
+        src = snooker;
+        break;
+      case 'badminton':
+        src = badminton;
+        break;
+      case 'volleyball':
+        src = volleyball;
+        break;
+      case 'handball':
+        src = handball;
+        break;
+      case 'ice hockey':
+        src = icehokey;
+        break;
+      case 'e sports':
+        src = esports;
+        break;
+      case 'cycling':
+        src = cycling;
+        break;
       case 'basketball':
         src = basket;
         break;
       default:
     }
     return src;
+  };
+
+  const backgroundColorBookmakers = () => {
+    let background = '';
+    switch (datas.bookmaker.toLowerCase()) {
+      case 'pinnacle':
+        background = '#E4AC65';
+        break;
+      case 'bet365':
+        background = '#3BA6B9';
+        break;
+      case '1xbit':
+        background = '#3DA184';
+        break;
+      case 'mrxbet':
+        background = '#FF5829';
+        break;
+      case 'gg.bet':
+        background = '#C6FE01';
+        break;
+      case 'asianodds':
+        background = '#8790E0';
+        break;
+
+      default:
+        background = '#000000';
+    }
+    return background;
   };
   return (
     <div
@@ -51,7 +111,10 @@ function OneBet({ datas }: IProps): JSX.Element {
           <div className="px-2 bg-[#D9D9D9] text-black rounded-full mr-2">
             {datas.stake}/10
           </div>
-          <div className="px-5  bg-[#E4AC65] rounded-full">
+          <div
+            style={{ backgroundColor: backgroundColorBookmakers() }}
+            className="px-5 !text-white rounded-full"
+          >
             {datas.bookmaker}
           </div>
         </div>
@@ -60,7 +123,7 @@ function OneBet({ datas }: IProps): JSX.Element {
             updateIdBetActif(datas.id);
             updateIsModal(true);
           }}
-          className="bg-[#3EB5CA] rounded-sm px-8 py-2 hover:opacity-90"
+          className="bg-[#6640D0] rounded-sm px-8 py-2 hover:opacity-90 !text-white"
           type="button"
         >
           TRACK

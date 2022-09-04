@@ -7,9 +7,9 @@ function Footer(): JSX.Element {
       <div className="lg:flex justify-between items-center">
         <img className="h-5 lg:mb-0 mb-5" src={logoEasyBet} alt="logo" />
         <div className="font-light opacity-70 flex">
-          <p className="mr-5">contact@easybet.com</p>
+          <p className="mr-5 text-sm">contact@easybet.com</p>
           <Link to="/mentions-legales">
-            <p>Mentions légales</p>
+            <p className="text-sm">Mentions légales</p>
           </Link>
         </div>
       </div>

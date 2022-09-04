@@ -7,17 +7,26 @@ export const UPDATE_USER_PROFIL = gql`
     $email: String
     $firstName: String
     $lastName: String
+    $avatar: String
+    $role: String
   ) {
     updateUser(
       id: $updateUserId
       email: $email
       firstName: $firstName
       lastName: $lastName
+      avatar: $avatar
+      role: $role
     ) {
       id
       email
+      password
       firstName
       lastName
+      createdAt
+      updatedAt
+      avatar
+      role
     }
   }
 `;
