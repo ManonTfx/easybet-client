@@ -1,4 +1,8 @@
+import { useContext } from 'react';
+import { AuthContext } from '../../context/authContext';
+
 function HeroSection(): JSX.Element {
+  const { updateIsSignUpModal } = useContext(AuthContext);
   return (
     <div className="hero-section h-screen relative">
       <div className="lg:pt-[30vh] pt-[20vh] lg:pl-[15vw] pl-[20px]">
@@ -11,6 +15,7 @@ function HeroSection(): JSX.Element {
         </p>
 
         <button
+          onClick={() => updateIsSignUpModal(true)}
           type="button"
           className="bg-primary px-4 py-3 rounded-lg lg:mt-4 mt-16"
         >

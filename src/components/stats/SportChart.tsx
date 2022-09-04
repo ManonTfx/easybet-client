@@ -62,8 +62,8 @@ function SportChart({ bets }: IProps) {
     ],
   };
   return (
-    <div className="w-3/12 m-auto mt-4">
-      <p className="mb-3">
+    <div className="lg:w-3/12 m-auto mt-4">
+      <p className="mb-3 text-center lg:text-left">
         Repartition selon les {uniqueSport.length} sports joués
       </p>
       <Doughnut data={data} options={options} />

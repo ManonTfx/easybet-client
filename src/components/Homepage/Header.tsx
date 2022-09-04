@@ -17,7 +17,7 @@ function Header(): JSX.Element {
 
   const [logoutMutation] = useMutation<Logout>(LOGOUT_MUTATION, {
     onCompleted: () => {
-      localStorage.removeItem('user');
+      localStorage.removeItem('userlogin');
       router('/', { replace: true });
       updateIsSignUpModal(false);
       updateIsLoginModal(false);

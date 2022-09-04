@@ -50,6 +50,32 @@ export const UPDATE_USER_PASSWORD = gql`
   }
 `;
 
+// UPDATE USER AVATAR
+export const UPDATE_USER_AVATAR = gql`
+  mutation UpdateUserAvatar($updateUserAvatarId: ID!, $avatar: String!) {
+    updateUserAvatar(id: $updateUserAvatarId, avatar: $avatar) {
+      avatar
+      id
+      password
+      email
+      lastName
+      firstName
+      createdAt
+      updatedAt
+      role
+    }
+  }
+`;
+
+// UPDATE USER ROLE
+export const UPDATE_USER_ROLE = gql`
+  mutation UpdateUserRole($updateUserRoleId: ID!, $role: String!) {
+    updateUserRole(id: $updateUserRoleId, role: $role) {
+      id
+    }
+  }
+`;
+
 // DELETE USER
 export const DELETE_USER = gql`
   mutation DeleteUserById($deleteUserByIdId: String!) {

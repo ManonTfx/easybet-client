@@ -12,7 +12,6 @@ import LegalNotice from './views/LegalNotice';
 
 function Router(): JSX.Element {
   const { user } = useContext(AuthContext);
-  console.log(user);
 
   return (
     <Routes>

@@ -184,7 +184,7 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
           <ProfitChart
             betsProfit={pastUserBetsWithProfit.map((bet: any) => bet.profit)}
           />
-          <div className="flex justify-between w-full px-11">
+          <div className="lg:flex justify-between w-full lg:px-11">
             <SecondaryStatisticalsFigures
               totalStaked={userBetsStats.total.stake}
               averageOdd={userBetsStats.average.odd}
@@ -206,7 +206,7 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
           <ProfitChart
             betsProfit={pastBetsWithProfit.map((bet) => bet.profit)}
           />
-          <div className="flex justify-between w-full px-11">
+          <div className="lg:flex justify-between w-full lg:px-11">
             <SecondaryStatisticalsFigures
               totalStaked={betsStats.total.stake}
               averageOdd={betsStats.average.odd}

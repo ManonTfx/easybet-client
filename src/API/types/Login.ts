@@ -15,6 +15,7 @@ export interface Login_login {
   lastName: string;
   token: string;
   role: string;
+  avatar: string;
 }
 
 export interface Login {

@@ -76,7 +76,7 @@ function ProfitChart({ betsProfit }: IProps) {
     ],
   };
   return (
-    <div className="w-7/12 m-auto mt-5">
+    <div className="lg:w-7/12 w-11/12 m-auto mt-5">
       <Line options={options} data={data} />
     </div>
   );

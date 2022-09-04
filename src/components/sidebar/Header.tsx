@@ -3,6 +3,7 @@ import menu from '../../assets/icons/menu.svg';
 import menuDark from '../../assets/icons/menuDark.svg';
 import lightDark from '../../assets/lightDark.svg';
 import darkLight from '../../assets/darkLight.svg';
+import dfltAvatar from '../../assets/dfltAvatar.svg';
 
 import { DashboardContext } from '../../context/dashboardContext';
 import { DarkModeContext } from '../../context/darkModeContext';
@@ -30,8 +31,18 @@ function Header(): JSX.Element {
           )}
         </button>
 
-        <div className="flex pr-1  mr-2">
-          <p>totot</p>
+        <div className="flex pr-1  mr-2 items-center">
+          <div
+            className="h-24 lg:h-10 lg:w-10 w-24 rounded-full border-4 lg:border-2 border-purple mr-3"
+            style={{
+              backgroundImage: `url(${
+                user.login.avatar === '' ? dfltAvatar : user.login.avatar
+              })`,
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+            }}
+          />
           <p style={{ color: isDarkMode ? 'white' : 'black' }} className="mr-2">
             {user?.login.firstName} {user?.login.lastName}
           </p>

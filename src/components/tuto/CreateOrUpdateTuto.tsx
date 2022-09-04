@@ -60,7 +60,7 @@ function CreateUpdateTuto({ setIsForm }: IProps): JSX.Element {
       })
       .catch((err) => console.log(err));
   };
-
+  console.log(user.login.avatar);
   // **  CREATE ARTICLE
   const [createArticle, { loading: createLoading, error: createError }] =
     useMutation(CREATE_ARTICLE, {
@@ -92,7 +92,7 @@ function CreateUpdateTuto({ setIsForm }: IProps): JSX.Element {
     console.log('Une erreur est survenue');
   }
   return (
-    <div className="w-full">
+    <div className="w-full overflow-y-scroll max-h-[90vh]">
       <button
         onClick={() => setIsForm(false)}
         type="button"
@@ -140,13 +140,29 @@ function CreateUpdateTuto({ setIsForm }: IProps): JSX.Element {
                   type="button"
                   className="flex text-sm justify-between items-center w-full mt-5 py-2 px-[16px] rounded-[5px]"
                 >
-                  <p>Ajouter une image</p>
+                  <p>
+                    {imgArticle === ''
+                      ? 'Ajouter une image'
+                      : "Modifier l'image"}
+                  </p>
                   <img src={upload} alt="ajouter un fichier" />
                 </button>
               </div>
             </section>
           )}
         </Dropzone>
+        {imgArticle !== '' && (
+          <div
+            className="h-[300px] lg:w-2/6 w-full border-purple mr-3 mt-5 "
+            style={{
+              backgroundImage: `url(${imgArticle})`,
+              backgroundPosition: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+            }}
+          />
+        )}
+
         <div
           style={{ border: '1px solid #5d6ad2' }}
           className="mt-5 rounded-[5px] overflow-hidden"

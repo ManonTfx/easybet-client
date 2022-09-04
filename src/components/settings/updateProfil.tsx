@@ -17,24 +17,32 @@ function UpdateProfil(): JSX.Element {
     user?.login.lastName
   );
   const [email, setEmail] = useState<string | undefined>(user?.login.email);
-  const { colorCards } = useContext(DarkModeContext);
+  const { isDarkMode } = useContext(DarkModeContext);
+  const { updateUser } = useContext(AuthContext);
 
   // UPDATE USER PROFIL
   const [update, { loading, error }] = useMutation(UPDATE_USER_PROFIL, {
     onCompleted: () => {
       toast('Vos informations personnelles ont bien étés mises à jour.');
+      updateUser({
+        login: {
+          firstName:
+            firstname !== undefined ? firstname : user?.login.firstName,
+          lastName: lastName !== undefined ? lastName : user?.login.lastName,
+          email: email !== undefined ? email : user?.login.email,
+          avatar: user?.login.avatar,
+          id: user?.login.id,
+          token: user?.login.token,
+          role: user?.login.role,
+          __typename: 'IUserWithToken',
+        },
+      });
     },
   });
 
+  const colorCards = isDarkMode ? '#19191C' : '#DDDFF2';
+
   const onSubmit = () => {
-    console.log({
-      firstName: firstname,
-      lastName,
-      email,
-      updateUserId: user?.login.id,
-      avatar: '',
-      role: user?.login.role,
-    });
     update({
       variables: {
         firstName: firstname,
@@ -96,7 +104,7 @@ function UpdateProfil(): JSX.Element {
           />
         </div>
         <button
-          className="w-auto px-3 py-2 bg-[#6640d1] rounded-lg mt-6 text-lg"
+          className="w-auto px-3 py-2 bg-[#6640d1] rounded-lg mt-6 text-lg !text-white"
           type="submit"
         >
           Enregistrer

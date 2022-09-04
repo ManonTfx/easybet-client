@@ -58,7 +58,7 @@ function Sidebar(): JSX.Element {
 
   const [logoutMutation] = useMutation<Logout>(LOGOUT_MUTATION, {
     onCompleted: () => {
-      localStorage.removeItem('user');
+      localStorage.removeItem('userlogin');
       router('/', { replace: true });
       window.location.reload();
     },

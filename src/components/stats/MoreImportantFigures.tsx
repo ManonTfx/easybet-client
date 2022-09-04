@@ -25,7 +25,7 @@ function MoreImportantFigures({
     },
   ];
   return (
-    <div className="flex p-5 w-full justify-between px-[100px]">
+    <div className="flex p-5 w-full justify-between lg:px-[100px]">
       {arrayData.map((data) => {
         return (
           <div

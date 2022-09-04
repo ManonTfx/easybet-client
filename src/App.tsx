@@ -11,8 +11,8 @@ import { Login } from './API/types/Login';
 function App(): JSX.Element {
   const [user, setUser] = useState<Login>(
     JSON.parse(
-      localStorage.getItem('user') ||
-        '{"login":{"id":"","email":"","firstName":"","lastName":"","token":"","role":"","__typename":""}}'
+      localStorage.getItem('userlogin') ||
+        '{"login":{"id":"","email":"","firstName":"","lastName":"","token":"","role":"","avatar":"","__typename":""}}'
     )
   );
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -44,8 +44,10 @@ function App(): JSX.Element {
 
   useEffect(() => {
     if (user) {
-      if (user !== JSON.parse(JSON.stringify(localStorage.getItem('user')))) {
-        localStorage.setItem('user', JSON.stringify(user));
+      if (
+        user !== JSON.parse(JSON.stringify(localStorage.getItem('userlogin')))
+      ) {
+        localStorage.setItem('userlogin', JSON.stringify(user));
       }
 
       setInterval(() => {
@@ -59,7 +61,7 @@ function App(): JSX.Element {
         }
       }, hour);
     } else {
-      localStorage.removeItem('user');
+      localStorage.removeItem('userlogin');
     }
   }, [user, expireDate]);
   return (

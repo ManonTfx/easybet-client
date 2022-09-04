@@ -11,7 +11,7 @@ function UpdatePassword(): JSX.Element {
   const { register, handleSubmit } = useForm();
 
   const { user } = useContext(AuthContext);
-  const { colorCards } = useContext(DarkModeContext);
+  const { isDarkMode } = useContext(DarkModeContext);
 
   // UPDATE USER PASSWORD
   const [update, { loading, error }] = useMutation(UPDATE_USER_PASSWORD, {
@@ -19,6 +19,8 @@ function UpdatePassword(): JSX.Element {
       toast('Votre mot de passe à été mis à jour.');
     },
   });
+
+  const colorCards = isDarkMode ? '#19191C' : '#DDDFF2';
 
   const onSubmit = (d: FieldValues) => {
     console.log(d);
@@ -86,7 +88,7 @@ function UpdatePassword(): JSX.Element {
           />
         </div>
         <button
-          className="w-auto px-3 py-2 bg-[#6640d1] rounded-lg mt-6 text-lg"
+          className="w-auto px-3 py-2 bg-[#6640d1] rounded-lg mt-6 text-lg !text-white"
           type="submit"
         >
           Enregistrer

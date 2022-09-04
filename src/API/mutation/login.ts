@@ -9,6 +9,7 @@ export const LOGIN_MUTATION = gql`
       lastName
       token
       role
+      avatar
     }
   }
 `;
