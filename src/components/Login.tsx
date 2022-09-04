@@ -8,14 +8,17 @@ import LoginInput from './formInputs/LoginInput';
 import logoEasybet from '../assets/logos/logoEasybet.svg';
 import close from '../assets/close.svg';
 import { Login, LoginVariables } from '../API/types/Login';
+import LoaderBar from './loader/LoaderBar';
 
 function LogIn(): JSX.Element {
-  const { register, handleSubmit } = useForm();
+  const router = useNavigate();
 
+  const { register, handleSubmit } = useForm();
   const { updateUser, updateIsLoginModal, updateIsSignUpModal } =
     useContext(AuthContext);
 
-  const router = useNavigate();
+  let erroMessage = '';
+  let loader = <div />;
 
   const [loginMutation, { loading, error }] = useMutation<
     Login,
@@ -25,9 +28,10 @@ function LogIn(): JSX.Element {
       localStorage.setItem('token', data.login.token);
       updateUser(data);
       router('/feed', { replace: true });
+      updateIsLoginModal(false);
+      updateIsSignUpModal(true);
     },
   });
-
   const onSubmit = (data: FieldValues) => {
     loginMutation({
       variables: {
@@ -38,10 +42,10 @@ function LogIn(): JSX.Element {
   };
 
   if (loading) {
-    return <p>laoding</p>;
+    loader = <LoaderBar />;
   }
   if (error) {
-    return <p>error</p>;
+    erroMessage = 'Email ou mot de passe incorrect';
   }
   return (
     <div className="w-screen fixed inset-0 z-50 h-full bg-black bg-opacity-70 flex items-center justify-center ">
@@ -82,6 +86,8 @@ function LogIn(): JSX.Element {
               error=""
               id="password"
             />
+            <p className="text-sm text-red-400 mt-1">{erroMessage}</p>
+            {loader}
             <button
               type="submit"
               className="rounded-lg w-full duration-1000 mt-5 text-white px-5 py-3 bg-[#5762C0] hover:bg-[#2C38A6]"
@@ -90,14 +96,10 @@ function LogIn(): JSX.Element {
             </button>
             <button
               type="submit"
-              onClick={() => {
-                updateIsLoginModal(false);
-                updateIsSignUpModal(true);
-              }}
               className="mt-4 w-full font-extralight drop-shadow-md text-sm"
               style={{ color: ' #5762C0' }}
             >
-              Pas encore inscrit?{' '}
+              Pas encore inscrit?
               <span className="font-medium underline">Inscrit toi!</span>
             </button>
           </form>

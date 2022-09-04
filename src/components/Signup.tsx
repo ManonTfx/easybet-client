@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useForm, FieldValues } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
 import { SIGNUP_MUTATION } from '../API/mutation/signup';
@@ -7,8 +7,10 @@ import { Signup, SignupVariables } from '../API/types/Signup';
 import logoEasybet from '../assets/logos/logoEasybet.svg';
 import close from '../assets/close.svg';
 import { AuthContext } from '../context/authContext';
+import LoaderBar from './loader/LoaderBar';
 
 function SignUp(): JSX.Element {
+  const [errorMessageSignup, setErrorMessageSignup] = useState('');
   const { register, handleSubmit } = useForm();
   const { updateIsLoginModal, updateIsSignUpModal } = useContext(AuthContext);
   const [signupMutation, { loading, error }] = useMutation<
@@ -21,9 +23,27 @@ function SignUp(): JSX.Element {
     },
   });
 
+  let errorMessage = '';
+  let loader = <div />;
+
   // eslint-disable-next-line camelcase
   const onSubmit = (data: FieldValues) => {
-    if (data.password === data.confirm_password) {
+    if (data.password !== data.confirm_password) {
+      setErrorMessageSignup('Les mots de passe ne sont pas identiques');
+    }
+    if (
+      !data.password.match(/[0-9]/g || !data.passeword.match(/[A-Z]/g)) ||
+      !data.password.match(/[a-z]/g)
+    ) {
+      setErrorMessageSignup(
+        'Le mot de passe doit contenir au moins 1 chiffre et 1 majuscule'
+      );
+    }
+    if (
+      data.password === data.confirm_password &&
+      data.password.match(/[0-9]/g || data.passeword.match(/[A-Z]/g)) &&
+      data.password.match(/[a-z]/g)
+    ) {
       signupMutation({
         variables: {
           email: data.email,
@@ -36,10 +56,10 @@ function SignUp(): JSX.Element {
   };
 
   if (loading) {
-    return <p>...loading</p>;
+    loader = <LoaderBar />;
   }
   if (error) {
-    return <p>error</p>;
+    errorMessage = 'Une erreur est survenue veillez réessayer';
   }
 
   return (
@@ -62,7 +82,7 @@ function SignUp(): JSX.Element {
         <form onSubmit={handleSubmit(onSubmit)}>
           <LoginInput
             label=""
-            placeholder="firstname"
+            placeholder="Prénom"
             register={register}
             name="firstName"
             type="text"
@@ -72,7 +92,7 @@ function SignUp(): JSX.Element {
           />
           <LoginInput
             label=""
-            placeholder="lastname"
+            placeholder="Nom"
             register={register}
             name="lastName"
             type="text"
@@ -82,7 +102,7 @@ function SignUp(): JSX.Element {
           />
           <LoginInput
             label=""
-            placeholder="user@email.com"
+            placeholder="Adresse email"
             register={register}
             name="email"
             type="email"
@@ -92,7 +112,7 @@ function SignUp(): JSX.Element {
           />
           <LoginInput
             label=""
-            placeholder="password"
+            placeholder="Mot de passe"
             register={register}
             name="password"
             type="password"
@@ -102,7 +122,7 @@ function SignUp(): JSX.Element {
           />
           <LoginInput
             label=""
-            placeholder="confirm password"
+            placeholder="Confirmation du mot de passe"
             register={register}
             name="confirm_password"
             type="password"
@@ -110,11 +130,15 @@ function SignUp(): JSX.Element {
             error=""
             id="confirm_password"
           />
+
+          <p className="text-sm text-red-400 mt-1">{errorMessageSignup}</p>
+          <p className="text-sm text-red-400 mt-1">{errorMessage}</p>
+          {loader}
           <button
             type="submit"
             className="rounded-lg text-white bg-[#5762C0] hover:bg-[#2C38A6] duration-1000 w-full px-5 mt-5 py-3"
           >
-            Signup
+            S&apos;inscrire
           </button>
           <button
             type="button"
@@ -125,8 +149,8 @@ function SignUp(): JSX.Element {
             className="mt-4 text-center w-full font-extralight drop-shadow-md font-extralight"
             style={{ color: '#5762C0' }}
           >
-            Already have an account?{' '}
-            <span className="font-medium underline"> Login in</span>
+            Tu a déjà un compte ?
+            <span className="font-medium underline"> Connecte toi ici </span>
           </button>
         </form>
       </div>

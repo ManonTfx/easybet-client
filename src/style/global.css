@@ -80,3 +80,35 @@ input:-webkit-autofill {
   border-radius: 10px;
   background-color: #dddff2;
 }
+
+.loaderBar {
+  height: 5px;
+  position: relative;
+  border-radius: 10px;
+  background-color: #5b69d2;
+  animation: borealisBar 2s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes borealisBar {
+  0% {
+    left: 0%;
+    right: 100%;
+    width: 0%;
+  }
+  10% {
+    left: 0%;
+    right: 75%;
+    width: 25%;
+  }
+  90% {
+    right: 0%;
+    left: 75%;
+    width: 25%;
+  }
+  100% {
+    left: 100%;
+    right: 0%;
+    width: 0%;
+  }
+}
