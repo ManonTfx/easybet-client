@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import { useQuery } from '@apollo/client';
 import { useParams, Link } from 'react-router-dom';
 import { useContext } from 'react';
@@ -35,6 +36,7 @@ function TutoDetail(): JSX.Element {
     : 'scrollbar-lightMode';
 
   const srcImg = isDarkMode ? arrow_right : arrow_black;
+  const backgroundColor = isDarkMode ? '#221D2C' : '#DCDFF1';
   return (
     <Layout>
       <div
@@ -46,20 +48,28 @@ function TutoDetail(): JSX.Element {
             <p className="text-sm ml-4">Revenir aux articles</p>
           </button>
         </Link>
-        <p className="text-xl">{dataArticle?.getArticleByID.title}</p>
-        <img
-          className="w-full mt-5"
-          src={dataArticle?.getArticleByID.img}
-          alt="toto"
-        />
-        {dataArticle?.getArticleByID.contents && (
+        <div style={{ backgroundColor }} className="p-6 rounded-[8px]">
+          <p className="text-2xl font-medium">
+            {dataArticle?.getArticleByID.title}
+          </p>
           <div
-            className="pb-4 mt-4"
-            dangerouslySetInnerHTML={{
-              __html: dataArticle.getArticleByID.contents,
+            className="h-[400px] w-1/2 border-purple mr-3 mt-5 "
+            style={{
+              backgroundImage: `url(${dataArticle?.getArticleByID.img})`,
+              backgroundPosition: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
             }}
           />
-        )}
+          {dataArticle?.getArticleByID.contents && (
+            <div
+              className="pb-4 mt-4"
+              dangerouslySetInnerHTML={{
+                __html: dataArticle.getArticleByID.contents,
+              }}
+            />
+          )}
+        </div>
       </div>
     </Layout>
   );
