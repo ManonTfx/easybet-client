@@ -29,7 +29,9 @@ function OneTuto({ data }: IProps): JSX.Element {
         />
         <div
           className="pb-4 mt-4 "
-          dangerouslySetInnerHTML={{ __html: data.contents }}
+          dangerouslySetInnerHTML={{
+            __html: `${data.contents.substring(0, 150)}...`,
+          }}
         />
       </div>
     </Link>
