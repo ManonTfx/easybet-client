@@ -9,6 +9,7 @@ import Admin from './views/Admin';
 import TutoDetail from './views/TutoDetail';
 import Stats from './views/Stats';
 import LegalNotice from './views/LegalNotice';
+import BetDetail from './views/BetDetail';
 
 function Router(): JSX.Element {
   const { user } = useContext(AuthContext);
@@ -20,6 +21,10 @@ function Router(): JSX.Element {
         element={user !== null ? <Feed /> : <Navigate to="/" />}
       />
       <Route
+        path="/bet/:id"
+        element={user !== null ? <BetDetail /> : <Navigate to="/" />}
+      />
+      <Route
         path="/articles"
         element={user !== null ? <Tutos /> : <Navigate to="/" />}
       />
@@ -27,7 +32,6 @@ function Router(): JSX.Element {
         path="/article/:id"
         element={user !== null ? <TutoDetail /> : <Navigate to="/" />}
       />
-
       <Route
         path="/stats"
         element={user !== null ? <Stats /> : <Navigate to="/" />}

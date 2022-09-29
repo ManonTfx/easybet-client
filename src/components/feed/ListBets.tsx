@@ -1,13 +1,8 @@
 /* eslint-disable camelcase */
-import { useContext, useEffect, useState } from 'react';
-import { useQuery } from '@apollo/client';
-import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
 import OneBet from './OneBet';
 import InputSearch from '../formInputs/InputSearch';
 import { GetBetByID_getBetByID } from '../../API/types/GetBetByID';
-import { DashboardContext } from '../../context/dashboardContext';
-import ModalTrack from './ModalTrack';
-import { GET_ALL_USERBETS } from '../../API/query/userBets';
 
 interface IProps {
   datas: any;
@@ -16,12 +11,6 @@ interface IProps {
 function ListBets({ datas }: IProps): JSX.Element {
   const [dataFiltered, setDataFiltered] = useState([...datas]);
   const [search, setSearch] = useState('');
-
-  const { isModal } = useContext(DashboardContext);
-
-  /// ** GET ALL USERBETS
-  const { error: errorUserBets, data: dataUserBets } =
-    useQuery(GET_ALL_USERBETS);
 
   const submitSearch = (searchValue: string) => {
     if (searchValue !== '') {
@@ -41,9 +30,6 @@ function ListBets({ datas }: IProps): JSX.Element {
     submitSearch(search);
   }, [search]);
 
-  if (errorUserBets) {
-    toast('Une erreur est survenue');
-  }
   return (
     <div className="px-4">
       <InputSearch
@@ -59,7 +45,6 @@ function ListBets({ datas }: IProps): JSX.Element {
           </div>
         );
       })}
-      {isModal && <ModalTrack dataUserBets={dataUserBets} />}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import football from '../../assets/cat/football.svg';
 import tennis from '../../assets/cat/tennis.svg';
 import basket from '../../assets/cat/basket.svg';
@@ -98,7 +99,9 @@ function OneBet({ datas }: IProps): JSX.Element {
     >
       <div className="flex items-center ">
         <img src={srcImg()} alt={datas.category} />
-        <div className="text-xl ml-2">{datas.name}</div>
+        <Link to={`/bet/${datas.id}`}>
+          <div className="text-xl ml-2">{datas.name}</div>
+        </Link>
       </div>
       <div className="text-lg">
         {datas.category} -{' '}
