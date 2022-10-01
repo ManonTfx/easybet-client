@@ -13,38 +13,38 @@ import BetDetail from './views/BetDetail';
 
 function Router(): JSX.Element {
   const { user } = useContext(AuthContext);
-
+  console.log(user);
   return (
     <Routes>
       <Route
         path="/feed"
-        element={user !== null ? <Feed /> : <Navigate to="/" />}
+        element={user.login.token !== '' ? <Feed /> : <Navigate to="/" />}
       />
       <Route
         path="/bet/:id"
-        element={user !== null ? <BetDetail /> : <Navigate to="/" />}
+        element={user.login.token !== '' ? <BetDetail /> : <Navigate to="/" />}
       />
       <Route
         path="/articles"
-        element={user !== null ? <Tutos /> : <Navigate to="/" />}
+        element={user.login.token !== '' ? <Tutos /> : <Navigate to="/" />}
       />
       <Route
         path="/article/:id"
-        element={user !== null ? <TutoDetail /> : <Navigate to="/" />}
+        element={user.login.token !== '' ? <TutoDetail /> : <Navigate to="/" />}
       />
       <Route
         path="/stats"
-        element={user !== null ? <Stats /> : <Navigate to="/" />}
+        element={user.login.token !== '' ? <Stats /> : <Navigate to="/" />}
       />
       <Route
         path="/settings"
-        element={user !== null ? <Settings /> : <Navigate to="/" />}
+        element={user.login.token !== '' ? <Settings /> : <Navigate to="/" />}
       />
 
       <Route
         path="/admin"
         element={
-          user !== null && user.login.role === 'SUPERADMIN' ? (
+          user.login.token !== '' && user.login.role === 'SUPERADMIN' ? (
             <Admin />
           ) : (
             <Navigate to="/" />
