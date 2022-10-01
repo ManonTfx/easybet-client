@@ -8,12 +8,9 @@ function HeroSection(): JSX.Element {
     <div className="hero-section h-screen relative">
       <div className="lg:pt-[30vh] pt-[20vh] lg:pl-[15vw] pl-[20px]">
         <h1 className="lg:text-[70px] text-[50px] font-bold lg:pb-0 pb-8">
-          Pari Comme un pro
+          On simplifie l&apos;investissement en paris sportif
         </h1>
-        <p className="mb-3 lg:text-[30px]">
-          Respecte nos 2 piliers fondateurs: Contrôle tes émotions et Track tous
-          tes résultats
-        </p>
+        <p className="mb-3 lg:text-[30px]">Copie simplement nos stratégies</p>
         {user.login.token === '' ? (
           <button
             onClick={() => updateIsSignUpModal(true)}

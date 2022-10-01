@@ -15,11 +15,11 @@ function StatsEasyBetSection(): JSX.Element {
         </h2>
         <p className="lg:text-lg py-8 text-sm">
           Nous avons plus de 7000 paris à notre actif mais nous avons décidé de
-          relancer les stats à louverture de la plateforme.
+          relancer les stats à l&apos;ouverture de la plateforme.
         </p>
         <div className="lg:flex justify-center lg:space-x-4 items-center mt-11 ">
           <OneCardStatsEasyBet
-            title="+200 Paris"
+            title="+1100 Paris"
             content="Nous procurrons en moyenne 3 paris par jour"
             borderColor="#3EB5CA"
           />

@@ -8,7 +8,7 @@ function WhyEasyBet(): JSX.Element {
       </h2>
       <div className="lg:w-7/12 m-auto w-full lg:px-0 px-[10px]">
         <div className="flex space-x-6">
-          <OneCardWhyEasyBet content="Une expertise depuis plus de 5 ans sur les paris sportifs." />
+          <OneCardWhyEasyBet content="Une expertise depuis plus de 3 ans sur les paris sportifs." />
           <OneCardWhyEasyBet content="Un ensemble de tutorial pour apprendre à gagner réellement sur le long terme." />
         </div>
         <div className="flex space-x-6 mt-6">
