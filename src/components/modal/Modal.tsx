@@ -8,9 +8,10 @@ interface IProps {
 function Modal({ children }: IProps): JSX.Element {
   const { isDarkMode } = useContext(DarkModeContext);
   const colorCards = isDarkMode ? '#19191C' : '#ABB1DF';
+  const colorText = isDarkMode ? 'text-white' : 'text-black';
   return (
     <div
-      className={`w-screen fixed inset-0 z-50 h-full flex items-center justify-center bg-[${colorCards}] bg-opacity-70`}
+      className={`w-screen fixed inset-0 z-50 h-full flex items-center justify-center bg-[${colorCards}] ${colorText} bg-opacity-70`}
     >
       <div
         className={` bg-[${colorCards}]  shadow-2xl rounded-xl overflow-hidden lg:w-6/12`}

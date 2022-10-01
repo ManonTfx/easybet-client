@@ -112,7 +112,7 @@ function OneBet({ datas }: IProps): JSX.Element {
       <div className="flex items-center justify-between">
         <div className="flex items-center mt-2">
           <div className="px-2 bg-[#D9D9D9] text-black rounded-full mr-2">
-            {datas.stake}/10
+            {datas.stake}/20
           </div>
           <div
             style={{ backgroundColor: backgroundColorBookmakers() }}

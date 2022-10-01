@@ -162,7 +162,7 @@ function ModalTrack({ dataUserBets }: IProps): JSX.Element {
             {dataBet.category} @{dataBet.getBetByID.odd}
           </p>
           <div className="px-2 bg-[#D9D9D9] text-black rounded-full mr-2">
-            {dataBet.getBetByID.stake}/10
+            {dataBet.getBetByID.stake}/20
           </div>
           <div
             style={{ backgroundColor: backgroundColorBookmakers() }}

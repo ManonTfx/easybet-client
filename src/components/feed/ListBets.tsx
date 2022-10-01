@@ -38,7 +38,7 @@ function ListBets({ datas }: IProps): JSX.Element {
         value={search}
         setValue={setSearch}
       />
-      {dataFiltered.reverse().map((el: GetBetByID_getBetByID) => {
+      {dataFiltered.map((el: GetBetByID_getBetByID) => {
         return (
           <div key={el.id}>
             <OneBet datas={el} />
