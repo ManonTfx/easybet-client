@@ -19,7 +19,7 @@ function SecondaryStatisticalsFigures({
   const arrayDataLeft = [
     {
       label: 'Total parié',
-      value: ` ${totalStaked} €`,
+      value: ` ${Math.floor(totalStaked)} €`,
     },
     {
       label: 'Cote moyenne',
@@ -33,7 +33,7 @@ function SecondaryStatisticalsFigures({
   const arrayDataRight = [
     {
       label: 'Total Gagné',
-      value: ` ${totalWin.toPrecision(3)} €`,
+      value: ` ${Math.floor(totalWin)} €`,
     },
     {
       label: 'Taux de victoire',

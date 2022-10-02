@@ -13,8 +13,6 @@ function BetDetail() {
     variables: { getBetByIdId: betId.id },
   });
 
-  console.log('totototo', data, betId.id);
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error...</p>;
   return (

@@ -17,7 +17,7 @@ function MoreImportantFigures({
     },
     {
       label: 'Gains',
-      value: ` ${winnings} €`,
+      value: ` ${Math.floor(winnings)} €`,
     },
     {
       label: 'ROI',

@@ -142,8 +142,8 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
     (userBet) => userBet.userId === user?.login.id
   );
 
-  const pastUserBetsWithProfit: IUserBetsWithResult[] = userBetsUserId.map(
-    (userBet: GetAllUserBets_getAllUserBets) => {
+  const pastUserBetsWithProfit: IUserBetsWithResult[] = userBetsUserId
+    .map((userBet: GetAllUserBets_getAllUserBets) => {
       // Find global bet from user bet
       const mainBet = pastBets.find(
         (globalBet: GetAllBets_getAllBets) => globalBet.id === userBet.betId
@@ -154,11 +154,17 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
         userBetsStats.total.stake += userBet.amount;
         userBetsStats.total.odd += mainBet.odd;
         userBetsStats.total.profit += profit;
+        userBetsStats.total.betsWon += profit > 0 ? 1 : 0;
         return { ...userBet, profit };
       }
       return { ...userBet, profit: 0 };
-    }
-  );
+    })
+    .filter((bet: any) => bet.profit !== 0 && bet.profit !== null);
+
+  pastUserBetsWithProfit.map((userBet: any) => {
+    console.log(userBet);
+    return 1;
+  });
 
   userBetsStats.average.odd =
     userBetsStats.total.odd / pastUserBetsWithProfit.length;
@@ -196,7 +202,7 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
               percentageWin={userBetsStats.percentage.win}
               esperance={userEsperance}
             />
-            <SportChart bets={dataBets} />
+            {/* <SportChart bets={dataBets} /> */}
           </div>
         </>
       ) : (
