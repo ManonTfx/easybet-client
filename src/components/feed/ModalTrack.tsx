@@ -91,7 +91,7 @@ function ModalTrack({ dataUserBets }: IProps): JSX.Element {
     if (userBetId.length > 0) {
       const trackDataUpdate = {
         amount: Number(amount),
-        odd: parseFloat(odd),
+        odd: parseFloat(odd.replace(/,/, '.')),
         betId: idBetActif,
         updateUserBetId: userBetId[0].id,
       };
@@ -99,7 +99,7 @@ function ModalTrack({ dataUserBets }: IProps): JSX.Element {
     } else {
       const trackData = {
         amount: Number(amount),
-        odd: parseFloat(odd),
+        odd: parseFloat(odd.replace(/,/, '.')),
         betId: idBetActif,
         userId: user?.login.id,
       };
@@ -133,10 +133,9 @@ function ModalTrack({ dataUserBets }: IProps): JSX.Element {
       case 'gg.bet':
         background = '#C6FE01';
         break;
-      case 'asianodds':
+      case 'Betwinner':
         background = '#8790E0';
         break;
-
       default:
         background = '#000000';
     }
