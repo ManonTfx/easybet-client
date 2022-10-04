@@ -23,7 +23,6 @@ function UpdatePassword(): JSX.Element {
   const colorCards = isDarkMode ? '#19191C' : '#DDDFF2';
 
   const onSubmit = (d: FieldValues) => {
-    console.log(d);
     if (d.password === d.passwordConfirm) {
       update({
         variables: {

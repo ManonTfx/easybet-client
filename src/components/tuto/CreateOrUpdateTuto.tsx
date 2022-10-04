@@ -47,7 +47,6 @@ function CreateUpdateTuto({ setIsForm }: IProps): JSX.Element {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', 'bx4sdw4m');
-    console.log(formData);
 
     fetch('https://api.cloudinary.com/v1_1/dk2hhjwva/image/upload', {
       method: 'POST',
@@ -56,11 +55,9 @@ function CreateUpdateTuto({ setIsForm }: IProps): JSX.Element {
       .then(async (res) => {
         const response = await res.json();
         setImgArticle(response.url);
-        console.log(response.url);
       })
       .catch((err) => console.log(err));
   };
-  console.log(user.login.avatar);
   // **  CREATE ARTICLE
   const [createArticle, { loading: createLoading, error: createError }] =
     useMutation(CREATE_ARTICLE, {

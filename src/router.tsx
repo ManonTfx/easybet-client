@@ -13,7 +13,6 @@ import BetDetail from './views/BetDetail';
 
 function Router(): JSX.Element {
   const { user } = useContext(AuthContext);
-  console.log(user);
   return (
     <Routes>
       <Route

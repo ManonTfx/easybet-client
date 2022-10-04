@@ -21,7 +21,6 @@ function UpdateAvatar(): JSX.Element {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', 'bx4sdw4m');
-    console.log(formData);
 
     fetch('https://api.cloudinary.com/v1_1/dk2hhjwva/image/upload', {
       method: 'POST',
@@ -92,7 +91,7 @@ function UpdateAvatar(): JSX.Element {
           <div {...getRootProps()}>
             <input {...getInputProps()} />
             <button
-              onClick={() => console.log('toto')}
+              onClick={() => console.log('Avatar updated')}
               className="px-3 py-2 bg-[#6640d1] rounded-lg text-lg mt-3 !text-white"
               type="button"
             >

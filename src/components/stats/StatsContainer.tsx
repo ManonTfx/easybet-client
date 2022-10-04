@@ -161,11 +161,6 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
     })
     .filter((bet: any) => bet.profit !== 0 && bet.profit !== null);
 
-  pastUserBetsWithProfit.map((userBet: any) => {
-    console.log(userBet);
-    return 1;
-  });
-
   userBetsStats.average.odd =
     userBetsStats.total.odd / pastUserBetsWithProfit.length;
   userBetsStats.average.stake =
