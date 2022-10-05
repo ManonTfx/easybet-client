@@ -88,7 +88,7 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
   };
   const pastBetsWithProfit: IBetsWithResult[] = pastBets.map(
     (bet: GetAllBets_getAllBets) => {
-      if (bet.result !== null) {
+      if (bet.result !== null && bet.result !== 0) {
         const profit =
           bet.result < 0
             ? bet.stake * bet.result
@@ -149,7 +149,7 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
         (globalBet: GetAllBets_getAllBets) => globalBet.id === userBet.betId
       );
       if (mainBet?.result) {
-        console.log(userBet.amount, userBet.odd, mainBet.result);
+        // console.log(userBet.amount, userBet.odd, mainBet.result);
         const profit =
           mainBet.result < 0
             ? userBet.amount * mainBet.result
