@@ -149,8 +149,11 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
         (globalBet: GetAllBets_getAllBets) => globalBet.id === userBet.betId
       );
       if (mainBet?.result) {
+        console.log(userBet.amount, userBet.odd, mainBet.result);
         const profit =
-          (userBet.amount * userBet.odd - userBet.amount) * mainBet.result;
+          mainBet.result < 0
+            ? userBet.amount * mainBet.result
+            : (userBet.amount * userBet.odd - userBet.amount) * mainBet.result;
         userBetsStats.total.stake += userBet.amount;
         userBetsStats.total.odd += mainBet.odd;
         userBetsStats.total.profit += profit;
@@ -161,6 +164,10 @@ function StatsContainer({ isMyStats }: IProps): JSX.Element {
     })
     .filter((bet: any) => bet.profit !== 0 && bet.profit !== null);
 
+  // pastUserBetsWithProfit.map((bet) => {
+  //   console.log(bet);
+  //   return 1;
+  // });
   userBetsStats.average.odd =
     userBetsStats.total.odd / pastUserBetsWithProfit.length;
   userBetsStats.average.stake =
