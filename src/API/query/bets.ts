@@ -13,6 +13,7 @@ export const GET_ALL_BETS = gql`
       result
       date
       createdAt
+      type
     }
   }
 `;
@@ -30,6 +31,7 @@ export const GET_ONE_BET = gql`
       result
       date
       createdAt
+      type
     }
   }
 `;

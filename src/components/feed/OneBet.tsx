@@ -102,6 +102,9 @@ function OneBet({ datas }: IProps): JSX.Element {
           <div className="text-xl ml-2">{datas.name}</div>
         </Link>
       </div>
+      <div>
+        {datas.type.split('@')[0]} @ {datas.odd}
+      </div>
       <div className="text-lg">
         {datas.category} -{' '}
         <span className="text-xs opacity-80">

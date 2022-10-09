@@ -9,6 +9,7 @@ export interface GetAllBets_getAllBets {
   result: number | null;
   date: string;
   createdAt: any;
+  type: string;
 }
 
 export interface GetAllBets {

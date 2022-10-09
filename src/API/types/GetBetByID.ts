@@ -18,6 +18,7 @@ export interface GetBetByID_getBetByID {
   result: number | null;
   date: string;
   createdAt: any;
+  type: string;
 }
 
 export interface GetBetByID {
