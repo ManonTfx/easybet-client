@@ -90,17 +90,32 @@ function OneBet({ datas }: IProps): JSX.Element {
     }
     return background;
   };
+
+  const displayResult = (bet: GetBetByID_getBetByID) => {
+    let profit = 0;
+    if (bet.result === 0 || bet.result === null) {
+      profit = 0;
+    } else if (bet.result < 0) {
+      profit = bet.stake * bet.result;
+    } else {
+      profit = (bet.stake * bet.odd - bet.stake) * bet.result;
+    }
+    return profit.toPrecision(2).toString();
+  };
   return (
     <div
       className={`${
         isDarkMode ? 'bg-[#221C2D]' : 'bg-[#dcdff1]'
       } py-4 px-4 mb-4 rounded-xl `}
     >
-      <div className="flex items-center ">
-        <img src={srcImg()} alt={datas.category} />
-        <Link to={`/bet/${datas.id}`}>
-          <div className="text-xl ml-2">{datas.name}</div>
-        </Link>
+      <div className="flex items-center justify-between ">
+        <div className="flex items-center ">
+          <img src={srcImg()} alt={datas.category} />
+          <Link to={`/bet/${datas.id}`}>
+            <div className="text-xl ml-2">{datas.name}</div>
+          </Link>
+        </div>
+        <div>{displayResult(datas)}</div>
       </div>
       <div>
         {datas.type.split('@')[0]} @ {datas.odd}
