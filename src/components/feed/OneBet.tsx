@@ -82,7 +82,7 @@ function OneBet({ datas }: IProps): JSX.Element {
       case 'gg.bet':
         background = '#C6FE01';
         break;
-      case 'Betwinner':
+      case 'betwinner':
         background = '#8790E0';
         break;
       default:
