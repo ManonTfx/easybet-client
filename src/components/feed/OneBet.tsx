@@ -100,9 +100,9 @@ function OneBet({ datas }: IProps): JSX.Element {
     } else if (bet.result < 0) {
       profit = (bet.stake * bet.result).toFixed(2).toString();
     } else {
-      profit = ((bet.stake * bet.odd - bet.stake) * bet.result)
-        .toFixed(2)
-        .toString();
+      profit = `+${((bet.stake * bet.odd - bet.stake) * bet.result).toFixed(
+        2
+      )}`;
     }
     return profit;
   };
