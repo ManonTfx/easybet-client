@@ -92,15 +92,19 @@ function OneBet({ datas }: IProps): JSX.Element {
   };
 
   const displayResult = (bet: GetBetByID_getBetByID) => {
-    let profit = 0;
-    if (bet.result === 0 || bet.result === null) {
-      profit = 0;
+    let profit = '';
+    if (bet.result === null) {
+      profit = '';
+    } else if (bet.result === 0) {
+      profit = '0';
     } else if (bet.result < 0) {
-      profit = bet.stake * bet.result;
+      profit = (bet.stake * bet.result).toFixed(2).toString();
     } else {
-      profit = (bet.stake * bet.odd - bet.stake) * bet.result;
+      profit = ((bet.stake * bet.odd - bet.stake) * bet.result)
+        .toFixed(2)
+        .toString();
     }
-    return profit.toPrecision(2).toString();
+    return profit;
   };
   return (
     <div
