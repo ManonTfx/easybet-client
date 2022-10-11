@@ -20,7 +20,7 @@ function StatsEasyBetSection(): JSX.Element {
         <div className="lg:flex justify-center lg:space-x-4 items-center mt-11 ">
           <OneCardStatsEasyBet
             title="+1100 Paris"
-            content="Nous procurrons en moyenne 3 paris par jour"
+            content="Nous procurrons en moyenne 15 paris par jour"
             borderColor="#3EB5CA"
           />
           <OneCardStatsEasyBet
